@@ -53,6 +53,9 @@
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
         <link rel="canonical" href="{{ $currentUrl }}">
 
+        <!-- Google Search Console Verification -->
+        <meta name="google-site-verification" content="A1v60g8eChf7ZcmSIzFO9lLZVvjDjFOHAmZcnby5WC0">
+
         <!-- Local GEO Meta Tags (Surabaya, Jawa Timur, Indonesia) -->
         <meta name="geo.region" content="ID-JI">
         <meta name="geo.placename" content="Surabaya">

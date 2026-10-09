@@ -85,7 +85,7 @@ class SettingSeeder extends Seeder
             ],
             [
                 'key' => 'google_site_verification',
-                'value' => 'E-tyAYsOQMugMAc2KAkBnFdVc9mAbKbId7ZOAK3gpDQ',
+                'value' => 'A1v60g8eChf7ZcmSIzFO9lLZVvjDjFOHAmZcnby5WC0',
                 'type' => 'text',
             ],
             [
