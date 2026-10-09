@@ -16,8 +16,8 @@ class PageAndSectionSeeder extends Seeder
         $homePage = Page::updateOrCreate(
             ['slug' => 'home'],
             [
-                'title' => 'SOLKIT | Software House Indonesia & Enterprise Software Engineering Studio',
-                'meta_description' => 'Software house terpercaya di Indonesia. Kami merekayasa aplikasi web kustom skala enterprise, mobile apps iOS & Android, sistem ERP/POS, arsitektur cloud, dan integrasi Enterprise AI berkinerja tinggi.',
+                'title' => 'SOLKIT | Software House Surabaya, Jawa Timur & Enterprise Software Engineering',
+                'meta_description' => 'Software house terpercaya di Surabaya, Jawa Timur & Indonesia. Kami merekayasa aplikasi web kustom skala enterprise, mobile apps iOS & Android, sistem ERP/POS, arsitektur cloud, dan integrasi Enterprise AI berkinerja tinggi.',
                 'is_active' => true,
             ]
         );

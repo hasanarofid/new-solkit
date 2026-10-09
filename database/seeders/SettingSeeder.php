@@ -25,7 +25,7 @@ class SettingSeeder extends Seeder
             ],
             [
                 'key' => 'site_description',
-                'value' => 'SOLKIT (Solusi Kode Kita) adalah software house modern yang merekayasa arsitektur cloud, SaaS enterprise, aplikasi mobile terukur, dan integrasi AI dengan standar agensi teknologi kelas dunia.',
+                'value' => 'SOLKIT (Solusi Kode Kita) adalah software house modern berbasis di Surabaya, Jawa Timur yang merekayasa arsitektur cloud, SaaS enterprise, aplikasi mobile terukur (iOS & Android), dan integrasi AI dengan standar agensi teknologi kelas dunia.',
                 'type' => 'textarea',
             ],
             [
@@ -50,37 +50,37 @@ class SettingSeeder extends Seeder
             ],
             [
                 'key' => 'company_address',
-                'value' => 'Equity Tower Lv 28, SCBD Jakarta Selatan, Indonesia',
+                'value' => 'Surabaya, Jawa Timur, Indonesia',
                 'type' => 'text',
             ],
             [
                 'key' => 'meta_title',
-                'value' => 'SOLKIT (Solusi Kode Kita) | Software House Indonesia & High-End Software Engineering',
+                'value' => 'SOLKIT (Solusi Kode Kita) | Software House Surabaya, Jawa Timur & Enterprise Engineering',
                 'type' => 'text',
             ],
             [
                 'key' => 'meta_keywords',
-                'value' => 'software house indonesia, jasa pembuatan website profesional, jasa pembuatan aplikasi mobile android ios, software house jakarta, konsultan arsitektur web, custom erp indonesia, enterprise saas development, web developer laravel vue inertia, integrasi ai llm, high performance software house, solkit, solusi kode kita, jasa software house terpercaya',
+                'value' => 'software house surabaya, jasa pembuatan website surabaya, jasa aplikasi mobile surabaya, web developer surabaya, software house jawa timur, jasa pembuatan website jawa timur, konsultan it surabaya, custom erp surabaya, software house indonesia, jasa pembuatan website profesional, jasa pembuatan aplikasi mobile android ios, software house jakarta, konsultan arsitektur web, custom erp indonesia, enterprise saas development, web developer laravel vue inertia, integrasi ai llm, high performance software house, solkit, solusi kode kita, jasa software house terpercaya',
                 'type' => 'textarea',
             ],
             [
                 'key' => 'geo_region',
-                'value' => 'ID-JK',
+                'value' => 'ID-JI',
                 'type' => 'text',
             ],
             [
                 'key' => 'geo_placename',
-                'value' => 'Jakarta Selatan, DKI Jakarta, Indonesia',
+                'value' => 'Surabaya, Jawa Timur, Indonesia',
                 'type' => 'text',
             ],
             [
                 'key' => 'geo_position',
-                'value' => '-6.2243;106.8097',
+                'value' => '-7.2575;112.7521',
                 'type' => 'text',
             ],
             [
                 'key' => 'geo_icbm',
-                'value' => '-6.2243, 106.8097',
+                'value' => '-7.2575, 112.7521',
                 'type' => 'text',
             ],
             [

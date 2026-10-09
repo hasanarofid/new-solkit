@@ -150,32 +150,34 @@ const structuredDataJson = computed(() => {
         '@type': 'ProfessionalService',
         '@id': 'https://solkit.tech/#organization',
         'name': 'SOLKIT (Solusi Kode Kita)',
-        'alternateName': ['SOLKIT', 'Solusi Kode Kita', 'Solkit Tech'],
+        'alternateName': ['SOLKIT', 'Solusi Kode Kita', 'Solkit Tech', 'Software House Surabaya'],
         'url': 'https://solkit.tech',
         'logo': 'https://solkit.tech/images/solkit-dark.svg',
         'image': 'https://solkit.tech/images/solkit-dark.png',
-        'description': props.settings.site_description || 'Software house modern Indonesia spesialis arsitektur web enterprise, mobile apps, sistem ERP/POS, dan integrasi AI.',
+        'description': props.settings.site_description || 'Software house modern berbasis di Surabaya, Jawa Timur yang melayani seluruh Indonesia untuk rekayasa web apps enterprise, mobile apps, sistem ERP/POS, dan integrasi AI.',
         'telephone': props.settings.whatsapp_number ? `+${props.settings.whatsapp_number}` : '+6281234567890',
         'email': props.settings.contact_email || 'partner@solkit.tech',
         'priceRange': '$$',
         'address': {
           '@type': 'PostalAddress',
-          'streetAddress': props.settings.company_address || 'Equity Tower Lv 28, SCBD',
-          'addressLocality': 'Jakarta Selatan',
-          'addressRegion': 'DKI Jakarta',
-          'postalCode': '12190',
+          'streetAddress': props.settings.company_address || 'Surabaya, Jawa Timur, Indonesia',
+          'addressLocality': 'Surabaya',
+          'addressRegion': 'Jawa Timur',
+          'postalCode': '60111',
           'addressCountry': 'ID'
         },
         'geo': {
           '@type': 'GeoCoordinates',
-          'latitude': -6.2243,
-          'longitude': 106.8097
+          'latitude': -7.2575,
+          'longitude': 112.7521
         },
         'areaServed': [
+          { '@type': 'City', 'name': 'Surabaya' },
+          { '@type': 'AdministrativeArea', 'name': 'Jawa Timur' },
+          { '@type': 'AdministrativeArea', 'name': 'Gerbangkertosusila' },
           { '@type': 'Country', 'name': 'Indonesia' },
           { '@type': 'Country', 'name': 'Malaysia' },
-          { '@type': 'Country', 'name': 'Singapore' },
-          { '@type': 'AdministrativeArea', 'name': 'DKI Jakarta' }
+          { '@type': 'Country', 'name': 'Singapore' }
         ],
         'sameAs': [
           'https://github.com/hasanarofid',
@@ -245,17 +247,17 @@ const remainingPortfolios = computed(() => {
 </script>
 
 <template>
-  <Head :title="page?.title || settings.meta_title || 'SOLKIT (Solusi Kode Kita) | Software House Indonesia'">
-    <meta name="description" :content="page?.meta_description || settings.meta_description || 'SOLKIT (Solusi Kode Kita) adalah software house modern Indonesia spesialis arsitektur web enterprise, mobile apps iOS & Android, dan integrasi Enterprise AI.'" />
-    <meta name="keywords" :content="settings.meta_keywords || 'software house indonesia, jasa pembuatan website profesional, jasa pembuatan aplikasi mobile android ios, software house jakarta, solkit, solusi kode kita'" />
+  <Head :title="page?.title || settings.meta_title || 'SOLKIT (Solusi Kode Kita) | Software House Surabaya & Jawa Timur'">
+    <meta name="description" :content="page?.meta_description || settings.meta_description || 'SOLKIT (Solusi Kode Kita) adalah software house modern berbasis di Surabaya, Jawa Timur yang merekayasa arsitektur web enterprise, mobile apps iOS & Android, dan integrasi Enterprise AI.'" />
+    <meta name="keywords" :content="settings.meta_keywords || 'software house surabaya, jasa pembuatan website surabaya, jasa aplikasi mobile surabaya, web developer surabaya, software house jawa timur, jasa pembuatan website jawa timur, software house indonesia, solkit, solusi kode kita'" />
     <meta name="author" content="SOLKIT (Solusi Kode Kita)" />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 
-    <!-- GEO Meta Tags (Local & Regional Indonesian SEO) -->
-    <meta name="geo.region" :content="settings.geo_region || 'ID-JK'" />
-    <meta name="geo.placename" :content="settings.geo_placename || 'Jakarta Selatan, DKI Jakarta, Indonesia'" />
-    <meta name="geo.position" :content="settings.geo_position || '-6.2243;106.8097'" />
-    <meta name="ICBM" :content="settings.geo_icbm || '-6.2243, 106.8097'" />
+    <!-- GEO Meta Tags (Local & Regional Surabaya / Jawa Timur SEO) -->
+    <meta name="geo.region" :content="settings.geo_region || 'ID-JI'" />
+    <meta name="geo.placename" :content="settings.geo_placename || 'Surabaya, Jawa Timur, Indonesia'" />
+    <meta name="geo.position" :content="settings.geo_position || '-7.2575;112.7521'" />
+    <meta name="ICBM" :content="settings.geo_icbm || '-7.2575, 112.7521'" />
     <meta name="geo.country" content="ID" />
 
     <!-- OpenGraph Tags -->
