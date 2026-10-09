@@ -228,30 +228,14 @@ const remainingPortfolios = computed(() => {
     <header class="sticky top-0 z-50 bg-[#090A0E]/80 backdrop-blur-xl border-b border-white/[0.08] transition-all">
       <div class="max-w-7xl mx-auto px-6 sm:px-8 h-20 flex items-center justify-between">
         
-        <!-- Logo SOLKIT (Ikon Origami Sudut Tajam + Teks Tebal + Sub-teks Solusi Kode Kita) -->
-        <Link href="/" class="flex items-center gap-3.5 group cursor-pointer">
-          <!-- Vector Sharp-Angled SOLKIT Symbol -->
-          <div class="relative w-9 h-9 flex items-center justify-center shrink-0">
-            <svg viewBox="0 0 100 100" class="w-9 h-9 drop-shadow-[0_0_12px_rgba(0,82,255,0.4)]">
-              <!-- Left Sharp Wing (Black/Deep Charcoal) -->
-              <path d="M 50 50 L 15 42 C 18 58 22 72 23 88 Z" fill="#141721" stroke="#334155" stroke-width="1.5" />
-              <!-- Right Sharp Dynamic Wing (Electric Blue #0052FF) -->
-              <path d="M 50 50 L 80 18 L 84 82 L 20 86 Z" :fill="primaryColor" />
-            </svg>
-          </div>
-
-          <!-- Brand Typography -->
-          <div class="flex flex-col">
-            <div class="flex items-center gap-1.5">
-              <span class="font-black text-xl tracking-tight text-white group-hover:text-slate-200 transition-colors">
-                SOLKIT
-              </span>
-              <span class="w-1.5 h-1.5 rounded-full" :style="{ backgroundColor: primaryColor }"></span>
-            </div>
-            <span class="text-[10px] tracking-wider font-mono font-medium text-sky-400 -mt-0.5">
-              Solusi Kode Kita
-            </span>
-          </div>
+        <!-- Logo Resmi SOLKIT (Solusi Kode Kita) -->
+        <Link href="/" class="flex items-center gap-3.5 group cursor-pointer py-1">
+          <img 
+            :src="settings.site_logo_url || '/images/solkit-dark.png'" 
+            alt="SOLKIT - Solusi Kode Kita" 
+            class="h-11 w-auto max-w-[200px] object-contain transition-transform duration-300 group-hover:scale-105"
+            @error="$event.target.src = '/images/solkit-dark.png'"
+          />
         </Link>
 
         <!-- Navigation Links -->
@@ -914,16 +898,14 @@ const remainingPortfolios = computed(() => {
     <footer class="py-16 border-t border-white/[0.06] bg-[#07080B] text-slate-400 text-xs">
       <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 md:grid-cols-4 gap-12">
         <div class="space-y-4 md:col-span-2">
-          <!-- Logo Footer -->
+          <!-- Logo Footer Resmi SOLKIT -->
           <div class="flex items-center gap-3">
-            <svg viewBox="0 0 100 100" class="w-7 h-7">
-              <path d="M 50 50 L 15 42 C 18 58 22 72 23 88 Z" fill="#1e293b" />
-              <path d="M 50 50 L 80 18 L 84 82 L 20 86 Z" :fill="primaryColor" />
-            </svg>
-            <div>
-              <span class="font-bold text-base text-white block">SOLKIT</span>
-              <span class="text-[10px] font-mono text-sky-400 -mt-0.5 block">Solusi Kode Kita</span>
-            </div>
+            <img 
+              :src="settings.site_logo_url || '/images/solkit-dark.png'" 
+              alt="SOLKIT - Solusi Kode Kita" 
+              class="h-9 w-auto max-w-[180px] object-contain"
+              @error="$event.target.src = '/images/solkit-dark.png'"
+            />
           </div>
           <p class="text-xs text-slate-400 max-w-sm leading-relaxed">
             {{ settings.site_description || 'SOLKIT (Solusi Kode Kita) adalah studio rekayasa perangkat lunak untuk aplikasi web kustom, sistem mobile, dan otomatisasi AI berskala enterprise.' }}

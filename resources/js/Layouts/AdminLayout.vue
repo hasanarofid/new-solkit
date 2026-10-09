@@ -61,16 +61,11 @@ const logout = () => {
         <!-- Sidebar Header / Logo -->
         <div :class="[isSidebarCollapsed ? 'lg:px-0 lg:justify-center' : 'px-6 justify-between', 'flex items-center h-20 border-b border-slate-800']">
           <Link :href="route('admin.dashboard')" class="flex items-center gap-3">
-            <div class="relative w-8 h-8 flex items-center justify-center shrink-0">
-              <svg viewBox="0 0 100 100" class="w-8 h-8 drop-shadow-[0_0_10px_rgba(0,82,255,0.4)]">
-                <path d="M 50 50 L 15 42 C 18 58 22 72 23 88 Z" fill="#1e293b" />
-                <path d="M 50 50 L 80 18 L 84 82 L 20 86 Z" fill="#0052FF" />
-              </svg>
-            </div>
-            <div :class="[isSidebarCollapsed ? 'lg:hidden' : 'block', 'transition-opacity duration-300']">
-              <h1 class="text-sm font-black tracking-tight text-white">SOLKIT</h1>
-              <p class="text-[10px] text-sky-400 font-mono tracking-wide -mt-0.5">Solusi Kode Kita</p>
-            </div>
+            <img 
+              src="/images/solkit-dark.png" 
+              alt="SOLKIT - Solusi Kode Kita" 
+              class="h-8 w-auto max-w-[140px] object-contain"
+            />
           </Link>
           <button 
             @click="isSidebarOpen = false" 
