@@ -43,4 +43,19 @@ class Setting extends Model
 
         return $setting;
     }
+
+    protected $appends = ['image_url'];
+
+    public function getImageUrlAttribute(): ?string
+    {
+        if ($this->type !== 'image' || !$this->value) {
+            return null;
+        }
+
+        if (str_starts_with($this->value, 'http://') || str_starts_with($this->value, 'https://')) {
+            return $this->value;
+        }
+
+        return \Illuminate\Support\Facades\Storage::url($this->value);
+    }
 }

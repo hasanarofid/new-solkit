@@ -14,7 +14,9 @@ import {
   Search,
   Server,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Briefcase,
+  FolderGit2
 } from '@lucide/vue';
 
 const page = usePage();
@@ -26,8 +28,10 @@ const isUserMenuOpen = ref(false);
 
 const navigation = [
   { name: 'Dashboard', href: route('admin.dashboard'), icon: LayoutDashboard, current: route().current('admin.dashboard') },
+  { name: 'Services', href: route('admin.services.index'), icon: Briefcase, current: route().current('admin.services.*') },
+  { name: 'Portfolios', href: route('admin.portfolios.index'), icon: FolderGit2, current: route().current('admin.portfolios.*') },
   { name: 'Pages & Sections', href: route('admin.pages.index'), icon: Layers, current: route().current('admin.pages.*') },
-  { name: 'Posts & Categories', href: route('admin.posts.index'), icon: FileText, current: route().current('admin.posts.*') },
+  { name: 'Posts & Insights', href: route('admin.posts.index'), icon: FileText, current: route().current('admin.posts.*') },
   { name: 'Web Settings', href: route('admin.settings.index'), icon: SettingsIcon, current: route().current('admin.settings.index') },
 ];
 

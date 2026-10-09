@@ -20,16 +20,16 @@ class DatabaseSeeder extends Seeder
 
         // 2. Seed Default Users and Assign Roles
         $admin = User::updateOrCreate(
-            ['email' => 'admin@cms.com'],
+            ['email' => 'admin@solkit.tech'],
             [
-                'name' => 'Admin CMS',
+                'name' => 'Admin Solkit',
                 'password' => bcrypt('password'),
             ]
         );
         $admin->assignRole('admin');
 
         $editor = User::updateOrCreate(
-            ['email' => 'editor@cms.com'],
+            ['email' => 'editor@solkit.tech'],
             [
                 'name' => 'Editor CMS',
                 'password' => bcrypt('password'),
@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
         $editor->assignRole('editor');
 
         $client = User::updateOrCreate(
-            ['email' => 'client@cms.com'],
+            ['email' => 'client@solkit.tech'],
             [
                 'name' => 'Client CMS',
                 'password' => bcrypt('password'),
@@ -49,10 +49,16 @@ class DatabaseSeeder extends Seeder
         // 3. Seed Settings
         $this->call(SettingSeeder::class);
 
-        // 4. Seed Pages and Sections
+        // 4. Seed Services (Software House offerings)
+        $this->call(ServiceSeeder::class);
+
+        // 5. Seed Portfolios (Case studies)
+        $this->call(PortfolioSeeder::class);
+
+        // 6. Seed Pages and Sections
         $this->call(PageAndSectionSeeder::class);
 
-        // 5. Seed Categories & Posts
+        // 7. Seed Categories & Posts
         $general = Category::updateOrCreate(
             ['slug' => 'general'],
             ['name' => 'General']
@@ -64,11 +70,11 @@ class DatabaseSeeder extends Seeder
         );
 
         Post::updateOrCreate(
-            ['slug' => 'selamat-datang-di-boilerplate-cms-baru-anda'],
+            ['slug' => 'selamat-datang-di-solkit'],
             [
                 'category_id' => $general->id,
-                'title' => 'Selamat Datang di Boilerplate CMS Baru Anda',
-                'content' => 'Ini adalah postingan pertama di CMS Anda. Anda dapat mengedit, menghapus, atau membuat postingan baru melalui dashboard admin dengan sangat mudah.',
+                'title' => 'Selamat Datang di Solkit',
+                'content' => 'Ini adalah postingan pertama di Solkit. Anda dapat mengedit, menghapus, atau membuat postingan baru melalui dashboard admin dengan sangat mudah.',
                 'image' => null,
                 'status' => 'published',
                 'is_featured' => true

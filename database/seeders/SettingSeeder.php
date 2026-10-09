@@ -15,18 +15,23 @@ class SettingSeeder extends Seeder
         $settings = [
             [
                 'key' => 'site_name',
-                'value' => 'My Premium CMS',
+                'value' => 'Solkit Tech',
+                'type' => 'text',
+            ],
+            [
+                'key' => 'site_tagline',
+                'value' => 'Enterprise Digital Engineering & Modern Software House',
                 'type' => 'text',
             ],
             [
                 'key' => 'site_description',
-                'value' => 'Sebuah platform CMS serbaguna berbasis Laravel 11 dan Vue 3 yang sangat fleksibel dan super cepat.',
+                'value' => 'Solkit Tech adalah mitra rekayasa perangkat lunak terpilih untuk startup berkembang dan korporasi. Kami merancang custom web platform, mobile apps, SaaS, dan integrasi kecerdasan buatan (AI) berkinerja tinggi.',
                 'type' => 'textarea',
             ],
             [
-                'key' => 'site_logo',
-                'value' => null,
-                'type' => 'image',
+                'key' => 'primary_color',
+                'value' => '#4f46e5', // Modern Indigo Accent
+                'type' => 'color',
             ],
             [
                 'key' => 'whatsapp_number',
@@ -34,14 +39,25 @@ class SettingSeeder extends Seeder
                 'type' => 'text',
             ],
             [
-                'key' => 'playstore_link',
-                'value' => 'https://play.google.com/store/apps/details?id=com.mycms.app',
-                'type' => 'url',
+                'key' => 'contact_email',
+                'value' => 'hello@solkit.tech',
+                'type' => 'text',
+            ],
+            [
+                'key' => 'company_address',
+                'value' => 'One Pacific Place Suite 1204, SCBD Jakarta Selatan, Indonesia',
+                'type' => 'text',
             ],
         ];
 
         foreach ($settings as $setting) {
-            Setting::updateOrCreate(['key' => $setting['key']], $setting);
+            Setting::updateOrCreate(
+                ['key' => $setting['key']],
+                [
+                    'value' => $setting['value'],
+                    'type' => $setting['type'],
+                ]
+            );
         }
     }
 }

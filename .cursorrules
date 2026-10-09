@@ -1,0 +1,9 @@
+# SOLKIT TECH - DEVELOPER & AI RULES
+# Standar Pengembangan Web Platform Software House (Laravel 11 + Vue 3 Inertia + Tailwind CSS)
+
+- Ikuti seluruh pedoman di `docs/rules.md`.
+- Prioritaskan standar UI/UX Pro Max: Tech-Forward Corporate Clean, dark mode glassmorphism accents, dynamic theme colors melalui CSS Variables, tipografi modern.
+- Gunakan Vue 3 Composition API `<script setup>` secara eksklusif.
+- Backend Laravel 11 wajib menerapkan Form Request, Controller ramping, dan type hints ketat.
+- Modul inti berorientasi Software House Modern: Services, Impact-Driven Portfolios (Problem, Solution, Tech Stack, Impact), Dynamic Sections, Global Settings, dan Consultation Leads.
+- Gunakan `@lucide/vue` untuk icon.
