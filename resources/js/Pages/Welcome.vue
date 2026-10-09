@@ -4,10 +4,7 @@ import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
 import { 
   ArrowUpRight, 
   CheckCircle2, 
-  MessageSquare, 
-  Layers, 
   ChevronRight,
-  Sparkles,
   ExternalLink,
   Code2,
   Cpu,
@@ -20,7 +17,7 @@ import {
   Phone,
   Mail,
   MapPin,
-  Check
+  Sparkles
 } from '@lucide/vue';
 
 const props = defineProps({
@@ -53,12 +50,11 @@ const props = defineProps({
 const pageData = usePage();
 const user = pageData.props.auth?.user;
 
-// Dynamic CSS Variables for Primary Color
+// Dynamic Theme Colors
 const primaryColor = computed(() => props.settings.primary_color || '#4f46e5');
 
 // Modal State
 const isConsultModalOpen = ref(false);
-const activeServiceFilter = ref('all');
 
 // Helper to find specific section by key
 const getSection = (key) => {
@@ -67,74 +63,88 @@ const getSection = (key) => {
 };
 
 const heroSection = computed(() => getSection('hero')?.content || {
-  badge: '🚀 Terbuka untuk Kolaborasi Proyek Baru',
-  headline: 'Kami Merekayasa Produk Digital Berkinerja Tinggi & Siap Skala',
-  subheadline: 'Dari ide rintisan hingga arsitektur korporat bernilai tinggi. Solkit Tech menghadirkan rekayasa software presisi dengan Laravel, Vue 3, Mobile Apps, dan Enterprise AI.',
-  cta_primary: 'Konsultasi Gratis',
+  badge: 'Kapasitas Q4: Terbuka untuk 2 Proyek Terpilih',
+  headline: 'Rekayasa Perangkat Lunak Presisi untuk Produk Digital yang Siap Berkembang',
+  subheadline: 'Kami membantu startup bertumbuh dan korporasi memodernisasi infrastruktur teknologinya melalui arsitektur web tangguh, aplikasi mobile performa tinggi, dan otomatisasi AI.',
+  cta_primary: 'Konsultasikan Proyek Anda',
   cta_secondary: 'Eksplorasi Studi Kasus',
   stats: [
-    { label: 'Proyek Terselesaikan', value: '45+' },
-    { label: 'SLA Uptime Sistem', value: '99.98%' },
-    { label: 'Pengguna Aktif Terlayani', value: '1.2M+' },
-    { label: 'Tingkat Retensi Klien', value: '98%' }
+    { label: 'Proyek Siap Produksi', value: '45+' },
+    { label: 'Rata-rata SLA Uptime', value: '99.98%' },
+    { label: 'Transaksi Diproses/Hari', value: '1.2M+' },
+    { label: 'Retensi Kemitraan Klien', value: '98%' }
   ]
 });
 
 const techSection = computed(() => getSection('tech_stack')?.content || {
-  badge: 'TECH EXCELLENCE',
-  title: 'Ekosistem Teknologi Terkini yang Kami Gunakan',
-  description: 'Kami memilih stack modern yang teruji dalam stabilitas, skalabilitas, dan kecepatan deployment.',
+  badge: 'TEKNOLOGI & ARSITEKTUR',
+  title: 'Fondasi Teknis yang Teruji di Lingkungan Produksi',
+  description: 'Kami menghindari tren sesaat dan berfokus pada ekosistem teknologi modern yang terbukti stabil, aman, dan mudah dirawat dalam jangka panjang.',
   stacks: [
-    { name: 'Laravel 11', category: 'Backend & API', desc: 'Arsitektur backend tangguh & aman' },
-    { name: 'Vue 3 & Inertia', category: 'Frontend Architecture', desc: 'Antarmuka reaktif berkecepatan tinggi' },
-    { name: 'Flutter & React Native', category: 'Mobile Ecosystem', desc: 'Fluid 60fps native experience' },
-    { name: 'Python & Gemini AI', category: 'Artificial Intelligence', desc: 'RAG & agentic automation' },
-    { name: 'PostgreSQL & Redis', category: 'Data & Caching', desc: 'In-memory ultra fast throughput' },
-    { name: 'Docker & Kubernetes', category: 'Cloud & DevOps', desc: 'Containerization siap skala horizontal' },
-    { name: 'Amazon Web Services', category: 'Cloud Infrastructure', desc: 'Serverless & high availability cluster' },
-    { name: 'Tailwind CSS', category: 'Design System', desc: 'Atomic utility UI/UX Pro Max' }
+    { name: 'Laravel 11', category: 'Backend & Core Engine', desc: 'Arsitektur modular, antrean aman, dan skalabilitas data tinggi' },
+    { name: 'Vue 3 & Inertia.js', category: 'Frontend Ecosystem', desc: 'SPA tanpa kompleksitas REST terpisah dengan rendering instan' },
+    { name: 'Flutter & Kotlin', category: 'Mobile Engineering', desc: 'Performa native 60fps dengan sinkronisasi offline-first' },
+    { name: 'Python & LLM RAG', category: 'Artificial Intelligence', desc: 'Pipeline ekstraksi dokumen, pemrosesan otomatis, dan agen cerdas' },
+    { name: 'PostgreSQL & Redis', category: 'Data & Storage Engine', desc: 'In-memory caching dan relational schema tangguh' },
+    { name: 'Docker & Kubernetes', category: 'Infrastruktur Cloud', desc: 'Container terisolasi yang siap scale horizontal tanpa downtime' }
   ]
 });
 
 const workflowSection = computed(() => getSection('workflow')?.content || {
-  badge: 'METODOLOGI KAMI',
-  title: 'Bagaimana Kami Mewujudkan Visi Digital Anda',
-  description: 'Proses terstruktur berbasis Agile Sprint yang transparan, terukur, dan bebas dari kejutan tak terduga.',
+  badge: 'METODOLOGI EKSEKUSI',
+  title: 'Alur Kerja Terstruktur Tanpa Friksi',
+  description: 'Setiap iterasi proyek dijalankan dengan transparansi penuh, dokumentasi rapi, dan siklus sprint mingguan yang dapat dievaluasi.',
   steps: [
-    { step: '01', title: 'Discovery & Architecture', description: 'Memetakan model bisnis Anda, mitigasi risiko, PRD detail, dan skema database optimal.' },
-    { step: '02', title: 'UI/UX Pro Max & Prototype', description: 'Perancangan wireframe interaktif di Figma lengkap dengan Design System yang berfokus konversi.' },
-    { step: '03', title: 'Agile Sprint Development', description: 'Penulisan clean code dengan automated testing, weekly sprint demo, dan code review ketat.' },
-    { step: '04', title: 'QA, Security & Launch', description: 'Load testing beban tinggi, penetration test OWASP, CI/CD pipeline, dan asistensi go-live 24/7.' }
-  ]
-});
-
-const testimonialsSection = computed(() => getSection('testimonials')?.content || {
-  badge: 'KEPERCAYAAN KLIEN',
-  title: 'Apa Kata Para Pemimpin Bisnis Tentang Solkit Tech',
-  items: [
     {
-      name: 'Reza Pratama',
-      role: 'Chief Technology Officer',
-      company: 'Artha Digital Mandiri',
-      comment: 'Solkit Tech bukan hanya vendor, mereka adalah partner teknis sejati. Tim mereka berhasil membangun sistem core payment kami dengan nol downtime.'
+      step: '01',
+      title: 'Audit & Desain Arsitektur',
+      description: 'Kami mengidentifikasi bottleneck bisnis, menyusun spesifikasi PRD rinci, dan memodelkan skema database sebelum menulis kode.'
     },
     {
-      name: 'Diana Stephanie',
-      role: 'VP of Product',
-      company: 'Kargo Nusantara Logistics',
-      comment: 'Aplikasi mobile Flutter dan dashboard web yang dibangun Solkit memangkas biaya operasional BBM kami sebesar 22% dalam 3 bulan pertama.'
+      step: '02',
+      title: 'Prototyping & Design System',
+      description: 'Merancang antarmuka interaktif di Figma dengan token desain konsisten yang siap diimplementasikan langsung ke kode.'
+    },
+    {
+      step: '03',
+      title: 'Sprint Development & Testing',
+      description: 'Pengembangan berbasis komponen dengan code review berkala, unit test, dan demo hasil progres setiap akhir pekan.'
+    },
+    {
+      step: '04',
+      title: 'Audit Keamanan & Go-Live',
+      description: 'Stress testing performa beban, audit kerentanan OWASP, penyiapan CI/CD automated pipeline, dan pemantauan aktif pasca peluncuran.'
     }
   ]
 });
 
-// Icon Resolver Helper
+const testimonialsSection = computed(() => getSection('testimonials')?.content || {
+  badge: 'REKAM JEJAK',
+  title: 'Dipercaya oleh Pemimpin Rekayasa Teknologi',
+  items: [
+    {
+      name: 'Reza Pratama',
+      role: 'Chief Technology Officer',
+      company: 'PT Artha Digital Mandiri',
+      comment: 'Solkit Tech memahami arsitektur core ledger perbankan kami dengan sangat matang. Sistem pemrosesan transaksi yang mereka bangun menangani beban gajian nasional tanpa kendala.'
+    },
+    {
+      name: 'Diana Stephanie',
+      role: 'Head of Product Operations',
+      company: 'Kargo Nusantara Logistics',
+      comment: 'Telemetri IoT dan aplikasi pengemudi Flutter yang dibangun tim Solkit langsung menurunkan biaya bahan bakar armada kami hingga 22% pada kuartal pertama implementasi.'
+    }
+  ]
+});
+
+// Icon Resolver
 const getServiceIcon = (iconName) => {
   switch (iconName?.toLowerCase()) {
     case 'smartphone': return Smartphone;
     case 'cpu': return Cpu;
     case 'cloud': return Cloud;
-    case 'palette':
-    case 'figma': return Palette;
+    case 'figma':
+    case 'palette': return Palette;
     case 'code': return Code2;
     default: return Layout;
   }
@@ -146,8 +156,8 @@ const consultForm = useForm({
   email: '',
   phone: '',
   company: '',
-  service_interest: 'Custom Web & SaaS',
-  budget_range: '< Rp 50 Juta',
+  service_interest: 'Custom Web & Enterprise SaaS',
+  budget_range: 'Rp 50 - 150 Juta',
   message: ''
 });
 
@@ -167,120 +177,133 @@ const submitConsultation = () => {
   });
 };
 
-// WhatsApp Direct Link Generator
+// Direct WhatsApp link
 const whatsappUrl = computed(() => {
   const number = props.settings.whatsapp_number || '6281234567890';
   const cleanNumber = number.replace(/[^0-9]/g, '');
-  const text = encodeURIComponent(`Halo Tim Solkit Tech, saya tertarik untuk mendiskusikan kebutuhan pengembangan software digital bersama tim Anda.`);
+  const text = encodeURIComponent(`Halo Tim Solkit Tech, saya ingin mendiskusikan kebutuhan pengembangan produk perangkat lunak untuk perusahaan saya.`);
   return `https://wa.me/${cleanNumber}?text=${text}`;
+});
+
+// Featured flagship portfolio vs standard portfolios
+const featuredPortfolio = computed(() => {
+  return props.portfolios.find(p => p.is_featured) || props.portfolios[0];
+});
+
+const remainingPortfolios = computed(() => {
+  if (!featuredPortfolio.value) return props.portfolios;
+  return props.portfolios.filter(p => p.id !== featuredPortfolio.value.id);
 });
 </script>
 
 <template>
   <Head :title="page?.title || 'Solkit Tech | Modern Software House & Digital Studio'" />
 
+  <!-- Root Container with Organic Deep Atmosphere (Anti-Flat Dark) -->
   <div 
-    class="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-indigo-500 selection:text-white relative overflow-hidden"
+    class="min-h-screen bg-[#070b14] text-slate-100 font-sans selection:bg-indigo-500 selection:text-white relative overflow-hidden"
     :style="{ '--primary-color': primaryColor }"
   >
-    <!-- Background Ambient Glow Blobs -->
+    <!-- Organic Layered Ambient Glows (Asymmetric Position) -->
     <div 
-      class="absolute top-[-10%] left-[-10%] w-[650px] h-[650px] rounded-full blur-[140px] pointer-events-none opacity-20"
+      class="absolute -top-32 -left-32 w-[680px] h-[680px] rounded-full blur-[160px] pointer-events-none opacity-[0.14]"
       :style="{ backgroundColor: primaryColor }"
     ></div>
     <div 
-      class="absolute top-[35%] right-[-10%] w-[600px] h-[600px] rounded-full blur-[140px] pointer-events-none opacity-15"
+      class="absolute top-[35%] -right-48 w-[600px] h-[600px] rounded-full blur-[170px] pointer-events-none opacity-[0.10]"
       :style="{ backgroundColor: primaryColor }"
     ></div>
     <div 
-      class="absolute bottom-[-5%] left-[20%] w-[550px] h-[550px] rounded-full blur-[140px] pointer-events-none opacity-15"
+      class="absolute bottom-[5%] left-[10%] w-[500px] h-[500px] rounded-full blur-[160px] pointer-events-none opacity-[0.08]"
       :style="{ backgroundColor: primaryColor }"
     ></div>
 
-    <!-- Sticky Glassmorphic Navbar -->
-    <header class="sticky top-0 z-50 bg-slate-950/75 backdrop-blur-md border-b border-slate-900 transition-all duration-300">
-      <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <!-- Logo -->
-        <Link href="/" class="flex items-center gap-3 group">
-          <div v-if="settings.site_logo_url" class="h-10 w-auto flex items-center">
+    <!-- Subtle Tech Mesh Dot Texture (Vercel/Linear Style Depth) -->
+    <div class="absolute inset-0 bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.18] pointer-events-none"></div>
+
+    <!-- Sticky Minimalist Glass Navbar -->
+    <header class="sticky top-0 z-50 bg-[#070b14]/80 backdrop-blur-xl border-b border-white/[0.06] transition-all">
+      <div class="max-w-7xl mx-auto px-6 sm:px-8 h-20 flex items-center justify-between">
+        <!-- Brand -->
+        <Link href="/" class="flex items-center gap-3.5 group">
+          <div v-if="settings.site_logo_url" class="h-9 w-auto flex items-center">
             <img :src="settings.site_logo_url" :alt="settings.site_name" class="h-8 object-contain" />
           </div>
           <div 
             v-else 
-            class="p-2.5 rounded-xl shadow-lg transition-transform group-hover:scale-105"
+            class="w-10 h-10 rounded-xl flex items-center justify-center font-black text-white text-base shadow-lg shadow-indigo-950/40 border border-white/10"
             :style="{ backgroundColor: primaryColor }"
           >
-            <Layers class="w-5 h-5 text-white" />
+            S
           </div>
           <div>
-            <span class="font-extrabold text-xl tracking-tight text-white block">
+            <span class="font-extrabold text-lg tracking-tight text-white block group-hover:text-slate-200 transition-colors">
               {{ settings.site_name || 'Solkit Tech' }}
             </span>
-            <span class="text-[10px] uppercase font-bold tracking-widest text-slate-500 block">
-              Digital Studio
+            <span class="text-[10px] tracking-widest text-slate-400 font-mono block">
+              SOFTWARE ENGINEERING
             </span>
           </div>
         </Link>
 
-        <!-- Navigation Links -->
-        <nav class="hidden md:flex items-center gap-8">
-          <a href="#services" class="text-sm font-medium text-slate-400 hover:text-white transition-colors">Layanan</a>
-          <a href="#case-studies" class="text-sm font-medium text-slate-400 hover:text-white transition-colors">Portofolio</a>
-          <a href="#tech-stack" class="text-sm font-medium text-slate-400 hover:text-white transition-colors">Teknologi</a>
-          <a href="#workflow" class="text-sm font-medium text-slate-400 hover:text-white transition-colors">Metodologi</a>
-          <a href="#testimonials" class="text-sm font-medium text-slate-400 hover:text-white transition-colors">Klien</a>
+        <!-- Navigation Menu -->
+        <nav class="hidden md:flex items-center gap-9 text-sm font-medium text-slate-400">
+          <a href="#services" class="hover:text-white transition-colors duration-200">Layanan</a>
+          <a href="#case-studies" class="hover:text-white transition-colors duration-200">Studi Kasus</a>
+          <a href="#tech-stack" class="hover:text-white transition-colors duration-200">Teknologi</a>
+          <a href="#workflow" class="hover:text-white transition-colors duration-200">Metodologi</a>
+          <a href="#testimonials" class="hover:text-white transition-colors duration-200">Klien</a>
         </nav>
 
-        <!-- Actions -->
+        <!-- CTA Action -->
         <div class="flex items-center gap-4">
           <button
             @click="isConsultModalOpen = true"
-            :style="{ backgroundColor: primaryColor }"
-            class="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold text-white rounded-xl shadow-lg shadow-indigo-600/20 hover:brightness-110 transition-all duration-200 cursor-pointer"
+            class="relative inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold text-white rounded-xl border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] hover:border-white/20 backdrop-blur-md transition-all duration-300 shadow-sm cursor-pointer group"
           >
-            <Sparkles class="w-4 h-4" />
+            <span class="w-1.5 h-1.5 rounded-full" :style="{ backgroundColor: primaryColor }"></span>
             Konsultasi Proyek
+            <ChevronRight class="w-3.5 h-3.5 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
           </button>
 
           <Link 
             v-if="user" 
             :href="route('admin.dashboard')" 
-            class="hidden sm:inline-flex items-center justify-center px-4 py-2 bg-slate-900 hover:bg-slate-800 border border-slate-800 text-xs font-semibold text-slate-300 rounded-xl transition-colors"
+            class="hidden sm:inline-flex text-xs font-medium text-slate-400 hover:text-white px-3 py-2 rounded-lg transition-colors"
           >
             Dashboard
-            <ArrowUpRight class="w-3.5 h-3.5 ml-1" />
           </Link>
         </div>
       </div>
     </header>
 
-    <!-- HERO SECTION -->
-    <section class="relative pt-20 pb-24 md:pt-28 md:pb-32 px-6">
+    <!-- HERO SECTION (Human-Crafted Typography & Breathing Space) -->
+    <section class="relative pt-24 pb-28 md:pt-36 md:pb-40 px-6 sm:px-8">
       <div class="max-w-5xl mx-auto text-center space-y-8">
-        <!-- Live Status Pill -->
-        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/90 border border-slate-800 shadow-xl backdrop-blur-md">
+        <!-- Status Indicator Pill -->
+        <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-md">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span class="text-xs font-semibold text-slate-300 tracking-wide">
+          <span class="text-xs font-medium text-slate-300 tracking-wide font-mono">
             {{ heroSection.badge }}
           </span>
         </div>
 
-        <!-- Headline -->
-        <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white leading-[1.1] max-w-4xl mx-auto">
+        <!-- Main Headline (Tight Kerning, Bold & Impactful) -->
+        <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white leading-[1.08] max-w-4xl mx-auto">
           {{ heroSection.headline }}
         </h1>
 
-        <!-- Subheadline -->
-        <p class="text-base sm:text-xl text-slate-400 font-normal max-w-3xl mx-auto leading-relaxed">
+        <!-- Subheadline (Generous Line Height & Breathable) -->
+        <p class="text-base sm:text-xl text-slate-400 font-normal max-w-2xl mx-auto leading-relaxed">
           {{ heroSection.subheadline }}
         </p>
 
-        <!-- CTAs -->
+        <!-- Dynamic Action Buttons -->
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
           <button 
             @click="isConsultModalOpen = true"
             :style="{ backgroundColor: primaryColor }"
-            class="w-full sm:w-auto px-8 py-4 rounded-xl text-sm font-bold text-white shadow-xl hover:brightness-110 transition-all flex items-center justify-center gap-2 group cursor-pointer"
+            class="w-full sm:w-auto px-8 py-4 rounded-xl text-sm font-semibold text-white shadow-xl shadow-indigo-950/40 hover:brightness-110 transition-all duration-300 flex items-center justify-center gap-2.5 group cursor-pointer"
           >
             {{ heroSection.cta_primary }}
             <ChevronRight class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -288,112 +311,77 @@ const whatsappUrl = computed(() => {
 
           <a 
             href="#case-studies"
-            class="w-full sm:w-auto px-8 py-4 rounded-xl text-sm font-bold text-slate-200 bg-slate-900/80 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 transition-all flex items-center justify-center gap-2"
+            class="w-full sm:w-auto px-8 py-4 rounded-xl text-sm font-semibold text-slate-300 bg-white/[0.03] hover:bg-white/[0.07] border border-white/10 hover:border-white/20 transition-all duration-300 flex items-center justify-center gap-2"
           >
             {{ heroSection.cta_secondary }}
             <ArrowUpRight class="w-4 h-4 text-slate-400" />
           </a>
         </div>
 
-        <!-- Stats Grid -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 pt-12 max-w-4xl mx-auto">
-          <div 
-            v-for="(st, idx) in heroSection.stats" 
-            :key="idx"
-            class="p-5 rounded-2xl bg-slate-900/50 border border-slate-800/80 backdrop-blur-md text-left"
-          >
-            <div class="text-2xl sm:text-3xl font-black text-white" :style="{ color: primaryColor }">{{ st.value }}</div>
-            <div class="text-xs font-medium text-slate-400 mt-1">{{ st.label }}</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TECH STACK SHOWCASE -->
-    <section id="tech-stack" class="py-20 border-y border-slate-900/80 bg-slate-950/60 relative">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center max-w-2xl mx-auto space-y-3 mb-14">
-          <span class="text-xs font-bold uppercase tracking-widest text-indigo-400" :style="{ color: primaryColor }">
-            {{ techSection.badge }}
-          </span>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            {{ techSection.title }}
-          </h2>
-          <p class="text-sm text-slate-400">
-            {{ techSection.description }}
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div 
-            v-for="(stack, idx) in techSection.stacks" 
-            :key="idx"
-            class="p-5 rounded-2xl bg-slate-900/40 hover:bg-slate-900/80 border border-slate-800/80 hover:border-slate-700 transition-all duration-300 group"
-          >
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-xs font-mono font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-400">
-                {{ stack.category }}
-              </span>
-              <Code2 class="w-4 h-4 text-slate-600 group-hover:text-indigo-400 transition-colors" />
+        <!-- Stats Bar (Integrated Clean Architecture without Gimmicks) -->
+        <div class="pt-16 max-w-4xl mx-auto">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-xl">
+            <div 
+              v-for="(st, idx) in heroSection.stats" 
+              :key="idx"
+              class="text-left space-y-1"
+            >
+              <div class="text-2xl sm:text-3xl font-black tracking-tight text-white font-mono">
+                {{ st.value }}
+              </div>
+              <div class="text-xs text-slate-400 font-medium">
+                {{ st.label }}
+              </div>
             </div>
-            <h3 class="text-lg font-bold text-white group-hover:text-indigo-300 transition-colors">
-              {{ stack.name }}
-            </h3>
-            <p class="text-xs text-slate-400 mt-1">
-              {{ stack.desc }}
-            </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SERVICES CATALOG -->
-    <section id="services" class="py-24 px-6 relative">
-      <div class="max-w-7xl mx-auto">
-        <div class="text-center max-w-3xl mx-auto space-y-3 mb-16">
-          <span class="text-xs font-bold uppercase tracking-widest text-indigo-400" :style="{ color: primaryColor }">
-            SOLUSI & LAYANAN DIGITAL
+    <!-- SERVICES (Bento Grid Layout - Not Symmetric Box Clones) -->
+    <section id="services" class="py-28 md:py-36 px-6 sm:px-8 border-t border-white/[0.06] relative">
+      <div class="max-w-7xl mx-auto space-y-16">
+        <!-- Section Header -->
+        <div class="max-w-2xl space-y-3">
+          <span class="text-xs font-mono font-semibold tracking-widest text-slate-400 uppercase">
+            KAPABILITAS TEKNIS
           </span>
           <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-            Rekayasa Perangkat Lunak Skala Enterprise
+            Layanan Rekayasa Sistem Tanpa Kompromi
           </h2>
-          <p class="text-base text-slate-400">
-            Kami menghadirkan kapabilitas end-to-end mulai dari arsitektur backend, aplikasi mobile fluid, hingga integrasi Artificial Intelligence.
+          <p class="text-base text-slate-400 leading-relaxed">
+            Setiap solusi dirancang berdasarkan analisis beban riil, standar keamanan industri, dan arsitektur kode yang bersih.
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Asymmetric Bento Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Card 1: Featured Flagship Service (Span 2 Columns) -->
           <div 
-            v-for="service in services" 
-            :key="service.id"
-            class="rounded-3xl bg-slate-900/40 border border-slate-800/80 hover:border-slate-700/80 p-8 flex flex-col justify-between transition-all duration-300 hover:shadow-2xl hover:shadow-indigo-950/20 group relative overflow-hidden"
+            v-if="services[0]"
+            class="md:col-span-2 rounded-3xl p-8 sm:p-10 bg-white/[0.02] hover:bg-white/[0.035] border border-white/[0.08] hover:border-white/20 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden"
           >
             <div class="space-y-6">
-              <!-- Service Icon -->
-              <div 
-                class="w-14 h-14 rounded-2xl flex items-center justify-center transition-transform group-hover:scale-105"
-                :style="{ backgroundColor: `${primaryColor}20`, color: primaryColor }"
-              >
-                <component :is="getServiceIcon(service.icon)" class="w-7 h-7" />
-              </div>
-
-              <div>
-                <span class="text-xs font-semibold text-indigo-400 tracking-wider uppercase block mb-1">
-                  {{ service.tagline || 'Layanan Inti' }}
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono px-3 py-1 rounded-full bg-white/[0.04] text-slate-300 border border-white/[0.08]">
+                  {{ services[0].tagline || 'Layanan Utama' }}
                 </span>
-                <h3 class="text-2xl font-bold text-white group-hover:text-indigo-300 transition-colors">
-                  {{ service.title }}
-                </h3>
+                <component :is="getServiceIcon(services[0].icon)" class="w-6 h-6 text-slate-400 group-hover:text-white transition-colors" />
               </div>
 
-              <p class="text-sm text-slate-400 leading-relaxed">
-                {{ service.description }}
-              </p>
+              <div class="space-y-3 max-w-xl">
+                <h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                  {{ services[0].title }}
+                </h3>
+                <p class="text-sm text-slate-400 leading-relaxed">
+                  {{ services[0].description }}
+                </p>
+              </div>
 
               <!-- Deliverables Checklist -->
-              <div class="space-y-2.5 pt-2 border-t border-slate-800/60">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 border-t border-white/[0.06]">
                 <div 
-                  v-for="(feat, idx) in (service.features || [])" 
+                  v-for="(feat, idx) in (services[0].features || [])" 
                   :key="idx"
                   class="flex items-start gap-2.5 text-xs text-slate-300"
                 >
@@ -403,24 +391,130 @@ const whatsappUrl = computed(() => {
               </div>
             </div>
 
-            <!-- Tech Badges & CTA -->
-            <div class="pt-6 mt-6 border-t border-slate-800/60 space-y-4">
+            <!-- Footer Tech Tags & Action -->
+            <div class="pt-8 mt-6 border-t border-white/[0.06] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="flex flex-wrap gap-1.5">
                 <span 
-                  v-for="(tech, idx) in (service.tech_stack || [])" 
+                  v-for="(tech, idx) in (services[0].tech_stack || [])" 
                   :key="idx"
-                  class="px-2.5 py-1 rounded-lg bg-slate-800/70 text-slate-300 text-[11px] font-mono border border-slate-700/50"
+                  class="px-2.5 py-1 rounded-md bg-white/[0.03] text-slate-300 text-xs font-mono border border-white/[0.06]"
                 >
                   {{ tech }}
                 </span>
               </div>
 
               <button
-                @click="consultForm.service_interest = service.title; isConsultModalOpen = true"
-                class="w-full py-2.5 rounded-xl bg-slate-800/60 hover:bg-slate-800 text-xs font-bold text-white border border-slate-700/60 flex items-center justify-center gap-2 transition-colors cursor-pointer"
+                @click="consultForm.service_interest = services[0].title; isConsultModalOpen = true"
+                class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300 hover:text-white transition-colors cursor-pointer"
               >
-                Diskusikan Layanan Ini
-                <ChevronRight class="w-3.5 h-3.5" />
+                Konsultasikan Solusi Ini
+                <ChevronRight class="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 2: AI Automation Service (Span 1 Column, Vertical Accent) -->
+          <div 
+            v-if="services[1]"
+            class="rounded-3xl p-8 sm:p-10 bg-white/[0.02] hover:bg-white/[0.035] border border-white/[0.08] hover:border-white/20 transition-all duration-300 flex flex-col justify-between group"
+          >
+            <div class="space-y-6">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono px-3 py-1 rounded-full bg-white/[0.04] text-slate-300 border border-white/[0.08]">
+                  {{ services[1].tagline || 'Intelligent System' }}
+                </span>
+                <component :is="getServiceIcon(services[1].icon)" class="w-6 h-6 text-slate-400 group-hover:text-white transition-colors" />
+              </div>
+
+              <div class="space-y-2">
+                <h3 class="text-2xl font-bold text-white tracking-tight">
+                  {{ services[1].title }}
+                </h3>
+                <p class="text-sm text-slate-400 leading-relaxed">
+                  {{ services[1].description }}
+                </p>
+              </div>
+
+              <div class="space-y-2.5 pt-4 border-t border-white/[0.06]">
+                <div 
+                  v-for="(feat, idx) in (services[1].features || []).slice(0, 3)" 
+                  :key="idx"
+                  class="flex items-start gap-2.5 text-xs text-slate-300"
+                >
+                  <CheckCircle2 class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <span>{{ feat }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-6 mt-6 border-t border-white/[0.06] flex items-center justify-between">
+              <div class="flex flex-wrap gap-1">
+                <span 
+                  v-for="(tech, idx) in (services[1].tech_stack || []).slice(0, 2)" 
+                  :key="idx"
+                  class="px-2 py-0.5 rounded bg-white/[0.03] text-slate-300 text-xs font-mono border border-white/[0.06]"
+                >
+                  {{ tech }}
+                </span>
+              </div>
+              <button
+                @click="consultForm.service_interest = services[1].title; isConsultModalOpen = true"
+                class="text-xs font-semibold text-slate-300 hover:text-white cursor-pointer"
+              >
+                Pilih
+              </button>
+            </div>
+          </div>
+
+          <!-- Cards 3, 4, 5: Grid Bawah -->
+          <div 
+            v-for="service in services.slice(2)" 
+            :key="service.id"
+            class="rounded-3xl p-8 bg-white/[0.02] hover:bg-white/[0.035] border border-white/[0.08] hover:border-white/20 transition-all duration-300 flex flex-col justify-between group"
+          >
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono text-slate-400">
+                  {{ service.tagline || 'Spesialisasi' }}
+                </span>
+                <component :is="getServiceIcon(service.icon)" class="w-5 h-5 text-slate-400 group-hover:text-white transition-colors" />
+              </div>
+
+              <h3 class="text-xl font-bold text-white tracking-tight">
+                {{ service.title }}
+              </h3>
+
+              <p class="text-xs text-slate-400 leading-relaxed">
+                {{ service.description }}
+              </p>
+
+              <div class="space-y-2 pt-3 border-t border-white/[0.06]">
+                <div 
+                  v-for="(feat, idx) in (service.features || []).slice(0, 2)" 
+                  :key="idx"
+                  class="flex items-start gap-2 text-xs text-slate-300"
+                >
+                  <CheckCircle2 class="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                  <span>{{ feat }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-6 mt-6 border-t border-white/[0.06] flex items-center justify-between">
+              <div class="flex flex-wrap gap-1">
+                <span 
+                  v-for="(tech, idx) in (service.tech_stack || []).slice(0, 2)" 
+                  :key="idx"
+                  class="px-2 py-0.5 rounded bg-white/[0.03] text-slate-300 text-[11px] font-mono border border-white/[0.06]"
+                >
+                  {{ tech }}
+                </span>
+              </div>
+              <button
+                @click="consultForm.service_interest = service.title; isConsultModalOpen = true"
+                class="text-xs font-semibold text-slate-300 hover:text-white cursor-pointer"
+              >
+                Diskusi
               </button>
             </div>
           </div>
@@ -428,98 +522,159 @@ const whatsappUrl = computed(() => {
       </div>
     </section>
 
-    <!-- CASE STUDIES / PORTFOLIO -->
-    <section id="case-studies" class="py-24 px-6 bg-slate-950/80 border-t border-slate-900/80 relative">
-      <div class="max-w-7xl mx-auto">
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-          <div class="space-y-3 max-w-2xl">
-            <span class="text-xs font-bold uppercase tracking-widest text-indigo-400" :style="{ color: primaryColor }">
-              STUDI KASUS BERBASIS DAMPAK (IMPACT-DRIVEN)
-            </span>
-            <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-              Portofolio Hasil Nyata
-            </h2>
-            <p class="text-base text-slate-400">
-              Setiap baris kode yang kami bangun berorientasi pada penyelesaian kendala bisnis nyata dan pencapaian metrik ROI positif bagi klien.
-            </p>
+    <!-- CASE STUDIES (Impact-Driven & Asymmetric Portfolio) -->
+    <section id="case-studies" class="py-28 md:py-36 px-6 sm:px-8 border-t border-white/[0.06] relative">
+      <div class="max-w-7xl mx-auto space-y-16">
+        <!-- Section Header -->
+        <div class="max-w-2xl space-y-3">
+          <span class="text-xs font-mono font-semibold tracking-widest text-slate-400 uppercase">
+            STUDI KASUS PRODUKSI
+          </span>
+          <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+            Hasil Rekayasa Berbasis Dampak Bisnis
+          </h2>
+          <p class="text-base text-slate-400 leading-relaxed">
+            Bukan sekadar galeri tampilan antarmuka. Kami memaparkan tantangan nyata, solusi rekayasa, dan metrik bisnis yang berhasil dicapai.
+          </p>
+        </div>
+
+        <!-- Flagship Case Study Card (Large Asymmetric Layout) -->
+        <div 
+          v-if="featuredPortfolio"
+          class="rounded-3xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 overflow-hidden transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 group"
+        >
+          <!-- Mockup Visual Image (Col 7) -->
+          <div class="lg:col-span-7 relative h-72 sm:h-96 lg:h-auto overflow-hidden bg-slate-900">
+            <img 
+              v-if="featuredPortfolio.thumbnail_url" 
+              :src="featuredPortfolio.thumbnail_url" 
+              :alt="featuredPortfolio.title"
+              class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 opacity-90"
+            />
+            <div v-else class="w-full h-full flex items-center justify-center bg-slate-900 text-slate-700">
+              <Code2 class="w-20 h-20" />
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-transparent via-[#070b14]/30 to-[#070b14]"></div>
+
+            <!-- Floating Metric Badge -->
+            <div class="absolute top-6 left-6">
+              <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#070b14]/85 border border-emerald-500/30 text-emerald-400 text-xs font-semibold backdrop-blur-md shadow-lg">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                {{ featuredPortfolio.impact_metric }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Editorial Case Study Content (Col 5) -->
+          <div class="lg:col-span-5 p-8 sm:p-10 flex flex-col justify-between space-y-6">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between text-xs font-mono text-slate-400">
+                <span>{{ featuredPortfolio.client_name }}</span>
+                <span>{{ featuredPortfolio.industry }}</span>
+              </div>
+
+              <h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-snug">
+                {{ featuredPortfolio.title }}
+              </h3>
+
+              <!-- Problem & Solution Block -->
+              <div class="space-y-4 pt-2">
+                <div class="space-y-1">
+                  <span class="text-[11px] font-mono font-semibold uppercase tracking-wider text-rose-400">
+                    Kendala Awal
+                  </span>
+                  <p class="text-xs text-slate-300 leading-relaxed">
+                    {{ featuredPortfolio.problem }}
+                  </p>
+                </div>
+                <div class="space-y-1 pt-2 border-t border-white/[0.06]">
+                  <span class="text-[11px] font-mono font-semibold uppercase tracking-wider text-indigo-400">
+                    Solusi Rekayasa
+                  </span>
+                  <p class="text-xs text-slate-300 leading-relaxed">
+                    {{ featuredPortfolio.solution }}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom Stack & Link -->
+            <div class="pt-6 border-t border-white/[0.06] flex items-center justify-between">
+              <div class="flex flex-wrap gap-1.5">
+                <span 
+                  v-for="(tech, idx) in (featuredPortfolio.tech_stack || []).slice(0, 4)" 
+                  :key="idx"
+                  class="px-2.5 py-1 rounded bg-white/[0.03] text-slate-300 text-xs font-mono border border-white/[0.06]"
+                >
+                  {{ tech }}
+                </span>
+              </div>
+
+              <a 
+                v-if="featuredPortfolio.project_url" 
+                :href="featuredPortfolio.project_url" 
+                target="_blank"
+                class="p-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 hover:text-white transition-colors"
+                title="Tinjau Studi Kasus"
+              >
+                <ExternalLink class="w-4 h-4" />
+              </a>
+            </div>
           </div>
         </div>
 
-        <!-- Portfolios Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Remaining Case Studies (2-Column Grid) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div 
-            v-for="item in portfolios" 
+            v-for="item in remainingPortfolios" 
             :key="item.id"
-            class="rounded-3xl bg-slate-900/40 border border-slate-800/80 overflow-hidden hover:border-slate-700/80 transition-all duration-300 flex flex-col justify-between group"
+            class="rounded-3xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 overflow-hidden transition-all duration-300 flex flex-col justify-between group"
           >
-            <!-- Thumbnail Image -->
-            <div class="relative h-64 sm:h-72 w-full overflow-hidden bg-slate-900">
+            <div class="relative h-60 w-full overflow-hidden bg-slate-900">
               <img 
                 v-if="item.thumbnail_url" 
                 :src="item.thumbnail_url" 
                 :alt="item.title"
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-85"
               />
-              <div v-else class="w-full h-full flex items-center justify-center bg-slate-900 text-slate-700">
-                <Code2 class="w-16 h-16" />
-              </div>
+              <div class="absolute inset-0 bg-gradient-to-t from-[#070b14] via-transparent to-transparent"></div>
               
-              <!-- Gradient Overlay -->
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
-
-              <!-- Impact Banner Floating -->
-              <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-950/90 border border-emerald-500/30 text-emerald-400 text-xs font-bold shadow-lg backdrop-blur-md">
-                  <Sparkles class="w-3.5 h-3.5" />
-                  {{ item.impact_metric || 'Successful Deployment' }}
-                </span>
-                <span class="text-xs font-mono px-2.5 py-1 rounded-lg bg-slate-950/80 text-slate-300 border border-slate-800 backdrop-blur-md">
-                  {{ item.industry }}
+              <div class="absolute top-4 left-4">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#070b14]/85 border border-emerald-500/30 text-emerald-400 text-xs font-semibold backdrop-blur-md">
+                  {{ item.impact_metric }}
                 </span>
               </div>
             </div>
 
-            <!-- Content Area -->
-            <div class="p-6 sm:p-8 space-y-5 flex-1 flex flex-col justify-between">
-              <div class="space-y-4">
-                <div>
-                  <span class="text-xs font-bold text-slate-400">Klien: {{ item.client_name }}</span>
-                  <h3 class="text-2xl font-bold text-white mt-1 group-hover:text-indigo-300 transition-colors">
-                    {{ item.title }}
-                  </h3>
+            <div class="p-8 space-y-5 flex-1 flex flex-col justify-between">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between text-xs font-mono text-slate-400">
+                  <span>{{ item.client_name }}</span>
+                  <span>{{ item.industry }}</span>
                 </div>
-
-                <!-- Problem & Solution Box -->
-                <div class="space-y-3 bg-slate-950/60 p-4 rounded-2xl border border-slate-850">
-                  <div v-if="item.problem" class="text-xs space-y-1">
-                    <span class="font-bold text-rose-400 uppercase tracking-wider text-[10px]">Tantangan Klien:</span>
-                    <p class="text-slate-300 leading-relaxed">{{ item.problem }}</p>
-                  </div>
-                  <div v-if="item.solution" class="text-xs space-y-1 pt-2 border-t border-slate-800/60">
-                    <span class="font-bold text-indigo-400 uppercase tracking-wider text-[10px]">Solusi Solkit Tech:</span>
-                    <p class="text-slate-300 leading-relaxed">{{ item.solution }}</p>
-                  </div>
-                </div>
+                <h3 class="text-xl font-bold text-white tracking-tight">
+                  {{ item.title }}
+                </h3>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                  {{ item.solution }}
+                </p>
               </div>
 
-              <!-- Tech Stack & Live URL -->
-              <div class="pt-4 border-t border-slate-800/60 flex items-center justify-between gap-4">
+              <div class="pt-4 border-t border-white/[0.06] flex items-center justify-between">
                 <div class="flex flex-wrap gap-1.5">
                   <span 
-                    v-for="(tech, idx) in (item.tech_stack || [])" 
+                    v-for="(tech, idx) in (item.tech_stack || []).slice(0, 3)" 
                     :key="idx"
-                    class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 text-[11px] font-mono border border-slate-700/60"
+                    class="px-2 py-0.5 rounded bg-white/[0.03] text-slate-300 text-[11px] font-mono border border-white/[0.06]"
                   >
                     {{ tech }}
                   </span>
                 </div>
-
                 <a 
                   v-if="item.project_url" 
                   :href="item.project_url" 
                   target="_blank"
-                  class="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors shrink-0"
-                  title="Kunjungi Proyek"
+                  class="text-slate-400 hover:text-white p-2 transition-colors"
                 >
                   <ExternalLink class="w-4 h-4" />
                 </a>
@@ -530,46 +685,83 @@ const whatsappUrl = computed(() => {
       </div>
     </section>
 
-    <!-- AGILE WORKFLOW / HOW WE WORK -->
-    <section id="workflow" class="py-24 px-6 border-t border-slate-900/80 relative">
-      <div class="max-w-7xl mx-auto">
-        <div class="text-center max-w-2xl mx-auto space-y-3 mb-16">
-          <span class="text-xs font-bold uppercase tracking-widest text-indigo-400" :style="{ color: primaryColor }">
-            {{ workflowSection.badge }}
+    <!-- TECH STACK (Curated Clean Grid - Not Cluttered) -->
+    <section id="tech-stack" class="py-28 md:py-36 px-6 sm:px-8 border-t border-white/[0.06] bg-white/[0.01] relative">
+      <div class="max-w-7xl mx-auto space-y-16">
+        <div class="max-w-2xl space-y-3">
+          <span class="text-xs font-mono font-semibold tracking-widest text-slate-400 uppercase">
+            {{ techSection.badge }}
           </span>
           <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-            {{ workflowSection.title }}
+            {{ techSection.title }}
           </h2>
-          <p class="text-sm text-slate-400">
-            {{ workflowSection.description }}
+          <p class="text-base text-slate-400 leading-relaxed">
+            {{ techSection.description }}
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <div 
-            v-for="(step, idx) in workflowSection.steps" 
+            v-for="(stack, idx) in techSection.stacks" 
             :key="idx"
-            class="p-6 rounded-3xl bg-slate-900/40 border border-slate-800/80 relative group hover:border-slate-700 transition-colors"
+            class="p-6 rounded-2xl bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.06] hover:border-white/15 transition-all duration-300 space-y-3"
           >
-            <span class="text-4xl font-black text-slate-800 group-hover:text-indigo-400/40 transition-colors">
-              {{ step.step }}
+            <span class="text-[11px] font-mono font-semibold text-slate-400 block">
+              {{ stack.category }}
             </span>
-            <h3 class="text-lg font-bold text-white mt-4">
-              {{ step.title }}
+            <h3 class="text-lg font-bold text-white tracking-tight">
+              {{ stack.name }}
             </h3>
-            <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-              {{ step.description }}
+            <p class="text-xs text-slate-400 leading-relaxed">
+              {{ stack.desc }}
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CLIENT TESTIMONIALS -->
-    <section id="testimonials" class="py-24 px-6 bg-slate-950/90 border-t border-slate-900/80 relative">
-      <div class="max-w-7xl mx-auto">
-        <div class="text-center max-w-2xl mx-auto space-y-3 mb-16">
-          <span class="text-xs font-bold uppercase tracking-widest text-indigo-400" :style="{ color: primaryColor }">
+    <!-- WORKFLOW METODOLOGI (Step Architecture) -->
+    <section id="workflow" class="py-28 md:py-36 px-6 sm:px-8 border-t border-white/[0.06] relative">
+      <div class="max-w-7xl mx-auto space-y-16">
+        <div class="max-w-2xl space-y-3">
+          <span class="text-xs font-mono font-semibold tracking-widest text-slate-400 uppercase">
+            {{ workflowSection.badge }}
+          </span>
+          <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+            {{ workflowSection.title }}
+          </h2>
+          <p class="text-base text-slate-400 leading-relaxed">
+            {{ workflowSection.description }}
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div 
+            v-for="(step, idx) in workflowSection.steps" 
+            :key="idx"
+            class="p-8 rounded-3xl bg-white/[0.02] border border-white/[0.06] hover:border-white/15 transition-all duration-300 flex flex-col justify-between space-y-6"
+          >
+            <div class="text-3xl font-black font-mono text-slate-500">
+              {{ step.step }}
+            </div>
+            <div class="space-y-2">
+              <h3 class="text-lg font-bold text-white tracking-tight">
+                {{ step.title }}
+              </h3>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                {{ step.description }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS (Executive Reviews) -->
+    <section id="testimonials" class="py-28 md:py-36 px-6 sm:px-8 border-t border-white/[0.06] bg-white/[0.01] relative">
+      <div class="max-w-7xl mx-auto space-y-16">
+        <div class="max-w-2xl space-y-3">
+          <span class="text-xs font-mono font-semibold tracking-widest text-slate-400 uppercase">
             {{ testimonialsSection.badge }}
           </span>
           <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
@@ -577,16 +769,16 @@ const whatsappUrl = computed(() => {
           </h2>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div 
             v-for="(item, idx) in testimonialsSection.items" 
             :key="idx"
-            class="p-8 rounded-3xl bg-slate-900/40 border border-slate-800/80 flex flex-col justify-between space-y-6"
+            class="p-8 sm:p-10 rounded-3xl bg-white/[0.02] border border-white/[0.06] flex flex-col justify-between space-y-6"
           >
-            <p class="text-sm text-slate-300 italic leading-relaxed">
+            <p class="text-sm sm:text-base text-slate-300 leading-relaxed italic">
               "{{ item.comment }}"
             </p>
-            <div class="flex items-center gap-3 pt-4 border-t border-slate-800/60">
+            <div class="pt-6 border-t border-white/[0.06] flex items-center gap-4">
               <div 
                 class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white text-sm"
                 :style="{ backgroundColor: primaryColor }"
@@ -595,7 +787,7 @@ const whatsappUrl = computed(() => {
               </div>
               <div>
                 <h4 class="text-sm font-bold text-white">{{ item.name }}</h4>
-                <p class="text-xs text-slate-400">{{ item.role }} · <span class="text-indigo-400">{{ item.company }}</span></p>
+                <p class="text-xs text-slate-400">{{ item.role }} · <span class="text-slate-300">{{ item.company }}</span></p>
               </div>
             </div>
           </div>
@@ -603,149 +795,136 @@ const whatsappUrl = computed(() => {
       </div>
     </section>
 
-    <!-- CALL TO ACTION & DIRECT CONTACT -->
-    <section class="py-24 px-6 relative overflow-hidden">
-      <div 
-        class="max-w-5xl mx-auto rounded-3xl p-8 sm:p-14 text-center border border-slate-800 shadow-2xl relative overflow-hidden"
-        :style="{ background: `linear-gradient(135deg, rgba(15,23,42,0.95), rgba(30,27,75,0.7))` }"
-      >
-        <div class="max-w-3xl mx-auto space-y-6 relative z-10">
-          <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
-            Siap Mentransformasikan Bisnis Anda Menjadi Pemimpin Digital?
+    <!-- DIRECT ENGAGEMENT SECTION (Sophisticated Executive CTA) -->
+    <section class="py-28 md:py-36 px-6 sm:px-8 border-t border-white/[0.06] relative">
+      <div class="max-w-4xl mx-auto p-10 sm:p-14 rounded-3xl bg-white/[0.02] border border-white/10 backdrop-blur-xl text-center space-y-8 relative overflow-hidden">
+        <div 
+          class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full blur-[120px] pointer-events-none opacity-20"
+          :style="{ backgroundColor: primaryColor }"
+        ></div>
+
+        <div class="space-y-4 relative z-10 max-w-2xl mx-auto">
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            Mulai Diskusi Rekayasa Software Anda Hari Ini
           </h2>
-          <p class="text-base text-slate-300">
-            Diskusikan tantangan teknis Anda langsung dengan tim Tech Lead kami. Dapatkan analisis arsitektur, pemilihan tech stack, dan estimasi timeline gratis.
+          <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
+            Dapatkan peninjauan arsitektur, pemilihan tech stack yang tepat, dan estimasi biaya tanpa komitmen awal.
           </p>
+        </div>
 
-          <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            <button
-              @click="isConsultModalOpen = true"
-              :style="{ backgroundColor: primaryColor }"
-              class="w-full sm:w-auto px-8 py-4 rounded-xl text-sm font-bold text-white shadow-xl hover:brightness-110 transition-all flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <Sparkles class="w-4 h-4" />
-              Mulai Konsultasi Online
-            </button>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
+          <button
+            @click="isConsultModalOpen = true"
+            :style="{ backgroundColor: primaryColor }"
+            class="w-full sm:w-auto px-8 py-3.5 rounded-xl text-sm font-semibold text-white shadow-lg hover:brightness-110 transition-all cursor-pointer"
+          >
+            Jadwalkan Konsultasi Teknis
+          </button>
 
-            <a
-              :href="whatsappUrl"
-              target="_blank"
-              class="w-full sm:w-auto px-8 py-4 rounded-xl text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-500 transition-colors flex items-center justify-center gap-2 shadow-xl shadow-emerald-600/20"
-            >
-              <Phone class="w-4 h-4" />
-              WhatsApp Tech Lead Langsung
-            </a>
-          </div>
+          <a
+            :href="whatsappUrl"
+            target="_blank"
+            class="w-full sm:w-auto px-8 py-3.5 rounded-xl text-sm font-semibold text-slate-300 bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 transition-colors flex items-center justify-center gap-2"
+          >
+            <Phone class="w-4 h-4 text-emerald-400" />
+            WhatsApp Tech Lead
+          </a>
         </div>
       </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="py-14 border-t border-slate-900 bg-slate-950 text-slate-400 text-xs">
-      <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10">
-        <!-- Brand -->
+    <footer class="py-16 border-t border-white/[0.06] bg-[#050810] text-slate-400 text-xs">
+      <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 md:grid-cols-4 gap-12">
         <div class="space-y-4 md:col-span-2">
           <div class="flex items-center gap-3">
             <div 
-              class="p-2 rounded-xl text-white"
+              class="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-white text-xs"
               :style="{ backgroundColor: primaryColor }"
             >
-              <Layers class="w-5 h-5" />
+              S
             </div>
-            <span class="font-extrabold text-xl text-white">{{ settings.site_name || 'Solkit Tech' }}</span>
+            <span class="font-bold text-base text-white">{{ settings.site_name || 'Solkit Tech' }}</span>
           </div>
-          <p class="text-xs text-slate-400 max-w-md leading-relaxed">
-            {{ settings.site_description || 'Enterprise Digital Engineering & Modern Software House.' }}
+          <p class="text-xs text-slate-400 max-w-sm leading-relaxed">
+            {{ settings.site_description || 'Studio rekayasa perangkat lunak untuk aplikasi web kustom, sistem mobile, dan otomatisasi AI berskala enterprise.' }}
           </p>
-          <p class="text-xxs text-slate-500">
-            © {{ new Date().getFullYear() }} {{ settings.site_name || 'Solkit Tech' }}. All rights reserved. Built with Laravel 11 & Vue 3.
-          </p>
-        </div>
-
-        <!-- Contact Info -->
-        <div class="space-y-3">
-          <h4 class="text-xs font-bold uppercase tracking-wider text-white">Hubungi Kami</h4>
-          <p class="flex items-center gap-2 text-slate-400">
-            <Mail class="w-4 h-4 text-indigo-400" />
-            {{ settings.contact_email || 'hello@solkit.tech' }}
-          </p>
-          <p class="flex items-center gap-2 text-slate-400">
-            <Phone class="w-4 h-4 text-emerald-400" />
-            +{{ settings.whatsapp_number || '6281234567890' }}
-          </p>
-          <p class="flex items-start gap-2 text-slate-400">
-            <MapPin class="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
-            <span>{{ settings.company_address || 'SCBD Jakarta Selatan, Indonesia' }}</span>
+          <p class="text-xxs text-slate-500 font-mono">
+            © {{ new Date().getFullYear() }} {{ settings.site_name || 'Solkit Tech' }}. Seluruh hak cipta dilindungi.
           </p>
         </div>
 
-        <!-- Quick Links -->
         <div class="space-y-3">
-          <h4 class="text-xs font-bold uppercase tracking-wider text-white">Akses Cepat</h4>
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-white">Hubungi Kami</h4>
+          <p class="text-slate-400">{{ settings.contact_email || 'hello@solkit.tech' }}</p>
+          <p class="text-slate-400">+{{ settings.whatsapp_number || '6281234567890' }}</p>
+          <p class="text-slate-500 text-xxs leading-relaxed">{{ settings.company_address || 'SCBD Jakarta Selatan, Indonesia' }}</p>
+        </div>
+
+        <div class="space-y-3">
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-white">Navigasi</h4>
           <ul class="space-y-2">
-            <li><a href="#services" class="hover:text-white transition-colors">Layanan Software</a></li>
-            <li><a href="#case-studies" class="hover:text-white transition-colors">Studi Kasus Klien</a></li>
-            <li><a href="#tech-stack" class="hover:text-white transition-colors">Teknologi Modern</a></li>
-            <li><Link :href="route('login')" class="hover:text-white transition-colors">Staff Portal (Login)</Link></li>
+            <li><a href="#services" class="hover:text-white transition-colors">Layanan</a></li>
+            <li><a href="#case-studies" class="hover:text-white transition-colors">Studi Kasus</a></li>
+            <li><a href="#tech-stack" class="hover:text-white transition-colors">Teknologi</a></li>
+            <li><Link :href="route('login')" class="hover:text-white transition-colors">Portal Staf</Link></li>
           </ul>
         </div>
       </div>
     </footer>
 
-    <!-- CONSULTATION / LEAD MODAL -->
+    <!-- CONSULTATION MODAL -->
     <div 
       v-if="isConsultModalOpen" 
-      class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fadeIn"
+      class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
     >
-      <div class="relative w-full max-w-xl bg-slate-950 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl">
+      <div class="relative w-full max-w-xl bg-[#090e1a] border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl">
         <button 
           @click="isConsultModalOpen = false"
-          class="absolute top-6 right-6 p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-900 transition-colors"
+          class="absolute top-6 right-6 p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/[0.04] transition-colors"
         >
           <X class="w-5 h-5" />
         </button>
 
         <div class="space-y-2 mb-6">
-          <span class="text-xs font-bold uppercase tracking-widest text-indigo-400" :style="{ color: primaryColor }">
-            KONSULTASI GRATIS 1-ON-1
+          <span class="text-xs font-mono uppercase tracking-widest text-slate-400">
+            KONSULTASI SPESIFIKASI PROYEK
           </span>
-          <h3 class="text-2xl font-bold text-white">
-            Diskusikan Kebutuhan Software Anda
+          <h3 class="text-2xl font-bold text-white tracking-tight">
+            Diskusikan Arsitektur Software Anda
           </h3>
-          <p class="text-xs text-slate-400">
-            Isi formulir ringkas di bawah. Tim analis teknis Solkit Tech akan merespons dalam 1x24 jam kerja.
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Formulir ini akan langsung ditinjau oleh analis teknis Solkit Tech dalam 1x24 jam kerja.
           </p>
         </div>
 
-        <!-- Success Message -->
-        <div v-if="isFormSuccess" class="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center gap-3">
+        <div v-if="isFormSuccess" class="p-5 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center gap-3">
           <CheckCircle2 class="w-6 h-6 shrink-0" />
-          <div class="text-xs">
-            <p class="font-bold">Terima kasih atas kepercayaan Anda!</p>
-            <p>Pesan Anda telah berhasil kami terima. Kami akan segera menghubungi Anda.</p>
+          <div class="text-xs space-y-0.5">
+            <p class="font-bold">Permintaan Berhasil Terkirim</p>
+            <p>Terima kasih. Rekayasa teknis kami akan menghubungi Anda melalui kontak yang dicantumkan.</p>
           </div>
         </div>
 
-        <!-- Form -->
         <form v-else @submit.prevent="submitConsultation" class="space-y-4">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div class="space-y-1">
-              <label class="block text-xs font-semibold text-slate-300">Nama Lengkap *</label>
+              <label class="block text-xs font-medium text-slate-300">Nama Lengkap *</label>
               <input
                 v-model="consultForm.name"
                 type="text"
                 placeholder="Nama Anda"
-                class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
+                class="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-white/30"
                 required
               />
             </div>
             <div class="space-y-1">
-              <label class="block text-xs font-semibold text-slate-300">Email Bisnis *</label>
+              <label class="block text-xs font-medium text-slate-300">Email Kerja *</label>
               <input
                 v-model="consultForm.email"
                 type="email"
                 placeholder="nama@perusahaan.com"
-                class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
+                class="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-white/30"
                 required
               />
             </div>
@@ -753,44 +932,44 @@ const whatsappUrl = computed(() => {
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div class="space-y-1">
-              <label class="block text-xs font-semibold text-slate-300">Nomor WhatsApp *</label>
+              <label class="block text-xs font-medium text-slate-300">WhatsApp Aktif *</label>
               <input
                 v-model="consultForm.phone"
                 type="text"
                 placeholder="0812xxxxxxx"
-                class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
+                class="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-white/30"
               />
             </div>
             <div class="space-y-1">
-              <label class="block text-xs font-semibold text-slate-300">Nama Perusahaan / Startup</label>
+              <label class="block text-xs font-medium text-slate-300">Perusahaan / Organisasi</label>
               <input
                 v-model="consultForm.company"
                 type="text"
-                placeholder="PT Inovasi Digital"
-                class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
+                placeholder="PT Solusi Digital"
+                class="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-white/30"
               />
             </div>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div class="space-y-1">
-              <label class="block text-xs font-semibold text-slate-300">Layanan yang Dibutuhkan</label>
+              <label class="block text-xs font-medium text-slate-300">Fokus Kebutuhan</label>
               <select
                 v-model="consultForm.service_interest"
-                class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500"
+                class="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-white/30"
               >
-                <option value="Custom Web & SaaS">Custom Web & SaaS</option>
+                <option value="Custom Web & Enterprise SaaS">Custom Web & Enterprise SaaS</option>
                 <option value="Mobile App (iOS/Android)">Mobile App (iOS/Android)</option>
                 <option value="AI Integration & Automation">AI Integration & Automation</option>
-                <option value="Cloud DevOps & Scaling">Cloud DevOps & Scaling</option>
+                <option value="Cloud Infrastructure & DevOps">Cloud Infrastructure & DevOps</option>
                 <option value="UI/UX Product Design">UI/UX Product Design</option>
               </select>
             </div>
             <div class="space-y-1">
-              <label class="block text-xs font-semibold text-slate-300">Estimasi Budget Proyek</label>
+              <label class="block text-xs font-medium text-slate-300">Estimasi Anggaran</label>
               <select
                 v-model="consultForm.budget_range"
-                class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500"
+                class="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-white/30"
               >
                 <option value="< Rp 50 Juta">&lt; Rp 50 Juta</option>
                 <option value="Rp 50 - 150 Juta">Rp 50 - 150 Juta</option>
@@ -801,12 +980,12 @@ const whatsappUrl = computed(() => {
           </div>
 
           <div class="space-y-1">
-            <label class="block text-xs font-semibold text-slate-300">Ceritakan Tantangan atau Rencana Proyek *</label>
+            <label class="block text-xs font-medium text-slate-300">Deskripsi Tantangan / Kebutuhan *</label>
             <textarea
               v-model="consultForm.message"
               rows="3"
-              placeholder="Contoh: Kami ingin membangun marketplace B2B dengan fitur multi-vendor, integrasi payment gateway, dan aplikasi kurir..."
-              class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
+              placeholder="Jelaskan secara ringkas sistem yang ingin dibangun atau kendala arsitektur saat ini..."
+              class="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-white/30"
               required
             ></textarea>
           </div>
@@ -815,20 +994,19 @@ const whatsappUrl = computed(() => {
             <a 
               :href="whatsappUrl" 
               target="_blank"
-              class="text-xs text-emerald-400 hover:text-emerald-300 flex items-center gap-1 font-semibold"
+              class="text-xs text-emerald-400 hover:text-emerald-300 flex items-center gap-1 font-medium"
             >
               <Phone class="w-3.5 h-3.5" />
-              Chat WhatsApp Langsung
+              WhatsApp Langsung
             </a>
 
             <button
               type="submit"
               :disabled="consultForm.processing"
               :style="{ backgroundColor: primaryColor }"
-              class="px-6 py-3 rounded-xl text-xs font-bold text-white shadow-xl hover:brightness-110 transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
+              class="px-6 py-2.5 rounded-xl text-xs font-semibold text-white shadow-md hover:brightness-110 transition-all cursor-pointer disabled:opacity-50"
             >
-              <Send class="w-3.5 h-3.5" />
-              Kirim Konsultasi
+              Kirim Spesifikasi
             </button>
           </div>
         </form>

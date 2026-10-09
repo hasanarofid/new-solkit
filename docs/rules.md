@@ -46,10 +46,14 @@ Dokumen ini adalah pedoman baku dan standar operasional pengembangan (SOP) softw
 1. **Composition API Only**:
    - Wajib menggunakan `<script setup>` syntax.
    - Hindari Options API (`data()`, `methods`).
-2. **UI/UX Pro Max Standard**:
-   - Terapkan estetika modern tech-forward: tipografi tebal, kontras tinggi, ruang kosong (*whitespace*) yang lapang, aksen glassmorphism subtle (`backdrop-blur-md`), serta micro-interactions pada hover/focus.
-   - Hindari warna mentah primer generic (seperti `#ff0000` atau `#0000ff`). Gunakan kurasi warna modern (Slate, Indigo, Cyan, Emerald).
-   - Seluruh komponen harus responsif penuh (*Mobile-First* hingga *Desktop 4K*).
+2. **Human-Crafted Look & Anti-AI Design Guardrails**:
+   - **Atmosfer & Gradien Organik (Anti-Flat Dark)**: Hindari latar belakang hitam pekat atau abu-abu flat polos (`bg-black` atau `bg-slate-950` polos tanpa kedalaman). Padukan warna dasar *deep charcoal/slate* dengan gradien ambient lembut, pencahayaan asimetris, dan tekstur pencahayaan yang tersebar alami di sudut layar.
+   - **Tipografi & Hirarki Berkarakter**: Gunakan variasi ukuran font dinamis. Judul utama tegas, padat, dan rapat (`tracking-tight`), deskripsi menggunakan warna abu netral dengan line-height longgar (`leading-relaxed`) agar nyaman dibaca (*breathable*).
+   - **Variasi Kartu & Grid Asimetris (Bento Grid)**: Hindari kartu simetris seragam yang membosankan. Gunakan arsitektur *Bento Grid* (kartu hero/featured lebih dominan, kartu samping horizontal/vertikal), kombinasi border tipis `border-white/10`, aksen *glassmorphism* transparan halus `backdrop-blur-md bg-white/[0.02]`, dan spotlight hover yang elegan.
+   - **Mikro-Interaksi & Visual Feedback**: Transisi halus (`transition-all duration-300`), feedback visual saat hover/focus yang bernyawa tanpa berlebihan (misal: border tipis berpendar halus atau kartu terangkat subtil).
+   - **Whitespace Mewah & Bernapas**: Ruang jeda antar seksi lapang (`py-28` hingga `py-36`) untuk menghadirkan kesan studio enterprise yang matang dan berkelas.
+   - **Kurangi Elemen Berlebihan (Anti-Clutter)**: Jangan menyematkan ikon di setiap elemen kecil tanpa fungsi nyata. Gunakan ikon hanya saat benar-benar memperjelas fungsi atau navigasi.
+   - **Copywriting Natural & Realistis**: Hindari kalimat klise buatan AI (seperti *"Di era digital yang berkembang pesat..."*). Gunakan gaya komunikasi bisnis modern, lugas, presisi, dan mencerminkan studio rekayasa perangkat lunak papan atas.
 3. **Props Handling & Inertia Form**:
    - Gunakan `useForm()` dari `@inertiajs/vue3` untuk penanganan form submit, validasi error state, dan upload file.
    - Selalu manfaatkan helper inertia seperti `preserveScroll: true` dan flash messages (`usePage().props.flash`).

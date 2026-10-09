@@ -2,8 +2,14 @@
 # Standar Pengembangan Web Platform Software House (Laravel 11 + Vue 3 Inertia + Tailwind CSS)
 
 - Ikuti seluruh pedoman di `docs/rules.md` dan spesifikasi arsitektur di `docs/PRD.md`.
-- Prioritaskan standar UI/UX Pro Max: Tech-Forward Corporate Clean, dark mode glassmorphism accents, dynamic theme colors melalui CSS Variables, tipografi modern.
+- **ANTI-AI DESIGN GUARDRAILS (Human-Crafted Modern UI/UX)**:
+  1. **Atmosfer & Gradien Organik**: Jangan gunakan flat dark monoton (`bg-black` polos). Padukan deep charcoal/slate dengan pencahayaan ambient asimetris di sudut layar.
+  2. **Tipografi & Hirarki Berkarakter**: Judul tebal rapat (`tracking-tight`), paragraf luas dan mudah dibaca (`leading-relaxed text-slate-400`).
+  3. **Variasi Kartu & Bento Grid**: Hindari grid simetris seragam. Terapkan Bento Grid dengan kartu hero/featured asimetris, border halus `border-white/10`, aksen `bg-white/[0.02] backdrop-blur-md`.
+  4. **Mikro-Interaksi**: Transisi halus `transition-all duration-300`, hover feedback yang berkelas.
+  5. **Whitespace Mewah**: Spasi antar section lapang (`py-28` s/d `py-36`).
+  6. **Anti-Clutter**: Hindari penempatan ikon kecil yang berlebihan dan tidak fungsional.
+  7. **Copywriting Alami**: Gunakan narasi bisnis korporat yang natural dan meyakinkan, hindari kalimat klise AI.
 - Gunakan Vue 3 Composition API `<script setup>` secara eksklusif.
-- Backend Laravel 11 wajib menerapkan Form Request, Controller ramping, dan type hints ketat.
-- Modul inti berorientasi Software House Modern: Services, Impact-Driven Portfolios (Problem, Solution, Tech Stack, Impact), Dynamic Sections, Global Settings, dan Consultation Leads.
-- Gunakan `@lucide/vue` untuk icon.
+- Backend Laravel 11 wajib menerapkan Form Request, Controller ramping, dan strict type-hints.
+- Modul inti: Services, Impact-Driven Portfolios, Dynamic Sections, Global Settings (Theming CSS Variables), dan Consultation Leads.
