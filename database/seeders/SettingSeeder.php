@@ -35,7 +35,7 @@ class SettingSeeder extends Seeder
             ],
             [
                 'key' => 'site_logo',
-                'value' => 'settings/solkit-dark.png',
+                'value' => 'settings/solkit-dark.svg',
                 'type' => 'image',
             ],
             [

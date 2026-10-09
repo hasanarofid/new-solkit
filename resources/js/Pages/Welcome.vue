@@ -231,10 +231,10 @@ const remainingPortfolios = computed(() => {
         <!-- Logo Resmi SOLKIT (Solusi Kode Kita) -->
         <Link href="/" class="flex items-center gap-3.5 group cursor-pointer py-1">
           <img 
-            :src="settings.site_logo_url || '/images/solkit-dark.png'" 
+            :src="settings.site_logo_url || '/images/solkit-dark.svg'" 
             alt="SOLKIT - Solusi Kode Kita" 
             class="h-11 w-auto max-w-[200px] object-contain transition-transform duration-300 group-hover:scale-105"
-            @error="$event.target.src = '/images/solkit-dark.png'"
+            @error="$event.target.src = '/images/solkit-dark.svg'"
           />
         </Link>
 
@@ -901,10 +901,10 @@ const remainingPortfolios = computed(() => {
           <!-- Logo Footer Resmi SOLKIT -->
           <div class="flex items-center gap-3">
             <img 
-              :src="settings.site_logo_url || '/images/solkit-dark.png'" 
+              :src="settings.site_logo_url || '/images/solkit-dark.svg'" 
               alt="SOLKIT - Solusi Kode Kita" 
               class="h-9 w-auto max-w-[180px] object-contain"
-              @error="$event.target.src = '/images/solkit-dark.png'"
+              @error="$event.target.src = '/images/solkit-dark.svg'"
             />
           </div>
           <p class="text-xs text-slate-400 max-w-sm leading-relaxed">
