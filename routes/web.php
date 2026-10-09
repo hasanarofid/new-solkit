@@ -8,11 +8,18 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\PortfolioController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 
 // Public Landing Page & Consultation
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/consultation', [HomeController::class, 'storeLead'])->name('consultation.store');
+
+// Public Editorial & Blog Routes (AdSense E-E-A-T & Multi-page Architecture)
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
+Route::get('/privacy-policy', [BlogController::class, 'privacyPolicy'])->name('privacy.policy');
+Route::get('/terms-of-service', [BlogController::class, 'termsOfService'])->name('terms.service');
 
 Route::get('/dashboard', function () {
     return redirect()->route('admin.dashboard');

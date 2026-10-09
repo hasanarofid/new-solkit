@@ -3,6 +3,8 @@ import { ref, computed } from 'vue';
 import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
 import { 
   ArrowUpRight, 
+  ArrowRight,
+  BookOpen,
   CheckCircle2, 
   ChevronRight,
   ExternalLink,
@@ -328,6 +330,7 @@ const remainingPortfolios = computed(() => {
           <a href="#tech-stack" class="hover:text-white transition-colors">Teknologi</a>
           <a href="#workflow" class="hover:text-white transition-colors">Metodologi</a>
           <a href="#testimonials" class="hover:text-white transition-colors">Klien</a>
+          <Link :href="route('blog.index')" class="text-sky-400 hover:text-white transition-colors font-bold">Blog</Link>
         </nav>
 
         <!-- Actions -->
@@ -901,6 +904,71 @@ const remainingPortfolios = computed(() => {
       </div>
     </section>
 
+    <!-- LATEST ENGINEERING ARTICLES & INSIGHTS (Google AdSense High-Value Content Hub) -->
+    <section id="insights" class="py-28 md:py-36 px-6 sm:px-8 border-b border-white/[0.06] bg-[#07080B] relative">
+      <div class="max-w-7xl mx-auto space-y-16">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div class="max-w-2xl space-y-3">
+            <span class="text-xs font-mono font-bold tracking-widest uppercase text-sky-400">
+              PUBLIKASI & RISET TEKNOLOGI
+            </span>
+            <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">
+              Insight & Panduan Rekayasa Terbaru
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+              Studi kasus pemecahan masalah teknis nyata, optimasi performa backend/frontend, arsitektur cloud, dan panduan rekayasa sistem enterprise.
+            </p>
+          </div>
+          <Link 
+            :href="route('blog.index')"
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 text-white text-xs font-bold transition-all shrink-0 group shadow-lg"
+          >
+            Lihat Semua Publikasi
+            <ArrowRight class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
+
+        <div v-if="posts && posts.length" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <article 
+            v-for="post in posts.slice(0, 3)" 
+            :key="post.id"
+            class="p-7 rounded-3xl bg-white/[0.02] border border-white/[0.06] hover:border-blue-500/40 hover:bg-white/[0.03] transition-all duration-300 flex flex-col justify-between space-y-6 group"
+          >
+            <div class="space-y-4">
+              <div class="flex items-center justify-between text-xs font-mono text-slate-500">
+                <span class="px-2.5 py-1 rounded bg-white/[0.04] text-sky-400 font-semibold border border-white/[0.06]">
+                  {{ post.category?.name || 'Teknologi' }}
+                </span>
+                <span class="text-[11px]">
+                  {{ new Date(post.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) }}
+                </span>
+              </div>
+
+              <h3 class="text-lg font-bold text-white tracking-tight group-hover:text-sky-300 transition-colors line-clamp-2 leading-snug">
+                <Link :href="route('blog.show', post.slug)">
+                  {{ post.title }}
+                </Link>
+              </h3>
+
+              <p class="text-xs text-slate-400 leading-relaxed line-clamp-3">
+                {{ post.content ? post.content.replace(/<[^>]*>/g, '').substring(0, 140) + '...' : '' }}
+              </p>
+            </div>
+
+            <div class="pt-4 border-t border-white/[0.06] flex items-center justify-between text-xs text-slate-400">
+              <span class="text-[11px] font-mono text-slate-500">Oleh Hasan Arofid</span>
+              <Link 
+                :href="route('blog.show', post.slug)"
+                class="text-sky-400 hover:text-white font-bold flex items-center gap-1 font-mono text-xs transition-colors"
+              >
+                Baca Panduan <ArrowRight class="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <!-- TESTIMONIALS -->
     <section id="testimonials" class="py-28 md:py-36 px-6 sm:px-8 border-b border-white/[0.06] bg-white/[0.01] relative">
       <div class="max-w-7xl mx-auto space-y-16">
@@ -1024,12 +1092,22 @@ const remainingPortfolios = computed(() => {
         </div>
 
         <div class="space-y-3">
-          <h4 class="text-xs font-bold uppercase tracking-wider text-white">Navigasi</h4>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-white">Publikasi & Insight</h4>
           <ul class="space-y-2">
-            <li><a href="#services" class="hover:text-white transition-colors">Layanan</a></li>
+            <li><Link :href="route('blog.index')" class="hover:text-white transition-colors flex items-center gap-1.5"><span class="w-1 h-1 rounded-full bg-sky-400"></span>Blog & Panduan</Link></li>
             <li><a href="#case-studies" class="hover:text-white transition-colors">Studi Kasus</a></li>
-            <li><a href="#tech-stack" class="hover:text-white transition-colors">Teknologi</a></li>
-            <li><Link :href="route('login')" class="hover:text-white transition-colors">Portal Staf</Link></li>
+            <li><a href="#services" class="hover:text-white transition-colors">Layanan Rekayasa</a></li>
+            <li><a href="#tech-stack" class="hover:text-white transition-colors">Stack Teknologi</a></li>
+          </ul>
+        </div>
+
+        <div class="space-y-3">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-white">Legalitas & Kepatuhan</h4>
+          <ul class="space-y-2">
+            <li><Link href="/privacy-policy" class="hover:text-white transition-colors">Kebijakan Privasi</Link></li>
+            <li><Link href="/terms-of-service" class="hover:text-white transition-colors">Syarat & Ketentuan</Link></li>
+            <li><Link :href="route('blog.index')" class="hover:text-white transition-colors">Standar Kualitas E-E-A-T</Link></li>
+            <li><Link :href="route('login')" class="hover:text-white transition-colors">Portal Akses Staf</Link></li>
           </ul>
         </div>
       </div>
