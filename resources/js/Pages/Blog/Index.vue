@@ -82,6 +82,18 @@ const stripTags = (html, length = 140) => {
   <Head :title="'Engineering Blog & Knowledge Base | ' + (settings.site_name || 'SOLKIT')">
     <meta name="description" content="Kumpulan panduan teknis mendalam, studi kasus arsitektur perangkat lunak, optimasi database, dan strategi cloud engineering dari tim SOLKIT." />
     <meta name="keywords" :content="'blog teknis, tutorial laravel, arsitektur software, optimasi web, software house surabaya, ' + (settings.meta_keywords || '')" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="SOLKIT (Solusi Kode Kita)" />
+    <meta property="og:title" :content="'Engineering Blog & Knowledge Base | ' + (settings.site_name || 'SOLKIT')" />
+    <meta property="og:description" content="Kumpulan panduan teknis mendalam, studi kasus arsitektur perangkat lunak, optimasi database, dan strategi cloud engineering dari tim SOLKIT." />
+    <meta property="og:url" content="https://solkit.tech/blog" />
+    <meta property="og:image" content="https://solkit.tech/images/og-share.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" :content="'Engineering Blog & Knowledge Base | ' + (settings.site_name || 'SOLKIT')" />
+    <meta name="twitter:description" content="Kumpulan panduan teknis mendalam, studi kasus arsitektur perangkat lunak, optimasi database, dan strategi cloud engineering dari tim SOLKIT." />
+    <meta name="twitter:image" content="https://solkit.tech/images/og-share.jpg" />
   </Head>
 
   <div class="min-h-screen bg-[#090A0E] text-slate-100 font-sans selection:bg-[#0052FF] selection:text-white relative">

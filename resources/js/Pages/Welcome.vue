@@ -265,17 +265,21 @@ const remainingPortfolios = computed(() => {
     <!-- OpenGraph Tags -->
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="id_ID" />
-    <meta property="og:site_name" content="SOLKIT - Solusi Kode Kita" />
-    <meta property="og:title" :content="page?.title || settings.meta_title || 'SOLKIT | Software House Indonesia'" />
-    <meta property="og:description" :content="page?.meta_description || settings.meta_description" />
+    <meta property="og:site_name" content="SOLKIT (Solusi Kode Kita)" />
+    <meta property="og:title" :content="page?.title || settings.meta_title || 'SOLKIT - Solusi Kode Kita | Studio Rekayasa Perangkat Lunak Surabaya'" />
+    <meta property="og:description" :content="page?.meta_description || settings.meta_description || 'SOLKIT (Solusi Kode Kita) adalah studio rekayasa perangkat lunak di Surabaya untuk pembuatan custom web application, sistem mobile iOS & Android, dan otomatisasi AI.'" />
     <meta property="og:url" content="https://solkit.tech" />
-    <meta property="og:image" :content="settings.og_image || '/images/solkit-dark.png'" />
+    <meta property="og:image" content="https://solkit.tech/images/og-share.jpg" />
+    <meta property="og:image:secure_url" content="https://solkit.tech/images/og-share.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" :content="page?.title || settings.meta_title || 'SOLKIT | Software House Indonesia'" />
-    <meta name="twitter:description" :content="page?.meta_description || settings.meta_description" />
-    <meta name="twitter:image" :content="settings.og_image || '/images/solkit-dark.png'" />
+    <meta name="twitter:title" :content="page?.title || settings.meta_title || 'SOLKIT - Solusi Kode Kita | Studio Rekayasa Perangkat Lunak Surabaya'" />
+    <meta name="twitter:description" :content="page?.meta_description || settings.meta_description || 'SOLKIT (Solusi Kode Kita) adalah studio rekayasa perangkat lunak di Surabaya untuk pembuatan custom web application, sistem mobile iOS & Android, dan otomatisasi AI.'" />
+    <meta name="twitter:image" content="https://solkit.tech/images/og-share.jpg" />
 
     <!-- Google Site Verification -->
     <meta v-if="settings.google_site_verification" name="google-site-verification" :content="settings.google_site_verification" />

@@ -136,7 +136,13 @@ const shareArticle = () => {
     <meta property="og:description" :content="cleanExcerpt" />
     <meta property="og:type" content="article" />
     <meta property="og:url" :content="'https://solkit.tech/blog/' + post.slug" />
+    <meta property="og:image" :content="post.image_url ? (post.image_url.startsWith('http') ? post.image_url : 'https://solkit.tech' + post.image_url) : 'https://solkit.tech/images/og-share.jpg'" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" :content="post.title" />
+    <meta name="twitter:description" :content="cleanExcerpt" />
+    <meta name="twitter:image" :content="post.image_url ? (post.image_url.startsWith('http') ? post.image_url : 'https://solkit.tech' + post.image_url) : 'https://solkit.tech/images/og-share.jpg'" />
     <link rel="canonical" :href="'https://solkit.tech/blog/' + post.slug" />
     <component :is="'script'" type="application/ld+json" v-html="schemaArticleJson" />
   </Head>
