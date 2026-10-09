@@ -1,0 +1,62 @@
+name: Deploy to Production (SOLKIT)
+
+on:
+  push:
+    branches:
+      - master
+      - main
+
+jobs:
+  deploy:
+    name: Deploy to VPS
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Execute remote deployment commands
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT || 22 }}
+          script: |
+            set -e
+            echo "🚀 Starting automated deployment for solkit.tech..."
+            cd /var/www/solkit.tech
+
+            # Pull latest changes
+            echo "📥 Fetching latest code..."
+            git fetch origin master
+            git reset --hard origin/master
+
+            # Install dependencies
+            echo "📦 Installing composer dependencies..."
+            COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --optimize-autoloader --no-interaction
+
+            # Run migrations
+            echo "🗄️ Running migrations..."
+            php artisan migrate --force
+
+            # Build frontend assets
+            echo "⚡ Building frontend assets..."
+            npm ci || npm install
+            npm run build
+
+            # Optimize cache
+            echo "🧹 Clearing and warming up caches..."
+            php artisan optimize:clear
+            php artisan optimize
+
+            # Fix permissions
+            echo "🔒 Ensuring correct permissions..."
+            chown -R www-data:www-data /var/www/solkit.tech/storage /var/www/solkit.tech/bootstrap/cache
+            chmod -R 775 /var/www/solkit.tech/storage /var/www/solkit.tech/bootstrap/cache
+
+            # Reload PHP-FPM
+            echo "🔄 Reloading PHP-FPM..."
+            systemctl reload php8.5-fpm
+
+            echo "✅ Deployment completed successfully for solkit.tech!"
