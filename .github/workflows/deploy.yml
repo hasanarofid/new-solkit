@@ -3,7 +3,6 @@ name: Deploy to Production (SOLKIT)
 on:
   push:
     branches:
-      - master
       - main
 
 jobs:
@@ -32,12 +31,13 @@ jobs:
           # Execute deployment commands over SSH
           ssh -i ~/.ssh/id_deploy -p "${SSH_PORT:-22}" -o StrictHostKeyChecking=accept-new "$SSH_USER@$SSH_HOST" << 'EOF'
             set -e
-            echo "🚀 Starting automated deployment for solkit.tech..."
+            echo "🚀 Starting automated deployment for solkit.tech (production from branch: main)..."
             cd /var/www/solkit.tech
 
-            echo "📥 Fetching latest code..."
-            git fetch origin master
-            git reset --hard origin/master
+            echo "📥 Fetching latest code from main branch..."
+            git fetch origin main
+            git checkout -B main origin/main
+            git reset --hard origin/main
 
             echo "📦 Installing composer dependencies..."
             COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --optimize-autoloader --no-interaction
