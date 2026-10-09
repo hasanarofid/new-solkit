@@ -53,6 +53,46 @@ class SettingSeeder extends Seeder
                 'value' => 'Equity Tower Lv 28, SCBD Jakarta Selatan, Indonesia',
                 'type' => 'text',
             ],
+            [
+                'key' => 'meta_title',
+                'value' => 'SOLKIT (Solusi Kode Kita) | Software House Indonesia & High-End Software Engineering',
+                'type' => 'text',
+            ],
+            [
+                'key' => 'meta_keywords',
+                'value' => 'software house indonesia, jasa pembuatan website profesional, jasa pembuatan aplikasi mobile android ios, software house jakarta, konsultan arsitektur web, custom erp indonesia, enterprise saas development, web developer laravel vue inertia, integrasi ai llm, high performance software house, solkit, solusi kode kita, jasa software house terpercaya',
+                'type' => 'textarea',
+            ],
+            [
+                'key' => 'geo_region',
+                'value' => 'ID-JK',
+                'type' => 'text',
+            ],
+            [
+                'key' => 'geo_placename',
+                'value' => 'Jakarta Selatan, DKI Jakarta, Indonesia',
+                'type' => 'text',
+            ],
+            [
+                'key' => 'geo_position',
+                'value' => '-6.2243;106.8097',
+                'type' => 'text',
+            ],
+            [
+                'key' => 'geo_icbm',
+                'value' => '-6.2243, 106.8097',
+                'type' => 'text',
+            ],
+            [
+                'key' => 'google_site_verification',
+                'value' => 'E-tyAYsOQMugMAc2KAkBnFdVc9mAbKbId7ZOAK3gpDQ',
+                'type' => 'text',
+            ],
+            [
+                'key' => 'og_image',
+                'value' => '/images/solkit-dark.png',
+                'type' => 'text',
+            ],
         ];
 
         foreach ($settings as $setting) {

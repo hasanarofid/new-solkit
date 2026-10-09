@@ -141,6 +141,51 @@ const testimonialsSection = computed(() => getSection('testimonials')?.content |
   ]
 });
 
+// JSON-LD Structured Data Schema.org (Google & Search Engines)
+const structuredDataJson = computed(() => {
+  return JSON.stringify({
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'ProfessionalService',
+        '@id': 'https://solkit.tech/#organization',
+        'name': 'SOLKIT (Solusi Kode Kita)',
+        'alternateName': ['SOLKIT', 'Solusi Kode Kita', 'Solkit Tech'],
+        'url': 'https://solkit.tech',
+        'logo': 'https://solkit.tech/images/solkit-dark.svg',
+        'image': 'https://solkit.tech/images/solkit-dark.png',
+        'description': props.settings.site_description || 'Software house modern Indonesia spesialis arsitektur web enterprise, mobile apps, sistem ERP/POS, dan integrasi AI.',
+        'telephone': props.settings.whatsapp_number ? `+${props.settings.whatsapp_number}` : '+6281234567890',
+        'email': props.settings.contact_email || 'partner@solkit.tech',
+        'priceRange': '$$',
+        'address': {
+          '@type': 'PostalAddress',
+          'streetAddress': props.settings.company_address || 'Equity Tower Lv 28, SCBD',
+          'addressLocality': 'Jakarta Selatan',
+          'addressRegion': 'DKI Jakarta',
+          'postalCode': '12190',
+          'addressCountry': 'ID'
+        },
+        'geo': {
+          '@type': 'GeoCoordinates',
+          'latitude': -6.2243,
+          'longitude': 106.8097
+        },
+        'areaServed': [
+          { '@type': 'Country', 'name': 'Indonesia' },
+          { '@type': 'Country', 'name': 'Malaysia' },
+          { '@type': 'Country', 'name': 'Singapore' },
+          { '@type': 'AdministrativeArea', 'name': 'DKI Jakarta' }
+        ],
+        'sameAs': [
+          'https://github.com/hasanarofid',
+          'https://hasanarofid.site'
+        ]
+      }
+    ]
+  });
+});
+
 // Icon Resolver
 const getServiceIcon = (iconName) => {
   switch (iconName?.toLowerCase()) {
@@ -200,7 +245,43 @@ const remainingPortfolios = computed(() => {
 </script>
 
 <template>
-  <Head :title="page?.title || 'SOLKIT | Solusi Kode Kita — High-End Software Engineering'" />
+  <Head :title="page?.title || settings.meta_title || 'SOLKIT (Solusi Kode Kita) | Software House Indonesia'">
+    <meta name="description" :content="page?.meta_description || settings.meta_description || 'SOLKIT (Solusi Kode Kita) adalah software house modern Indonesia spesialis arsitektur web enterprise, mobile apps iOS & Android, dan integrasi Enterprise AI.'" />
+    <meta name="keywords" :content="settings.meta_keywords || 'software house indonesia, jasa pembuatan website profesional, jasa pembuatan aplikasi mobile android ios, software house jakarta, solkit, solusi kode kita'" />
+    <meta name="author" content="SOLKIT (Solusi Kode Kita)" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+    <!-- GEO Meta Tags (Local & Regional Indonesian SEO) -->
+    <meta name="geo.region" :content="settings.geo_region || 'ID-JK'" />
+    <meta name="geo.placename" :content="settings.geo_placename || 'Jakarta Selatan, DKI Jakarta, Indonesia'" />
+    <meta name="geo.position" :content="settings.geo_position || '-6.2243;106.8097'" />
+    <meta name="ICBM" :content="settings.geo_icbm || '-6.2243, 106.8097'" />
+    <meta name="geo.country" content="ID" />
+
+    <!-- OpenGraph Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:site_name" content="SOLKIT - Solusi Kode Kita" />
+    <meta property="og:title" :content="page?.title || settings.meta_title || 'SOLKIT | Software House Indonesia'" />
+    <meta property="og:description" :content="page?.meta_description || settings.meta_description" />
+    <meta property="og:url" content="https://solkit.tech" />
+    <meta property="og:image" :content="settings.og_image || '/images/solkit-dark.png'" />
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" :content="page?.title || settings.meta_title || 'SOLKIT | Software House Indonesia'" />
+    <meta name="twitter:description" :content="page?.meta_description || settings.meta_description" />
+    <meta name="twitter:image" :content="settings.og_image || '/images/solkit-dark.png'" />
+
+    <!-- Google Site Verification -->
+    <meta v-if="settings.google_site_verification" name="google-site-verification" :content="settings.google_site_verification" />
+
+    <!-- Canonical Link -->
+    <link rel="canonical" href="https://solkit.tech" />
+
+    <!-- JSON-LD Structured Data Schema.org -->
+    <component :is="'script'" type="application/ld+json" v-html="structuredDataJson" />
+  </Head>
 
   <!-- Root Container with Deep Obsidian Palette (#090A0E) & Electric Blue Glow -->
   <div 
@@ -830,18 +911,36 @@ const remainingPortfolios = computed(() => {
           </h2>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Client Brands Trust Grid -->
+        <div v-if="testimonialsSection.client_brands && testimonialsSection.client_brands.length" class="space-y-4 pt-2">
+          <p class="text-xs font-mono font-semibold uppercase tracking-widest text-slate-400">
+            Dipercaya Oleh Para Mitra & Klien Strategis:
+          </p>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
+            <div 
+              v-for="(brand, bIdx) in testimonialsSection.client_brands" 
+              :key="bIdx"
+              class="px-5 py-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-blue-500/40 hover:bg-white/[0.04] flex items-center justify-center text-center transition-all duration-300 group"
+            >
+              <span class="text-xs sm:text-sm font-semibold text-slate-300 group-hover:text-white transition-colors tracking-tight">
+                {{ brand }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4">
           <div 
             v-for="(item, idx) in testimonialsSection.items" 
             :key="idx"
-            class="p-8 sm:p-10 rounded-3xl bg-white/[0.02] border border-white/[0.06] hover:border-blue-500/30 transition-all duration-300 flex flex-col justify-between space-y-6"
+            class="p-8 rounded-3xl bg-white/[0.02] border border-white/[0.06] hover:border-blue-500/30 hover:bg-white/[0.03] transition-all duration-300 flex flex-col justify-between space-y-6"
           >
-            <p class="text-sm sm:text-base text-slate-300 leading-relaxed italic">
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed italic">
               "{{ item.comment }}"
             </p>
             <div class="pt-6 border-t border-white/[0.06] flex items-center gap-4">
               <div 
-                class="w-10 h-10 rounded-xl flex items-center justify-center font-black text-white text-sm"
+                class="w-10 h-10 rounded-xl flex items-center justify-center font-black text-white text-sm shrink-0"
                 :style="{ backgroundColor: primaryColor }"
               >
                 {{ item.name.charAt(0) }}
