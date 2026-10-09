@@ -82,10 +82,14 @@
         <meta name="twitter:description" content="{{ $metaDescription }}">
         <meta name="twitter:image" content="{{ $metaImage }}">
 
-        <!-- Favicon & Touch Icons -->
-        <link rel="icon" type="image/svg+xml" href="{{ asset('images/solkit-vector.svg') }}">
-        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/solkit-clean.png') }}">
-        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/solkit-clean.png') }}">
+        <!-- Favicon & Touch Icons (Multi-format support for Chrome, Safari, Firefox, Edge) -->
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v=2">
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v=2">
+        <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}?v=2">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}?v=2">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}?v=2">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}?v=2">
+        <meta name="msapplication-TileColor" content="#090A0E">
         <meta name="theme-color" content="#07080B">
 
         <!-- Google AdSense Verification -->
