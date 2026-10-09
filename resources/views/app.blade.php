@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        @php
+        <?php
             $component = $page['component'] ?? '';
             $props = $page['props'] ?? [];
             $currentUrl = url()->current();
@@ -42,7 +42,7 @@
                 $metaDescription = $defaultDescription;
                 $metaImage = $defaultImage;
             }
-        @endphp
+        ?>
 
         <!-- Primary SEO Meta Tags -->
         <title inertia>{{ $metaTitle }}</title>
@@ -94,34 +94,34 @@
 
         <!-- Structured Data Organization Schema (JSON-LD) -->
         <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "ProfessionalService",
-          "name": "SOLKIT (Solusi Kode Kita)",
-          "alternateName": "Solkit Tech Software House",
-          "url": "https://solkit.tech",
-          "logo": "{{ asset('images/solkit-clean.png') }}",
-          "image": "{{ asset('images/og-share.jpg') }}",
-          "description": "Studio rekayasa perangkat lunak enterprise untuk custom web application, sistem mobile, dan otomatisasi AI.",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Surabaya",
-            "addressRegion": "Jawa Timur",
-            "addressCountry": "ID"
-          },
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": -7.257472,
-            "longitude": 112.752088
-          },
-          "founder": {
-            "@type": "Person",
-            "name": "Hasan Arofid",
-            "jobTitle": "Principal Software Architect"
-          },
-          "areaServed": ["Surabaya", "Jawa Timur", "Indonesia", "Global"],
-          "priceRange": "$$"
-        }
+        {!! json_encode([
+          '@context' => 'https://schema.org',
+          '@type' => 'ProfessionalService',
+          'name' => 'SOLKIT (Solusi Kode Kita)',
+          'alternateName' => 'Solkit Tech Software House',
+          'url' => 'https://solkit.tech',
+          'logo' => asset('images/solkit-clean.png'),
+          'image' => asset('images/og-share.jpg'),
+          'description' => 'Studio rekayasa perangkat lunak enterprise untuk custom web application, sistem mobile, dan otomatisasi AI.',
+          'address' => [
+            '@type' => 'PostalAddress',
+            'addressLocality' => 'Surabaya',
+            'addressRegion' => 'Jawa Timur',
+            'addressCountry' => 'ID',
+          ],
+          'geo' => [
+            '@type' => 'GeoCoordinates',
+            'latitude' => -7.257472,
+            'longitude' => 112.752088,
+          ],
+          'founder' => [
+            '@type' => 'Person',
+            'name' => 'Hasan Arofid',
+            'jobTitle' => 'Principal Software Architect',
+          ],
+          'areaServed' => ['Surabaya', 'Jawa Timur', 'Indonesia', 'Global'],
+          'priceRange' => '$$',
+        ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
         </script>
 
         <!-- Fonts -->
