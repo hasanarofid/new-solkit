@@ -15,23 +15,28 @@ class SettingSeeder extends Seeder
         $settings = [
             [
                 'key' => 'site_name',
-                'value' => 'Solkit Tech',
+                'value' => 'SOLKIT',
                 'type' => 'text',
             ],
             [
                 'key' => 'site_tagline',
-                'value' => 'Enterprise Digital Engineering & Modern Software House',
+                'value' => 'Solusi Kode Kita — High-End Software Engineering & Digital Studio',
                 'type' => 'text',
             ],
             [
                 'key' => 'site_description',
-                'value' => 'Solkit Tech adalah mitra rekayasa perangkat lunak terpilih untuk startup berkembang dan korporasi. Kami merancang custom web platform, mobile apps, SaaS, dan integrasi kecerdasan buatan (AI) berkinerja tinggi.',
+                'value' => 'SOLKIT (Solusi Kode Kita) adalah software house modern yang merekayasa arsitektur cloud, SaaS enterprise, aplikasi mobile terukur, dan integrasi AI dengan standar agensi teknologi kelas dunia.',
                 'type' => 'textarea',
             ],
             [
                 'key' => 'primary_color',
-                'value' => '#4f46e5', // Modern Indigo Accent
+                'value' => '#0052FF', // Biru Elektrik Resmi SOLKIT
                 'type' => 'color',
+            ],
+            [
+                'key' => 'site_logo',
+                'value' => 'settings/solkit.jpeg',
+                'type' => 'image',
             ],
             [
                 'key' => 'whatsapp_number',
@@ -40,12 +45,12 @@ class SettingSeeder extends Seeder
             ],
             [
                 'key' => 'contact_email',
-                'value' => 'hello@solkit.tech',
+                'value' => 'partner@solkit.tech',
                 'type' => 'text',
             ],
             [
                 'key' => 'company_address',
-                'value' => 'One Pacific Place Suite 1204, SCBD Jakarta Selatan, Indonesia',
+                'value' => 'Equity Tower Lv 28, SCBD Jakarta Selatan, Indonesia',
                 'type' => 'text',
             ],
         ];

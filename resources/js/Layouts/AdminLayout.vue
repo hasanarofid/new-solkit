@@ -61,12 +61,15 @@ const logout = () => {
         <!-- Sidebar Header / Logo -->
         <div :class="[isSidebarCollapsed ? 'lg:px-0 lg:justify-center' : 'px-6 justify-between', 'flex items-center h-20 border-b border-slate-800']">
           <Link :href="route('admin.dashboard')" class="flex items-center gap-3">
-            <div class="p-2.5 bg-indigo-600 rounded-xl shadow-lg shadow-indigo-650/30 shrink-0">
-              <Layers class="w-5 h-5 text-white" />
+            <div class="relative w-8 h-8 flex items-center justify-center shrink-0">
+              <svg viewBox="0 0 100 100" class="w-8 h-8 drop-shadow-[0_0_10px_rgba(0,82,255,0.4)]">
+                <path d="M 50 50 L 15 42 C 18 58 22 72 23 88 Z" fill="#1e293b" />
+                <path d="M 50 50 L 80 18 L 84 82 L 20 86 Z" fill="#0052FF" />
+              </svg>
             </div>
             <div :class="[isSidebarCollapsed ? 'lg:hidden' : 'block', 'transition-opacity duration-300']">
-              <h1 class="text-sm font-bold tracking-tight text-white uppercase">CMS Panel</h1>
-              <p class="text-xxs text-indigo-400 font-medium tracking-wide">SaaS SaaS-Boilerplate</p>
+              <h1 class="text-sm font-black tracking-tight text-white">SOLKIT</h1>
+              <p class="text-[10px] text-sky-400 font-mono tracking-wide -mt-0.5">Solusi Kode Kita</p>
             </div>
           </Link>
           <button 

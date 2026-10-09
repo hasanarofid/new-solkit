@@ -17,7 +17,11 @@ import {
   Phone,
   Mail,
   MapPin,
-  Sparkles
+  Terminal,
+  Activity,
+  ShieldCheck,
+  Server,
+  Zap
 } from '@lucide/vue';
 
 const props = defineProps({
@@ -50,70 +54,70 @@ const props = defineProps({
 const pageData = usePage();
 const user = pageData.props.auth?.user;
 
-// Dynamic Theme Colors
-const primaryColor = computed(() => props.settings.primary_color || '#4f46e5');
+// Primary Color: Electric Blue SOLKIT (#0052FF)
+const primaryColor = computed(() => props.settings.primary_color || '#0052FF');
 
 // Modal State
 const isConsultModalOpen = ref(false);
 
-// Helper to find specific section by key
+// Helper for dynamic section content
 const getSection = (key) => {
   if (!props.page || !props.page.sections) return null;
   return props.page.sections.find(s => s.key === key && s.is_active);
 };
 
 const heroSection = computed(() => getSection('hero')?.content || {
-  badge: 'Kapasitas Q4: Terbuka untuk 2 Proyek Terpilih',
-  headline: 'Rekayasa Perangkat Lunak Presisi untuk Produk Digital yang Siap Berkembang',
-  subheadline: 'Kami membantu startup bertumbuh dan korporasi memodernisasi infrastruktur teknologinya melalui arsitektur web tangguh, aplikasi mobile performa tinggi, dan otomatisasi AI.',
-  cta_primary: 'Konsultasikan Proyek Anda',
+  badge: 'Terbuka untuk Kolaborasi Proyek Q4',
+  headline: 'Membangun Ekosistem Perangkat Lunak Masa Depan',
+  subheadline: 'SOLKIT (Solusi Kode Kita) adalah studio rekayasa perangkat lunak terpilih untuk bisnis bertumbuh dan korporasi. Kami merancang custom web platform, aplikasi mobile fluid, dan otomatisasi AI berkinerja tinggi.',
+  cta_primary: 'Mulai Konsultasi Teknis',
   cta_secondary: 'Eksplorasi Studi Kasus',
   stats: [
-    { label: 'Proyek Siap Produksi', value: '45+' },
+    { label: 'Proyek Skala Enterprise', value: '45+' },
     { label: 'Rata-rata SLA Uptime', value: '99.98%' },
-    { label: 'Transaksi Diproses/Hari', value: '1.2M+' },
+    { label: 'Throughput Transaksi/Hari', value: '1.2M+' },
     { label: 'Retensi Kemitraan Klien', value: '98%' }
   ]
 });
 
 const techSection = computed(() => getSection('tech_stack')?.content || {
-  badge: 'TEKNOLOGI & ARSITEKTUR',
-  title: 'Fondasi Teknis yang Teruji di Lingkungan Produksi',
-  description: 'Kami menghindari tren sesaat dan berfokus pada ekosistem teknologi modern yang terbukti stabil, aman, dan mudah dirawat dalam jangka panjang.',
+  badge: 'ARSITEKTUR & TEKNOLOGI',
+  title: 'Ekosistem Modern Berdaya Tahan Tinggi',
+  description: 'Kami menggunakan stack teknologi yang teruji di lingkungan produksi berskala besar, menjamin stabilitas, kecepatan, dan pemeliharaan mudah.',
   stacks: [
-    { name: 'Laravel 11', category: 'Backend & Core Engine', desc: 'Arsitektur modular, antrean aman, dan skalabilitas data tinggi' },
-    { name: 'Vue 3 & Inertia.js', category: 'Frontend Ecosystem', desc: 'SPA tanpa kompleksitas REST terpisah dengan rendering instan' },
-    { name: 'Flutter & Kotlin', category: 'Mobile Engineering', desc: 'Performa native 60fps dengan sinkronisasi offline-first' },
-    { name: 'Python & LLM RAG', category: 'Artificial Intelligence', desc: 'Pipeline ekstraksi dokumen, pemrosesan otomatis, dan agen cerdas' },
-    { name: 'PostgreSQL & Redis', category: 'Data & Storage Engine', desc: 'In-memory caching dan relational schema tangguh' },
-    { name: 'Docker & Kubernetes', category: 'Infrastruktur Cloud', desc: 'Container terisolasi yang siap scale horizontal tanpa downtime' }
+    { name: 'Laravel 11', category: 'Backend Engine', desc: 'Arsitektur modular, antrean aman, dan skalabilitas data tinggi' },
+    { name: 'Vue 3 & Inertia.js', category: 'Frontend Architecture', desc: 'Pengalaman SPA instan tanpa kerumitan REST API terpisah' },
+    { name: 'Flutter & Kotlin', category: 'Mobile Engineering', desc: 'Aplikasi lintas platform 60fps dengan sinkronisasi offline-first' },
+    { name: 'Python & LLM RAG', category: 'Artificial Intelligence', desc: 'Pemrosesan dokumen otomatis, analitik prediktif, dan AI agents' },
+    { name: 'PostgreSQL & Redis', category: 'Data & Cache Tier', desc: 'In-memory throughput super cepat dan konsistensi relasional' },
+    { name: 'Docker & Kubernetes', category: 'Cloud Infrastructure', desc: 'Container terisolasi yang siap scale horizontal tanpa downtime' }
   ]
 });
 
 const workflowSection = computed(() => getSection('workflow')?.content || {
-  badge: 'METODOLOGI EKSEKUSI',
-  title: 'Alur Kerja Terstruktur Tanpa Friksi',
-  description: 'Setiap iterasi proyek dijalankan dengan transparansi penuh, dokumentasi rapi, dan siklus sprint mingguan yang dapat dievaluasi.',
+  badge: 'METODOLOGI KAMI',
+  title: 'Alur Kerja Rekayasa Berstandar Agensi Global',
+  description: 'Proses Agile terukur tanpa friksi dengan dokumentasi arsitektur rapi dan sprint mingguan yang transparan.',
   steps: [
     {
       step: '01',
-      title: 'Audit & Desain Arsitektur',
-      description: 'Kami mengidentifikasi bottleneck bisnis, menyusun spesifikasi PRD rinci, dan memodelkan skema database sebelum menulis kode.'
+      title: 'Discovery & System Design',
+      description: 'Audit model bisnis, mitigasi celah keamanan, penyusunan PRD mendalam, dan perancangan skema database optimal.'
     },
     {
       step: '02',
-      title: 'Prototyping & Design System',
-      description: 'Merancang antarmuka interaktif di Figma dengan token desain konsisten yang siap diimplementasikan langsung ke kode.'
+      title: 'UI/UX Pro Max & Prototyping',
+      description: 'Pembuatan design system interaktif di Figma yang berfokus pada kemudahan pakai dan konversi bisnis.'
     },
     {
       step: '03',
-      title: 'Sprint Development & Testing',
-      description: 'Pengembangan berbasis komponen dengan code review berkala, unit test, dan demo hasil progres setiap akhir pekan.'
+      title: 'Agile Sprint Engineering',
+      description: 'Penulisan clean code dengan automated testing, weekly sprint demo, dan code review ketat sebelum merge.'
     },
     {
       step: '04',
-      title: 'Audit Keamanan & Go-Live',
-      description: 'Stress testing performa beban, audit kerentanan OWASP, penyiapan CI/CD automated pipeline, dan pemantauan aktif pasca peluncuran.'
+      title: 'Security Audit & Zero-Downtime Launch',
+      description: 'Load stress test, OWASP penetration testing, setup CI/CD pipeline, serta asistensi go-live 24/7.'
     }
   ]
 });
@@ -126,13 +130,13 @@ const testimonialsSection = computed(() => getSection('testimonials')?.content |
       name: 'Reza Pratama',
       role: 'Chief Technology Officer',
       company: 'PT Artha Digital Mandiri',
-      comment: 'Solkit Tech memahami arsitektur core ledger perbankan kami dengan sangat matang. Sistem pemrosesan transaksi yang mereka bangun menangani beban gajian nasional tanpa kendala.'
+      comment: 'SOLKIT memahami arsitektur sistem core payment kami dengan sangat matang. Engine transaksi yang mereka rancang sukses menangani lonjakan transaksi nasional tanpa kendala.'
     },
     {
       name: 'Diana Stephanie',
       role: 'Head of Product Operations',
       company: 'Kargo Nusantara Logistics',
-      comment: 'Telemetri IoT dan aplikasi pengemudi Flutter yang dibangun tim Solkit langsung menurunkan biaya bahan bakar armada kami hingga 22% pada kuartal pertama implementasi.'
+      comment: 'Telemetri IoT dan aplikasi pengemudi Flutter yang dibangun tim SOLKIT memangkas biaya bahan bakar armada kami hingga 22% dalam 3 bulan pertama pengoperasian.'
     }
   ]
 });
@@ -150,7 +154,7 @@ const getServiceIcon = (iconName) => {
   }
 };
 
-// Consultation Form
+// Form Handler
 const consultForm = useForm({
   name: '',
   email: '',
@@ -181,11 +185,10 @@ const submitConsultation = () => {
 const whatsappUrl = computed(() => {
   const number = props.settings.whatsapp_number || '6281234567890';
   const cleanNumber = number.replace(/[^0-9]/g, '');
-  const text = encodeURIComponent(`Halo Tim Solkit Tech, saya ingin mendiskusikan kebutuhan pengembangan produk perangkat lunak untuk perusahaan saya.`);
+  const text = encodeURIComponent(`Halo Tim SOLKIT (Solusi Kode Kita), saya ingin mendiskusikan kebutuhan pengembangan software untuk proyek kami.`);
   return `https://wa.me/${cleanNumber}?text=${text}`;
 });
 
-// Featured flagship portfolio vs standard portfolios
 const featuredPortfolio = computed(() => {
   return props.portfolios.find(p => p.is_featured) || props.portfolios[0];
 });
@@ -197,179 +200,254 @@ const remainingPortfolios = computed(() => {
 </script>
 
 <template>
-  <Head :title="page?.title || 'Solkit Tech | Modern Software House & Digital Studio'" />
+  <Head :title="page?.title || 'SOLKIT | Solusi Kode Kita — High-End Software Engineering'" />
 
-  <!-- Root Container with Organic Deep Atmosphere (Anti-Flat Dark) -->
+  <!-- Root Container with Deep Obsidian Palette (#090A0E) & Electric Blue Glow -->
   <div 
-    class="min-h-screen bg-[#070b14] text-slate-100 font-sans selection:bg-indigo-500 selection:text-white relative overflow-hidden"
-    :style="{ '--primary-color': primaryColor }"
+    class="min-h-screen bg-[#090A0E] text-slate-100 font-sans selection:bg-[#0052FF] selection:text-white relative overflow-hidden"
+    :style="{ '--solkit-blue': primaryColor }"
   >
-    <!-- Organic Layered Ambient Glows (Asymmetric Position) -->
+    <!-- Organic Asymmetric Ambient Glows (Electric Blue #0052FF) -->
     <div 
-      class="absolute -top-32 -left-32 w-[680px] h-[680px] rounded-full blur-[160px] pointer-events-none opacity-[0.14]"
+      class="absolute -top-36 -left-36 w-[700px] h-[700px] rounded-full blur-[180px] pointer-events-none opacity-25"
       :style="{ backgroundColor: primaryColor }"
     ></div>
     <div 
-      class="absolute top-[35%] -right-48 w-[600px] h-[600px] rounded-full blur-[170px] pointer-events-none opacity-[0.10]"
+      class="absolute top-[40%] -right-48 w-[650px] h-[650px] rounded-full blur-[190px] pointer-events-none opacity-15"
       :style="{ backgroundColor: primaryColor }"
     ></div>
     <div 
-      class="absolute bottom-[5%] left-[10%] w-[500px] h-[500px] rounded-full blur-[160px] pointer-events-none opacity-[0.08]"
+      class="absolute bottom-[-10%] left-[25%] w-[600px] h-[600px] rounded-full blur-[180px] pointer-events-none opacity-15"
       :style="{ backgroundColor: primaryColor }"
     ></div>
 
-    <!-- Subtle Tech Mesh Dot Texture (Vercel/Linear Style Depth) -->
-    <div class="absolute inset-0 bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.18] pointer-events-none"></div>
+    <!-- Engineering Dot-Grid Precision Texture -->
+    <div class="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:28px_28px] opacity-25 pointer-events-none"></div>
 
-    <!-- Sticky Minimalist Glass Navbar -->
-    <header class="sticky top-0 z-50 bg-[#070b14]/80 backdrop-blur-xl border-b border-white/[0.06] transition-all">
+    <!-- STICKY GLASSMORPHIC NAVBAR DENGAN LOGO SOLKIT PRESISI -->
+    <header class="sticky top-0 z-50 bg-[#090A0E]/80 backdrop-blur-xl border-b border-white/[0.08] transition-all">
       <div class="max-w-7xl mx-auto px-6 sm:px-8 h-20 flex items-center justify-between">
-        <!-- Brand -->
-        <Link href="/" class="flex items-center gap-3.5 group">
-          <div v-if="settings.site_logo_url" class="h-9 w-auto flex items-center">
-            <img :src="settings.site_logo_url" :alt="settings.site_name" class="h-8 object-contain" />
+        
+        <!-- Logo SOLKIT (Ikon Origami Sudut Tajam + Teks Tebal + Sub-teks Solusi Kode Kita) -->
+        <Link href="/" class="flex items-center gap-3.5 group cursor-pointer">
+          <!-- Vector Sharp-Angled SOLKIT Symbol -->
+          <div class="relative w-9 h-9 flex items-center justify-center shrink-0">
+            <svg viewBox="0 0 100 100" class="w-9 h-9 drop-shadow-[0_0_12px_rgba(0,82,255,0.4)]">
+              <!-- Left Sharp Wing (Black/Deep Charcoal) -->
+              <path d="M 50 50 L 15 42 C 18 58 22 72 23 88 Z" fill="#141721" stroke="#334155" stroke-width="1.5" />
+              <!-- Right Sharp Dynamic Wing (Electric Blue #0052FF) -->
+              <path d="M 50 50 L 80 18 L 84 82 L 20 86 Z" :fill="primaryColor" />
+            </svg>
           </div>
-          <div 
-            v-else 
-            class="w-10 h-10 rounded-xl flex items-center justify-center font-black text-white text-base shadow-lg shadow-indigo-950/40 border border-white/10"
-            :style="{ backgroundColor: primaryColor }"
-          >
-            S
-          </div>
-          <div>
-            <span class="font-extrabold text-lg tracking-tight text-white block group-hover:text-slate-200 transition-colors">
-              {{ settings.site_name || 'Solkit Tech' }}
-            </span>
-            <span class="text-[10px] tracking-widest text-slate-400 font-mono block">
-              SOFTWARE ENGINEERING
+
+          <!-- Brand Typography -->
+          <div class="flex flex-col">
+            <div class="flex items-center gap-1.5">
+              <span class="font-black text-xl tracking-tight text-white group-hover:text-slate-200 transition-colors">
+                SOLKIT
+              </span>
+              <span class="w-1.5 h-1.5 rounded-full" :style="{ backgroundColor: primaryColor }"></span>
+            </div>
+            <span class="text-[10px] tracking-wider font-mono font-medium text-sky-400 -mt-0.5">
+              Solusi Kode Kita
             </span>
           </div>
         </Link>
 
-        <!-- Navigation Menu -->
-        <nav class="hidden md:flex items-center gap-9 text-sm font-medium text-slate-400">
-          <a href="#services" class="hover:text-white transition-colors duration-200">Layanan</a>
-          <a href="#case-studies" class="hover:text-white transition-colors duration-200">Studi Kasus</a>
-          <a href="#tech-stack" class="hover:text-white transition-colors duration-200">Teknologi</a>
-          <a href="#workflow" class="hover:text-white transition-colors duration-200">Metodologi</a>
-          <a href="#testimonials" class="hover:text-white transition-colors duration-200">Klien</a>
+        <!-- Navigation Links -->
+        <nav class="hidden md:flex items-center gap-9 text-xs font-semibold uppercase tracking-wider text-slate-400">
+          <a href="#services" class="hover:text-white transition-colors">Layanan</a>
+          <a href="#case-studies" class="hover:text-white transition-colors">Studi Kasus</a>
+          <a href="#tech-stack" class="hover:text-white transition-colors">Teknologi</a>
+          <a href="#workflow" class="hover:text-white transition-colors">Metodologi</a>
+          <a href="#testimonials" class="hover:text-white transition-colors">Klien</a>
         </nav>
 
-        <!-- CTA Action -->
+        <!-- Actions -->
         <div class="flex items-center gap-4">
           <button
             @click="isConsultModalOpen = true"
-            class="relative inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold text-white rounded-xl border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] hover:border-white/20 backdrop-blur-md transition-all duration-300 shadow-sm cursor-pointer group"
+            :style="{ backgroundColor: primaryColor }"
+            class="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold text-white rounded-xl shadow-[0_0_20px_rgba(0,82,255,0.4)] hover:brightness-110 transition-all duration-300 cursor-pointer"
           >
-            <span class="w-1.5 h-1.5 rounded-full" :style="{ backgroundColor: primaryColor }"></span>
             Konsultasi Proyek
-            <ChevronRight class="w-3.5 h-3.5 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
+            <ChevronRight class="w-3.5 h-3.5" />
           </button>
 
           <Link 
             v-if="user" 
             :href="route('admin.dashboard')" 
-            class="hidden sm:inline-flex text-xs font-medium text-slate-400 hover:text-white px-3 py-2 rounded-lg transition-colors"
+            class="hidden sm:inline-flex text-xs font-semibold text-slate-300 hover:text-white px-3.5 py-2 rounded-xl bg-white/[0.04] border border-white/10 transition-colors"
           >
-            Dashboard
+            Admin Panel
           </Link>
         </div>
       </div>
     </header>
 
-    <!-- HERO SECTION (Human-Crafted Typography & Breathing Space) -->
-    <section class="relative pt-24 pb-28 md:pt-36 md:pb-40 px-6 sm:px-8">
-      <div class="max-w-5xl mx-auto text-center space-y-8">
-        <!-- Status Indicator Pill -->
-        <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-md">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span class="text-xs font-medium text-slate-300 tracking-wide font-mono">
-            {{ heroSection.badge }}
-          </span>
-        </div>
+    <!-- HERO SECTION (Split-Screen & Asymmetric Typography - Bukan Rata Tengah Kaku) -->
+    <section class="relative pt-16 pb-24 md:pt-24 md:pb-32 px-6 sm:px-8 border-b border-white/[0.06]">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        
+        <!-- Left Column: Asymmetric Bold Typography & Direct Action -->
+        <div class="lg:col-span-7 space-y-7 text-left">
+          <!-- Live Capacity Pill -->
+          <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-md">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="text-xs font-mono font-medium text-slate-300">
+              {{ heroSection.badge }}
+            </span>
+          </div>
 
-        <!-- Main Headline (Tight Kerning, Bold & Impactful) -->
-        <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white leading-[1.08] max-w-4xl mx-auto">
-          {{ heroSection.headline }}
-        </h1>
+          <!-- Bold Tight Main Headline -->
+          <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.05]">
+            Membangun Ekosistem Perangkat Lunak <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300">Masa Depan.</span>
+          </h1>
 
-        <!-- Subheadline (Generous Line Height & Breathable) -->
-        <p class="text-base sm:text-xl text-slate-400 font-normal max-w-2xl mx-auto leading-relaxed">
-          {{ heroSection.subheadline }}
-        </p>
+          <!-- Breathable Subheadline -->
+          <p class="text-base sm:text-lg text-slate-400 font-normal leading-relaxed max-w-xl">
+            {{ heroSection.subheadline }}
+          </p>
 
-        <!-- Dynamic Action Buttons -->
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-          <button 
-            @click="isConsultModalOpen = true"
-            :style="{ backgroundColor: primaryColor }"
-            class="w-full sm:w-auto px-8 py-4 rounded-xl text-sm font-semibold text-white shadow-xl shadow-indigo-950/40 hover:brightness-110 transition-all duration-300 flex items-center justify-center gap-2.5 group cursor-pointer"
-          >
-            {{ heroSection.cta_primary }}
-            <ChevronRight class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </button>
-
-          <a 
-            href="#case-studies"
-            class="w-full sm:w-auto px-8 py-4 rounded-xl text-sm font-semibold text-slate-300 bg-white/[0.03] hover:bg-white/[0.07] border border-white/10 hover:border-white/20 transition-all duration-300 flex items-center justify-center gap-2"
-          >
-            {{ heroSection.cta_secondary }}
-            <ArrowUpRight class="w-4 h-4 text-slate-400" />
-          </a>
-        </div>
-
-        <!-- Stats Bar (Integrated Clean Architecture without Gimmicks) -->
-        <div class="pt-16 max-w-4xl mx-auto">
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-xl">
-            <div 
-              v-for="(st, idx) in heroSection.stats" 
-              :key="idx"
-              class="text-left space-y-1"
+          <!-- Dual CTA Buttons -->
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+            <button 
+              @click="isConsultModalOpen = true"
+              :style="{ backgroundColor: primaryColor }"
+              class="px-8 py-4 rounded-xl text-sm font-bold text-white shadow-[0_0_30px_rgba(0,82,255,0.45)] hover:brightness-110 transition-all duration-300 flex items-center justify-center gap-2 group cursor-pointer"
             >
-              <div class="text-2xl sm:text-3xl font-black tracking-tight text-white font-mono">
+              {{ heroSection.cta_primary }}
+              <ChevronRight class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </button>
+
+            <a 
+              href="#case-studies"
+              class="px-8 py-4 rounded-xl text-sm font-bold text-slate-300 bg-white/[0.03] hover:bg-white/[0.07] border border-white/10 hover:border-blue-500/40 transition-all duration-300 flex items-center justify-center gap-2"
+            >
+              {{ heroSection.cta_secondary }}
+              <ArrowUpRight class="w-4 h-4 text-slate-400" />
+            </a>
+          </div>
+
+          <!-- Integrated Trust Metrics Strip -->
+          <div class="pt-8 border-t border-white/[0.08] grid grid-cols-2 sm:grid-cols-4 gap-6">
+            <div v-for="(st, idx) in heroSection.stats" :key="idx" class="space-y-1">
+              <div class="text-2xl sm:text-3xl font-black font-mono text-white" :style="{ color: idx === 0 ? '#60A5FA' : 'white' }">
                 {{ st.value }}
               </div>
-              <div class="text-xs text-slate-400 font-medium">
+              <div class="text-xs text-slate-400 font-medium leading-snug">
                 {{ st.label }}
               </div>
             </div>
           </div>
         </div>
+
+        <!-- Right Column: Interactive Live Architecture Console (Vercel/Linear Engineering Style) -->
+        <div class="lg:col-span-5 relative">
+          <!-- Ambient Console Backlight -->
+          <div class="absolute -inset-1 rounded-3xl bg-gradient-to-tr from-blue-600/30 to-indigo-600/10 blur-xl opacity-60"></div>
+
+          <!-- Console Terminal Window -->
+          <div class="relative rounded-3xl bg-[#0D0F17] border border-white/[0.12] shadow-2xl p-6 sm:p-7 space-y-6 overflow-hidden">
+            <!-- Terminal Header Bar -->
+            <div class="flex items-center justify-between pb-4 border-b border-white/[0.08]">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+                <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+                <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+                <span class="ml-2 text-xs font-mono text-slate-400">solkit-cluster-v4 // production</span>
+              </div>
+              <div class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-mono">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                ONLINE
+              </div>
+            </div>
+
+            <!-- Terminal Metrics Block -->
+            <div class="space-y-4 font-mono text-xs">
+              <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-2">
+                <div class="flex items-center justify-between text-slate-400 text-[11px]">
+                  <span>CORE ARCHITECTURE</span>
+                  <span class="text-emerald-400">HEALTHY (99.98%)</span>
+                </div>
+                <div class="flex items-center gap-2 text-white font-semibold">
+                  <Server class="w-4 h-4 text-blue-400" />
+                  <span>Laravel 11 + Vue 3 Inertia + Microservices</span>
+                </div>
+              </div>
+
+              <!-- Real-time telemetry items -->
+              <div class="grid grid-cols-2 gap-3">
+                <div class="p-3 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-1">
+                  <span class="text-[10px] text-slate-400">EDGE LATENCY</span>
+                  <div class="text-sm font-bold text-white flex items-center gap-1">
+                    <Zap class="w-3.5 h-3.5 text-blue-400" />
+                    <span>8.4 ms</span>
+                  </div>
+                </div>
+                <div class="p-3 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-1">
+                  <span class="text-[10px] text-slate-400">SECURITY AUDIT</span>
+                  <div class="text-sm font-bold text-white flex items-center gap-1">
+                    <ShieldCheck class="w-3.5 h-3.5 text-emerald-400" />
+                    <span>OWASP Grade A+</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Live Stream Code Log -->
+              <div class="p-3.5 rounded-xl bg-black/40 border border-white/[0.06] text-slate-400 text-[11px] space-y-1 font-mono">
+                <p class="text-slate-500">// Deploying enterprise pipeline</p>
+                <p><span class="text-emerald-400">✓</span> Container orchestration: Docker & K8s</p>
+                <p><span class="text-emerald-400">✓</span> High-throughput Redis cluster sync</p>
+                <p><span class="text-blue-400">&gt;</span> Ready for client project onboarding...</p>
+              </div>
+            </div>
+
+            <!-- Bottom Brand Stamp -->
+            <div class="pt-2 flex items-center justify-between text-xs text-slate-400 border-t border-white/[0.06]">
+              <span class="font-mono text-[11px]">SOLKIT ENGINEERING STUDIO</span>
+              <span class="text-sky-400 font-mono text-[11px]">Solusi Kode Kita</span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
-    <!-- SERVICES (Bento Grid Layout - Not Symmetric Box Clones) -->
-    <section id="services" class="py-28 md:py-36 px-6 sm:px-8 border-t border-white/[0.06] relative">
+    <!-- SERVICES (BENTO GRID ASYMMETRIC LAYOUT - ANTI KOTAK-KOTAK BIASA) -->
+    <section id="services" class="py-28 md:py-36 px-6 sm:px-8 border-b border-white/[0.06] relative">
       <div class="max-w-7xl mx-auto space-y-16">
+        
         <!-- Section Header -->
         <div class="max-w-2xl space-y-3">
-          <span class="text-xs font-mono font-semibold tracking-widest text-slate-400 uppercase">
-            KAPABILITAS TEKNIS
+          <span class="text-xs font-mono font-bold tracking-widest uppercase text-sky-400">
+            KAPABILITAS & LAYANAN REKAYASA
           </span>
-          <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-            Layanan Rekayasa Sistem Tanpa Kompromi
+          <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">
+            Solusi Perangkat Lunak Skala Enterprise
           </h2>
           <p class="text-base text-slate-400 leading-relaxed">
-            Setiap solusi dirancang berdasarkan analisis beban riil, standar keamanan industri, dan arsitektur kode yang bersih.
+            Dari arsitektur SaaS berskala multi-juta pengguna hingga aplikasi mobile fluid, kami membangun sistem yang dirancang untuk stabilitas jangka panjang.
           </p>
         </div>
 
         <!-- Asymmetric Bento Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <!-- Card 1: Featured Flagship Service (Span 2 Columns) -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+          
+          <!-- Bento Item 1: Flagship Web & SaaS (Span 8 Cols) -->
           <div 
             v-if="services[0]"
-            class="md:col-span-2 rounded-3xl p-8 sm:p-10 bg-white/[0.02] hover:bg-white/[0.035] border border-white/[0.08] hover:border-white/20 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden"
+            class="md:col-span-8 rounded-3xl p-8 sm:p-10 bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.08] hover:border-blue-500/50 hover:shadow-[0_0_35px_rgba(0,82,255,0.15)] transition-all duration-300 flex flex-col justify-between group"
           >
             <div class="space-y-6">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-mono px-3 py-1 rounded-full bg-white/[0.04] text-slate-300 border border-white/[0.08]">
+                <span class="text-xs font-mono px-3 py-1 rounded-full bg-blue-500/10 text-sky-400 border border-blue-500/20">
                   {{ services[0].tagline || 'Layanan Utama' }}
                 </span>
-                <component :is="getServiceIcon(services[0].icon)" class="w-6 h-6 text-slate-400 group-hover:text-white transition-colors" />
+                <component :is="getServiceIcon(services[0].icon)" class="w-6 h-6 text-slate-400 group-hover:text-blue-400 transition-colors" />
               </div>
 
-              <div class="space-y-3 max-w-xl">
+              <div class="space-y-3 max-w-2xl">
                 <h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">
                   {{ services[0].title }}
                 </h3>
@@ -378,20 +456,20 @@ const remainingPortfolios = computed(() => {
                 </p>
               </div>
 
-              <!-- Deliverables Checklist -->
+              <!-- Deliverables Grid -->
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 border-t border-white/[0.06]">
                 <div 
                   v-for="(feat, idx) in (services[0].features || [])" 
                   :key="idx"
                   class="flex items-start gap-2.5 text-xs text-slate-300"
                 >
-                  <CheckCircle2 class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <CheckCircle2 class="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
                   <span>{{ feat }}</span>
                 </div>
               </div>
             </div>
 
-            <!-- Footer Tech Tags & Action -->
+            <!-- Tech Badges & Action -->
             <div class="pt-8 mt-6 border-t border-white/[0.06] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="flex flex-wrap gap-1.5">
                 <span 
@@ -402,35 +480,34 @@ const remainingPortfolios = computed(() => {
                   {{ tech }}
                 </span>
               </div>
-
               <button
                 @click="consultForm.service_interest = services[0].title; isConsultModalOpen = true"
-                class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300 hover:text-white transition-colors cursor-pointer"
+                class="inline-flex items-center gap-1.5 text-xs font-bold text-sky-400 hover:text-white transition-colors cursor-pointer"
               >
-                Konsultasikan Solusi Ini
+                Konsultasikan Layanan Ini
                 <ChevronRight class="w-4 h-4" />
               </button>
             </div>
           </div>
 
-          <!-- Card 2: AI Automation Service (Span 1 Column, Vertical Accent) -->
+          <!-- Bento Item 2: AI & LLM Automation (Span 4 Cols) -->
           <div 
             v-if="services[1]"
-            class="rounded-3xl p-8 sm:p-10 bg-white/[0.02] hover:bg-white/[0.035] border border-white/[0.08] hover:border-white/20 transition-all duration-300 flex flex-col justify-between group"
+            class="md:col-span-4 rounded-3xl p-8 sm:p-10 bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.08] hover:border-blue-500/50 hover:shadow-[0_0_35px_rgba(0,82,255,0.15)] transition-all duration-300 flex flex-col justify-between group"
           >
             <div class="space-y-6">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-mono px-3 py-1 rounded-full bg-white/[0.04] text-slate-300 border border-white/[0.08]">
+                <span class="text-xs font-mono px-3 py-1 rounded-full bg-blue-500/10 text-sky-400 border border-blue-500/20">
                   {{ services[1].tagline || 'Intelligent System' }}
                 </span>
-                <component :is="getServiceIcon(services[1].icon)" class="w-6 h-6 text-slate-400 group-hover:text-white transition-colors" />
+                <component :is="getServiceIcon(services[1].icon)" class="w-6 h-6 text-slate-400 group-hover:text-blue-400 transition-colors" />
               </div>
 
               <div class="space-y-2">
                 <h3 class="text-2xl font-bold text-white tracking-tight">
                   {{ services[1].title }}
                 </h3>
-                <p class="text-sm text-slate-400 leading-relaxed">
+                <p class="text-xs text-slate-400 leading-relaxed">
                   {{ services[1].description }}
                 </p>
               </div>
@@ -439,9 +516,9 @@ const remainingPortfolios = computed(() => {
                 <div 
                   v-for="(feat, idx) in (services[1].features || []).slice(0, 3)" 
                   :key="idx"
-                  class="flex items-start gap-2.5 text-xs text-slate-300"
+                  class="flex items-start gap-2 text-xs text-slate-300"
                 >
-                  <CheckCircle2 class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <CheckCircle2 class="w-3.5 h-3.5 text-blue-400 shrink-0 mt-0.5" />
                   <span>{{ feat }}</span>
                 </div>
               </div>
@@ -459,25 +536,25 @@ const remainingPortfolios = computed(() => {
               </div>
               <button
                 @click="consultForm.service_interest = services[1].title; isConsultModalOpen = true"
-                class="text-xs font-semibold text-slate-300 hover:text-white cursor-pointer"
+                class="text-xs font-bold text-sky-400 hover:text-white cursor-pointer"
               >
                 Pilih
               </button>
             </div>
           </div>
 
-          <!-- Cards 3, 4, 5: Grid Bawah -->
+          <!-- Bento Item 3, 4, 5 (Span 4 Cols Each di Baris Kedua) -->
           <div 
             v-for="service in services.slice(2)" 
             :key="service.id"
-            class="rounded-3xl p-8 bg-white/[0.02] hover:bg-white/[0.035] border border-white/[0.08] hover:border-white/20 transition-all duration-300 flex flex-col justify-between group"
+            class="md:col-span-4 rounded-3xl p-8 bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.08] hover:border-blue-500/50 hover:shadow-[0_0_35px_rgba(0,82,255,0.15)] transition-all duration-300 flex flex-col justify-between group"
           >
             <div class="space-y-4">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-mono text-slate-400">
                   {{ service.tagline || 'Spesialisasi' }}
                 </span>
-                <component :is="getServiceIcon(service.icon)" class="w-5 h-5 text-slate-400 group-hover:text-white transition-colors" />
+                <component :is="getServiceIcon(service.icon)" class="w-5 h-5 text-slate-400 group-hover:text-blue-400 transition-colors" />
               </div>
 
               <h3 class="text-xl font-bold text-white tracking-tight">
@@ -494,7 +571,7 @@ const remainingPortfolios = computed(() => {
                   :key="idx"
                   class="flex items-start gap-2 text-xs text-slate-300"
                 >
-                  <CheckCircle2 class="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                  <CheckCircle2 class="w-3.5 h-3.5 text-blue-400 shrink-0 mt-0.5" />
                   <span>{{ feat }}</span>
                 </div>
               </div>
@@ -512,38 +589,39 @@ const remainingPortfolios = computed(() => {
               </div>
               <button
                 @click="consultForm.service_interest = service.title; isConsultModalOpen = true"
-                class="text-xs font-semibold text-slate-300 hover:text-white cursor-pointer"
+                class="text-xs font-bold text-sky-400 hover:text-white cursor-pointer"
               >
                 Diskusi
               </button>
             </div>
           </div>
+
         </div>
       </div>
     </section>
 
-    <!-- CASE STUDIES (Impact-Driven & Asymmetric Portfolio) -->
-    <section id="case-studies" class="py-28 md:py-36 px-6 sm:px-8 border-t border-white/[0.06] relative">
+    <!-- CASE STUDIES (IMPACT-DRIVEN ASYMMETRIC PORTFOLIO) -->
+    <section id="case-studies" class="py-28 md:py-36 px-6 sm:px-8 border-b border-white/[0.06] relative">
       <div class="max-w-7xl mx-auto space-y-16">
-        <!-- Section Header -->
+        
         <div class="max-w-2xl space-y-3">
-          <span class="text-xs font-mono font-semibold tracking-widest text-slate-400 uppercase">
+          <span class="text-xs font-mono font-bold tracking-widest uppercase text-sky-400">
             STUDI KASUS PRODUKSI
           </span>
-          <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-            Hasil Rekayasa Berbasis Dampak Bisnis
+          <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">
+            Rekayasa Berbasis Dampak Bisnis
           </h2>
           <p class="text-base text-slate-400 leading-relaxed">
-            Bukan sekadar galeri tampilan antarmuka. Kami memaparkan tantangan nyata, solusi rekayasa, dan metrik bisnis yang berhasil dicapai.
+            Hasil rekayasa nyata yang memecahkan masalah kompleks dan mencetak metrik performa positif bagi mitra kami.
           </p>
         </div>
 
-        <!-- Flagship Case Study Card (Large Asymmetric Layout) -->
+        <!-- Flagship Case Study (Large Horizontal Hero Card) -->
         <div 
           v-if="featuredPortfolio"
-          class="rounded-3xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 overflow-hidden transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 group"
+          class="rounded-3xl bg-white/[0.02] border border-white/[0.08] hover:border-blue-500/50 hover:shadow-[0_0_35px_rgba(0,82,255,0.15)] overflow-hidden transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 group"
         >
-          <!-- Mockup Visual Image (Col 7) -->
+          <!-- Mockup Visual -->
           <div class="lg:col-span-7 relative h-72 sm:h-96 lg:h-auto overflow-hidden bg-slate-900">
             <img 
               v-if="featuredPortfolio.thumbnail_url" 
@@ -554,18 +632,17 @@ const remainingPortfolios = computed(() => {
             <div v-else class="w-full h-full flex items-center justify-center bg-slate-900 text-slate-700">
               <Code2 class="w-20 h-20" />
             </div>
-            <div class="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-transparent via-[#070b14]/30 to-[#070b14]"></div>
+            <div class="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-transparent via-[#090A0E]/30 to-[#090A0E]"></div>
 
-            <!-- Floating Metric Badge -->
             <div class="absolute top-6 left-6">
-              <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#070b14]/85 border border-emerald-500/30 text-emerald-400 text-xs font-semibold backdrop-blur-md shadow-lg">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#090A0E]/85 border border-blue-500/30 text-sky-300 text-xs font-mono font-semibold backdrop-blur-md shadow-lg">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
                 {{ featuredPortfolio.impact_metric }}
               </span>
             </div>
           </div>
 
-          <!-- Editorial Case Study Content (Col 5) -->
+          <!-- Editorial Case Study Content -->
           <div class="lg:col-span-5 p-8 sm:p-10 flex flex-col justify-between space-y-6">
             <div class="space-y-4">
               <div class="flex items-center justify-between text-xs font-mono text-slate-400">
@@ -577,10 +654,9 @@ const remainingPortfolios = computed(() => {
                 {{ featuredPortfolio.title }}
               </h3>
 
-              <!-- Problem & Solution Block -->
               <div class="space-y-4 pt-2">
                 <div class="space-y-1">
-                  <span class="text-[11px] font-mono font-semibold uppercase tracking-wider text-rose-400">
+                  <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-rose-400">
                     Kendala Awal
                   </span>
                   <p class="text-xs text-slate-300 leading-relaxed">
@@ -588,8 +664,8 @@ const remainingPortfolios = computed(() => {
                   </p>
                 </div>
                 <div class="space-y-1 pt-2 border-t border-white/[0.06]">
-                  <span class="text-[11px] font-mono font-semibold uppercase tracking-wider text-indigo-400">
-                    Solusi Rekayasa
+                  <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-blue-400">
+                    Solusi SOLKIT
                   </span>
                   <p class="text-xs text-slate-300 leading-relaxed">
                     {{ featuredPortfolio.solution }}
@@ -598,7 +674,7 @@ const remainingPortfolios = computed(() => {
               </div>
             </div>
 
-            <!-- Bottom Stack & Link -->
+            <!-- Tech Badges & Link -->
             <div class="pt-6 border-t border-white/[0.06] flex items-center justify-between">
               <div class="flex flex-wrap gap-1.5">
                 <span 
@@ -615,7 +691,7 @@ const remainingPortfolios = computed(() => {
                 :href="featuredPortfolio.project_url" 
                 target="_blank"
                 class="p-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 hover:text-white transition-colors"
-                title="Tinjau Studi Kasus"
+                title="Tinjau Proyek"
               >
                 <ExternalLink class="w-4 h-4" />
               </a>
@@ -623,12 +699,12 @@ const remainingPortfolios = computed(() => {
           </div>
         </div>
 
-        <!-- Remaining Case Studies (2-Column Grid) -->
+        <!-- 2-Column Grid Remaining Portfolios -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div 
             v-for="item in remainingPortfolios" 
             :key="item.id"
-            class="rounded-3xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 overflow-hidden transition-all duration-300 flex flex-col justify-between group"
+            class="rounded-3xl bg-white/[0.02] border border-white/[0.08] hover:border-blue-500/50 hover:shadow-[0_0_35px_rgba(0,82,255,0.15)] overflow-hidden transition-all duration-300 flex flex-col justify-between group"
           >
             <div class="relative h-60 w-full overflow-hidden bg-slate-900">
               <img 
@@ -637,10 +713,10 @@ const remainingPortfolios = computed(() => {
                 :alt="item.title"
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-85"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-[#070b14] via-transparent to-transparent"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-[#090A0E] via-transparent to-transparent"></div>
               
               <div class="absolute top-4 left-4">
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#070b14]/85 border border-emerald-500/30 text-emerald-400 text-xs font-semibold backdrop-blur-md">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#090A0E]/85 border border-blue-500/30 text-sky-300 text-xs font-mono font-semibold backdrop-blur-md">
                   {{ item.impact_metric }}
                 </span>
               </div>
@@ -682,17 +758,18 @@ const remainingPortfolios = computed(() => {
             </div>
           </div>
         </div>
+
       </div>
     </section>
 
-    <!-- TECH STACK (Curated Clean Grid - Not Cluttered) -->
-    <section id="tech-stack" class="py-28 md:py-36 px-6 sm:px-8 border-t border-white/[0.06] bg-white/[0.01] relative">
+    <!-- TECH STACK SHOWCASE -->
+    <section id="tech-stack" class="py-28 md:py-36 px-6 sm:px-8 border-b border-white/[0.06] bg-white/[0.01] relative">
       <div class="max-w-7xl mx-auto space-y-16">
         <div class="max-w-2xl space-y-3">
-          <span class="text-xs font-mono font-semibold tracking-widest text-slate-400 uppercase">
+          <span class="text-xs font-mono font-bold tracking-widest uppercase text-sky-400">
             {{ techSection.badge }}
           </span>
-          <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+          <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">
             {{ techSection.title }}
           </h2>
           <p class="text-base text-slate-400 leading-relaxed">
@@ -704,9 +781,9 @@ const remainingPortfolios = computed(() => {
           <div 
             v-for="(stack, idx) in techSection.stacks" 
             :key="idx"
-            class="p-6 rounded-2xl bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.06] hover:border-white/15 transition-all duration-300 space-y-3"
+            class="p-6 rounded-2xl bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.06] hover:border-blue-500/30 transition-all duration-300 space-y-3"
           >
-            <span class="text-[11px] font-mono font-semibold text-slate-400 block">
+            <span class="text-[11px] font-mono font-semibold text-sky-400 block">
               {{ stack.category }}
             </span>
             <h3 class="text-lg font-bold text-white tracking-tight">
@@ -720,14 +797,14 @@ const remainingPortfolios = computed(() => {
       </div>
     </section>
 
-    <!-- WORKFLOW METODOLOGI (Step Architecture) -->
-    <section id="workflow" class="py-28 md:py-36 px-6 sm:px-8 border-t border-white/[0.06] relative">
+    <!-- AGILE WORKFLOW METODOLOGI -->
+    <section id="workflow" class="py-28 md:py-36 px-6 sm:px-8 border-b border-white/[0.06] relative">
       <div class="max-w-7xl mx-auto space-y-16">
         <div class="max-w-2xl space-y-3">
-          <span class="text-xs font-mono font-semibold tracking-widest text-slate-400 uppercase">
+          <span class="text-xs font-mono font-bold tracking-widest uppercase text-sky-400">
             {{ workflowSection.badge }}
           </span>
-          <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+          <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">
             {{ workflowSection.title }}
           </h2>
           <p class="text-base text-slate-400 leading-relaxed">
@@ -739,9 +816,9 @@ const remainingPortfolios = computed(() => {
           <div 
             v-for="(step, idx) in workflowSection.steps" 
             :key="idx"
-            class="p-8 rounded-3xl bg-white/[0.02] border border-white/[0.06] hover:border-white/15 transition-all duration-300 flex flex-col justify-between space-y-6"
+            class="p-8 rounded-3xl bg-white/[0.02] border border-white/[0.06] hover:border-blue-500/30 transition-all duration-300 flex flex-col justify-between space-y-6"
           >
-            <div class="text-3xl font-black font-mono text-slate-500">
+            <div class="text-3xl font-black font-mono text-blue-500/60">
               {{ step.step }}
             </div>
             <div class="space-y-2">
@@ -757,14 +834,14 @@ const remainingPortfolios = computed(() => {
       </div>
     </section>
 
-    <!-- TESTIMONIALS (Executive Reviews) -->
-    <section id="testimonials" class="py-28 md:py-36 px-6 sm:px-8 border-t border-white/[0.06] bg-white/[0.01] relative">
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" class="py-28 md:py-36 px-6 sm:px-8 border-b border-white/[0.06] bg-white/[0.01] relative">
       <div class="max-w-7xl mx-auto space-y-16">
         <div class="max-w-2xl space-y-3">
-          <span class="text-xs font-mono font-semibold tracking-widest text-slate-400 uppercase">
+          <span class="text-xs font-mono font-bold tracking-widest uppercase text-sky-400">
             {{ testimonialsSection.badge }}
           </span>
-          <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+          <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">
             {{ testimonialsSection.title }}
           </h2>
         </div>
@@ -773,21 +850,21 @@ const remainingPortfolios = computed(() => {
           <div 
             v-for="(item, idx) in testimonialsSection.items" 
             :key="idx"
-            class="p-8 sm:p-10 rounded-3xl bg-white/[0.02] border border-white/[0.06] flex flex-col justify-between space-y-6"
+            class="p-8 sm:p-10 rounded-3xl bg-white/[0.02] border border-white/[0.06] hover:border-blue-500/30 transition-all duration-300 flex flex-col justify-between space-y-6"
           >
             <p class="text-sm sm:text-base text-slate-300 leading-relaxed italic">
               "{{ item.comment }}"
             </p>
             <div class="pt-6 border-t border-white/[0.06] flex items-center gap-4">
               <div 
-                class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white text-sm"
+                class="w-10 h-10 rounded-xl flex items-center justify-center font-black text-white text-sm"
                 :style="{ backgroundColor: primaryColor }"
               >
                 {{ item.name.charAt(0) }}
               </div>
               <div>
                 <h4 class="text-sm font-bold text-white">{{ item.name }}</h4>
-                <p class="text-xs text-slate-400">{{ item.role }} · <span class="text-slate-300">{{ item.company }}</span></p>
+                <p class="text-xs text-slate-400">{{ item.role }} · <span class="text-sky-400">{{ item.company }}</span></p>
               </div>
             </div>
           </div>
@@ -795,20 +872,20 @@ const remainingPortfolios = computed(() => {
       </div>
     </section>
 
-    <!-- DIRECT ENGAGEMENT SECTION (Sophisticated Executive CTA) -->
-    <section class="py-28 md:py-36 px-6 sm:px-8 border-t border-white/[0.06] relative">
+    <!-- DIRECT ENGAGEMENT (EXECUTIVE CTA) -->
+    <section class="py-28 md:py-36 px-6 sm:px-8 relative">
       <div class="max-w-4xl mx-auto p-10 sm:p-14 rounded-3xl bg-white/[0.02] border border-white/10 backdrop-blur-xl text-center space-y-8 relative overflow-hidden">
         <div 
-          class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full blur-[120px] pointer-events-none opacity-20"
+          class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full blur-[120px] pointer-events-none opacity-25"
           :style="{ backgroundColor: primaryColor }"
         ></div>
 
         <div class="space-y-4 relative z-10 max-w-2xl mx-auto">
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Mulai Diskusi Rekayasa Software Anda Hari Ini
+          <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+            Siap Merekayasa Solusi Digital Anda?
           </h2>
           <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
-            Dapatkan peninjauan arsitektur, pemilihan tech stack yang tepat, dan estimasi biaya tanpa komitmen awal.
+            Diskusikan langsung dengan Tech Lead SOLKIT. Dapatkan analisis arsitektur, estimasi timeline, dan rekomendasi stack tanpa biaya awal.
           </p>
         </div>
 
@@ -816,7 +893,7 @@ const remainingPortfolios = computed(() => {
           <button
             @click="isConsultModalOpen = true"
             :style="{ backgroundColor: primaryColor }"
-            class="w-full sm:w-auto px-8 py-3.5 rounded-xl text-sm font-semibold text-white shadow-lg hover:brightness-110 transition-all cursor-pointer"
+            class="w-full sm:w-auto px-8 py-3.5 rounded-xl text-sm font-bold text-white shadow-[0_0_25px_rgba(0,82,255,0.4)] hover:brightness-110 transition-all cursor-pointer"
           >
             Jadwalkan Konsultasi Teknis
           </button>
@@ -824,7 +901,7 @@ const remainingPortfolios = computed(() => {
           <a
             :href="whatsappUrl"
             target="_blank"
-            class="w-full sm:w-auto px-8 py-3.5 rounded-xl text-sm font-semibold text-slate-300 bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 transition-colors flex items-center justify-center gap-2"
+            class="w-full sm:w-auto px-8 py-3.5 rounded-xl text-sm font-bold text-slate-300 bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-emerald-500/40 transition-colors flex items-center justify-center gap-2"
           >
             <Phone class="w-4 h-4 text-emerald-400" />
             WhatsApp Tech Lead
@@ -833,36 +910,38 @@ const remainingPortfolios = computed(() => {
       </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="py-16 border-t border-white/[0.06] bg-[#050810] text-slate-400 text-xs">
+    <!-- FOOTER BERSIH & PRESISI -->
+    <footer class="py-16 border-t border-white/[0.06] bg-[#07080B] text-slate-400 text-xs">
       <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 md:grid-cols-4 gap-12">
         <div class="space-y-4 md:col-span-2">
+          <!-- Logo Footer -->
           <div class="flex items-center gap-3">
-            <div 
-              class="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-white text-xs"
-              :style="{ backgroundColor: primaryColor }"
-            >
-              S
+            <svg viewBox="0 0 100 100" class="w-7 h-7">
+              <path d="M 50 50 L 15 42 C 18 58 22 72 23 88 Z" fill="#1e293b" />
+              <path d="M 50 50 L 80 18 L 84 82 L 20 86 Z" :fill="primaryColor" />
+            </svg>
+            <div>
+              <span class="font-bold text-base text-white block">SOLKIT</span>
+              <span class="text-[10px] font-mono text-sky-400 -mt-0.5 block">Solusi Kode Kita</span>
             </div>
-            <span class="font-bold text-base text-white">{{ settings.site_name || 'Solkit Tech' }}</span>
           </div>
           <p class="text-xs text-slate-400 max-w-sm leading-relaxed">
-            {{ settings.site_description || 'Studio rekayasa perangkat lunak untuk aplikasi web kustom, sistem mobile, dan otomatisasi AI berskala enterprise.' }}
+            {{ settings.site_description || 'SOLKIT (Solusi Kode Kita) adalah studio rekayasa perangkat lunak untuk aplikasi web kustom, sistem mobile, dan otomatisasi AI berskala enterprise.' }}
           </p>
           <p class="text-xxs text-slate-500 font-mono">
-            © {{ new Date().getFullYear() }} {{ settings.site_name || 'Solkit Tech' }}. Seluruh hak cipta dilindungi.
+            © {{ new Date().getFullYear() }} SOLKIT (Solusi Kode Kita). Seluruh hak cipta dilindungi.
           </p>
         </div>
 
         <div class="space-y-3">
-          <h4 class="text-xs font-semibold uppercase tracking-wider text-white">Hubungi Kami</h4>
-          <p class="text-slate-400">{{ settings.contact_email || 'hello@solkit.tech' }}</p>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-white">Hubungi Kami</h4>
+          <p class="text-slate-400">{{ settings.contact_email || 'partner@solkit.tech' }}</p>
           <p class="text-slate-400">+{{ settings.whatsapp_number || '6281234567890' }}</p>
-          <p class="text-slate-500 text-xxs leading-relaxed">{{ settings.company_address || 'SCBD Jakarta Selatan, Indonesia' }}</p>
+          <p class="text-slate-500 text-xxs leading-relaxed">{{ settings.company_address || 'Equity Tower SCBD Jakarta Selatan, Indonesia' }}</p>
         </div>
 
         <div class="space-y-3">
-          <h4 class="text-xs font-semibold uppercase tracking-wider text-white">Navigasi</h4>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-white">Navigasi</h4>
           <ul class="space-y-2">
             <li><a href="#services" class="hover:text-white transition-colors">Layanan</a></li>
             <li><a href="#case-studies" class="hover:text-white transition-colors">Studi Kasus</a></li>
@@ -878,23 +957,23 @@ const remainingPortfolios = computed(() => {
       v-if="isConsultModalOpen" 
       class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
     >
-      <div class="relative w-full max-w-xl bg-[#090e1a] border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl">
+      <div class="relative w-full max-w-xl bg-[#0C0E15] border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl">
         <button 
           @click="isConsultModalOpen = false"
-          class="absolute top-6 right-6 p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/[0.04] transition-colors"
+          class="absolute top-6 right-6 p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/[0.04] transition-colors cursor-pointer"
         >
           <X class="w-5 h-5" />
         </button>
 
         <div class="space-y-2 mb-6">
-          <span class="text-xs font-mono uppercase tracking-widest text-slate-400">
-            KONSULTASI SPESIFIKASI PROYEK
+          <span class="text-xs font-mono uppercase tracking-widest text-sky-400 font-bold">
+            SOLKIT CONSULTATION // 1-ON-1
           </span>
           <h3 class="text-2xl font-bold text-white tracking-tight">
-            Diskusikan Arsitektur Software Anda
+            Diskusikan Kebutuhan Software Anda
           </h3>
           <p class="text-xs text-slate-400 leading-relaxed">
-            Formulir ini akan langsung ditinjau oleh analis teknis Solkit Tech dalam 1x24 jam kerja.
+            Formulir ini akan langsung ditinjau oleh analis teknis SOLKIT dalam 1x24 jam kerja.
           </p>
         </div>
 
@@ -902,7 +981,7 @@ const remainingPortfolios = computed(() => {
           <CheckCircle2 class="w-6 h-6 shrink-0" />
           <div class="text-xs space-y-0.5">
             <p class="font-bold">Permintaan Berhasil Terkirim</p>
-            <p>Terima kasih. Rekayasa teknis kami akan menghubungi Anda melalui kontak yang dicantumkan.</p>
+            <p>Terima kasih. Tim engineering SOLKIT akan segera menghubungi kontak yang Anda cantumkan.</p>
           </div>
         </div>
 
@@ -914,17 +993,17 @@ const remainingPortfolios = computed(() => {
                 v-model="consultForm.name"
                 type="text"
                 placeholder="Nama Anda"
-                class="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-white/30"
+                class="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div class="space-y-1">
-              <label class="block text-xs font-medium text-slate-300">Email Kerja *</label>
+              <label class="block text-xs font-medium text-slate-300">Email Bisnis *</label>
               <input
                 v-model="consultForm.email"
                 type="email"
                 placeholder="nama@perusahaan.com"
-                class="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-white/30"
+                class="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
@@ -932,21 +1011,21 @@ const remainingPortfolios = computed(() => {
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div class="space-y-1">
-              <label class="block text-xs font-medium text-slate-300">WhatsApp Aktif *</label>
+              <label class="block text-xs font-medium text-slate-300">Nomor WhatsApp *</label>
               <input
                 v-model="consultForm.phone"
                 type="text"
                 placeholder="0812xxxxxxx"
-                class="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-white/30"
+                class="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
               />
             </div>
             <div class="space-y-1">
-              <label class="block text-xs font-medium text-slate-300">Perusahaan / Organisasi</label>
+              <label class="block text-xs font-medium text-slate-300">Perusahaan / Startup</label>
               <input
                 v-model="consultForm.company"
                 type="text"
                 placeholder="PT Solusi Digital"
-                class="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-white/30"
+                class="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
               />
             </div>
           </div>
@@ -956,7 +1035,7 @@ const remainingPortfolios = computed(() => {
               <label class="block text-xs font-medium text-slate-300">Fokus Kebutuhan</label>
               <select
                 v-model="consultForm.service_interest"
-                class="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-white/30"
+                class="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-blue-500"
               >
                 <option value="Custom Web & Enterprise SaaS">Custom Web & Enterprise SaaS</option>
                 <option value="Mobile App (iOS/Android)">Mobile App (iOS/Android)</option>
@@ -966,10 +1045,10 @@ const remainingPortfolios = computed(() => {
               </select>
             </div>
             <div class="space-y-1">
-              <label class="block text-xs font-medium text-slate-300">Estimasi Anggaran</label>
+              <label class="block text-xs font-medium text-slate-300">Estimasi Budget</label>
               <select
                 v-model="consultForm.budget_range"
-                class="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-white/30"
+                class="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-blue-500"
               >
                 <option value="< Rp 50 Juta">&lt; Rp 50 Juta</option>
                 <option value="Rp 50 - 150 Juta">Rp 50 - 150 Juta</option>
@@ -984,8 +1063,8 @@ const remainingPortfolios = computed(() => {
             <textarea
               v-model="consultForm.message"
               rows="3"
-              placeholder="Jelaskan secara ringkas sistem yang ingin dibangun atau kendala arsitektur saat ini..."
-              class="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-white/30"
+              placeholder="Ceritakan gambaran sistem, fitur utama, atau bottleneck yang ingin diselesaikan..."
+              class="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
               required
             ></textarea>
           </div>
@@ -994,17 +1073,17 @@ const remainingPortfolios = computed(() => {
             <a 
               :href="whatsappUrl" 
               target="_blank"
-              class="text-xs text-emerald-400 hover:text-emerald-300 flex items-center gap-1 font-medium"
+              class="text-xs text-emerald-400 hover:text-emerald-300 flex items-center gap-1 font-semibold"
             >
               <Phone class="w-3.5 h-3.5" />
-              WhatsApp Langsung
+              Chat WhatsApp Langsung
             </a>
 
             <button
               type="submit"
               :disabled="consultForm.processing"
               :style="{ backgroundColor: primaryColor }"
-              class="px-6 py-2.5 rounded-xl text-xs font-semibold text-white shadow-md hover:brightness-110 transition-all cursor-pointer disabled:opacity-50"
+              class="px-6 py-2.5 rounded-xl text-xs font-bold text-white shadow-md hover:brightness-110 transition-all cursor-pointer disabled:opacity-50"
             >
               Kirim Spesifikasi
             </button>
