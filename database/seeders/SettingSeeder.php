@@ -40,7 +40,7 @@ class SettingSeeder extends Seeder
             ],
             [
                 'key' => 'whatsapp_number',
-                'value' => '6281234567890',
+                'value' => '628814959247',
                 'type' => 'text',
             ],
             [

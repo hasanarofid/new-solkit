@@ -1,6 +1,7 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import { ArrowLeft, BookOpen } from '@lucide/vue';
+import FloatingWhatsApp from '@/Components/FloatingWhatsApp.vue';
 
 defineProps({
   settings: {
@@ -68,5 +69,8 @@ defineProps({
     <footer class="py-8 border-t border-white/[0.06] text-center text-xs text-slate-500">
       © {{ new Date().getFullYear() }} SOLKIT (Solusi Kode Kita). Seluruh hak cipta dilindungi.
     </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <FloatingWhatsApp :phone-number="settings.whatsapp_number || '628814959247'" />
   </div>
 </template>

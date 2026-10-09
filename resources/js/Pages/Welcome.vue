@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
+import FloatingWhatsApp from '@/Components/FloatingWhatsApp.vue';
 import { 
   ArrowUpRight, 
   ArrowRight,
@@ -1256,5 +1257,8 @@ const remainingPortfolios = computed(() => {
         </form>
       </div>
     </div>
+
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <FloatingWhatsApp :phone-number="settings.whatsapp_number || '628814959247'" />
   </div>
 </template>

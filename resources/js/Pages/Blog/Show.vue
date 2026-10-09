@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 import { Head, Link } from '@inertiajs/vue3';
+import FloatingWhatsApp from '@/Components/FloatingWhatsApp.vue';
 import { 
   ArrowLeft, 
   Calendar, 
@@ -344,5 +345,8 @@ const shareArticle = () => {
         </div>
       </div>
     </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <FloatingWhatsApp :phone-number="settings.whatsapp_number || '628814959247'" />
   </div>
 </template>

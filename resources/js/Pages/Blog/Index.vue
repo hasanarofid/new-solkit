@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { Head, Link, router } from '@inertiajs/vue3';
+import FloatingWhatsApp from '@/Components/FloatingWhatsApp.vue';
 import { 
   Search, 
   Clock, 
@@ -312,5 +313,8 @@ const stripTags = (html, length = 140) => {
         </div>
       </div>
     </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <FloatingWhatsApp :phone-number="settings.whatsapp_number || '628814959247'" />
   </div>
 </template>
