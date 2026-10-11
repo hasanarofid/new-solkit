@@ -9,5 +9,5 @@
   <text x="194" y="86" font-family="'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif" font-weight="900" font-size="74" fill="#090A0E" letter-spacing="-1.5">SOLKIT</text>
   
   <!-- Teks Solusi Kode Kita Vektor (Biru Muda Tajam & Terbaca Jelas) -->
-  <text x="156" y="166" font-family="'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif" font-weight="600" font-size="32" fill="#0284C7" letter-spacing="0.5">Solusi Kode Kita</text>
+  <text x="194" y="160" font-family="'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif" font-weight="500" font-size="34" fill="#0284C7" letter-spacing="1.2">Solusi Kode Kita</text>
 </svg>

@@ -92,8 +92,8 @@
         <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}?v=2">
         <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}?v=2">
         <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}?v=2">
-        <meta name="msapplication-TileColor" content="#090A0E">
-        <meta name="theme-color" content="#07080B">
+        <meta name="msapplication-TileColor" content="#07080E">
+        <meta name="theme-color" content="#07080E">
 
         <!-- Google AdSense Verification -->
         <meta name="google-adsense-account" content="ca-pub-7190047001129861">
@@ -107,7 +107,7 @@
           'name' => 'SOLKIT (Solusi Kode Kita)',
           'alternateName' => 'Solkit Tech Software House',
           'url' => 'https://solkit.tech',
-          'logo' => asset('images/solkit-clean.png'),
+          'logo' => asset('images/solkit-dark.svg'),
           'image' => asset('images/og-share.jpg'),
           'description' => 'Studio rekayasa perangkat lunak enterprise untuk custom web application, sistem mobile, dan otomatisasi AI.',
           'address' => [
@@ -141,7 +141,7 @@
         @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
         @inertiaHead
     </head>
-    <body class="font-sans antialiased bg-[#07080B] text-slate-100 selection:bg-blue-600 selection:text-white">
+    <body class="font-sans antialiased bg-[#07080E] text-slate-100 selection:bg-[#0052FF] selection:text-white">
         @inertia
     </body>
 </html>
