@@ -1,7 +1,7 @@
 <script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { Head, Link } from '@inertiajs/vue3';
-import { Briefcase, FolderGit2, Users, Layers, MessageSquare, ArrowRight, ExternalLink, Plus } from '@lucide/vue';
+import { Briefcase, FolderGit2, Users, Layers, MessageSquare, ArrowRight, ExternalLink, Plus, Mail, Phone } from '@lucide/vue';
 
 const props = defineProps({
   stats: {
@@ -164,28 +164,52 @@ const props = defineProps({
               <MessageSquare class="w-5 h-5 text-emerald-400" />
               Inquiry / Konsultasi Masuk
             </h3>
-            <span class="text-xs font-semibold text-slate-500">Real-time Lead Capture</span>
+            <span class="text-xxs font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              Notif: solusicodekita@gmail.com
+            </span>
           </div>
 
           <div class="divide-y divide-slate-800/60">
             <div
               v-for="lead in recent_leads"
               :key="lead.id"
-              class="py-3 space-y-1"
+              class="py-3.5 space-y-2"
             >
               <div class="flex items-center justify-between">
-                <span class="text-sm font-bold text-white">{{ lead.name }}</span>
+                <div>
+                  <span class="text-sm font-bold text-white">{{ lead.name }}</span>
+                  <span v-if="lead.company" class="text-xs text-slate-400 ml-2 font-normal">({{ lead.company }})</span>
+                </div>
                 <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                   {{ lead.service_interest || 'Konsultasi' }}
                 </span>
               </div>
               <p class="text-xs text-slate-400 font-mono">{{ lead.email }} · {{ lead.phone || '-' }}</p>
-              <p class="text-xs text-slate-300 line-clamp-2 italic bg-slate-900/60 p-2 rounded-lg mt-1 border border-slate-850">
+              <p class="text-xs text-slate-300 line-clamp-2 italic bg-slate-900/60 p-2.5 rounded-lg border border-slate-850">
                 "{{ lead.message }}"
               </p>
+              <div class="flex items-center gap-2 pt-1">
+                <a
+                  :href="`mailto:${lead.email}?subject=Tanggapan Konsultasi Solkit Tech - ${encodeURIComponent(lead.name)}`"
+                  class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 rounded-lg text-xxs font-semibold transition-colors"
+                >
+                  <Mail class="w-3 h-3 text-indigo-400" />
+                  Balas Email
+                </a>
+                <a
+                  v-if="lead.phone"
+                  :href="`https://wa.me/${lead.phone.replace(/[^0-9]/g, '').replace(/^0/, '62')}?text=Halo%20${encodeURIComponent(lead.name)}%2C%20kami%20dari%20tim%20SOLKIT%20(Solusi%20Kode%20Kita)%20menindaklanjuti%20inquiry%20Anda.`"
+                  target="_blank"
+                  class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-950/40 hover:bg-emerald-900/40 text-emerald-300 border border-emerald-800/50 rounded-lg text-xxs font-semibold transition-colors"
+                >
+                  <Phone class="w-3 h-3 text-emerald-400" />
+                  WhatsApp
+                </a>
+              </div>
             </div>
             <div v-if="recent_leads.length === 0" class="py-6 text-center text-xs text-slate-500">
-              Belum ada pesan inquiry baru. Calon klien yang mengisi form konsultasi di landing page akan muncul di sini.
+              Belum ada pesan inquiry baru. Calon klien yang mengisi form konsultasi di landing page akan otomatis mengirim notifikasi ke email Anda dan tampil di sini.
             </div>
           </div>
         </div>

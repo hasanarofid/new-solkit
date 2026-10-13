@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreLeadRequest;
+use App\Mail\LeadConfirmationMail;
+use App\Mail\NewLeadNotificationMail;
 use App\Models\Lead;
 use App\Models\Page;
 use App\Models\Portfolio;
@@ -11,6 +13,8 @@ use App\Models\Service;
 use App\Models\Setting;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -89,6 +93,26 @@ class HomeController extends Controller
     public function storeLead(StoreLeadRequest $request): RedirectResponse
     {
         $lead = Lead::create($request->validated());
+
+        // Dispatch email notifications safely
+        try {
+            $notificationEmail = Setting::where('key', 'notification_email')->value('value')
+                ?: Setting::where('key', 'contact_email')->value('value')
+                ?: config('mail.from.address', 'solusicodekita@gmail.com');
+
+            // 1. Send notification to admin / tech lead
+            Mail::to($notificationEmail)->send(new NewLeadNotificationMail($lead));
+
+            // 2. Send automated confirmation to the client
+            if (!empty($lead->email)) {
+                Mail::to($lead->email)->send(new LeadConfirmationMail($lead));
+            }
+        } catch (\Throwable $e) {
+            Log::error('Gagal mengirim email notifikasi konsultasi: ' . $e->getMessage(), [
+                'lead_id' => $lead->id,
+                'error' => $e->getMessage(),
+            ]);
+        }
 
         return redirect()->back()->with('success', 'Terima kasih! Tim konsultan Solkit Tech akan segera menghubungi Anda dalam 1x24 jam.');
     }

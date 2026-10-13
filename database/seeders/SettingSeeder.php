@@ -45,7 +45,12 @@ class SettingSeeder extends Seeder
             ],
             [
                 'key' => 'contact_email',
-                'value' => 'partner@solkit.tech',
+                'value' => 'solusicodekita@gmail.com',
+                'type' => 'text',
+            ],
+            [
+                'key' => 'notification_email',
+                'value' => 'solusicodekita@gmail.com',
                 'type' => 'text',
             ],
             [

@@ -2,16 +2,35 @@
 import { ref } from 'vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
-import { Save, Image as ImageIcon, Link as LinkIcon, Phone, FileText, Globe, Palette, Mail, MapPin } from '@lucide/vue';
+import { 
+  Save, 
+  Image as ImageIcon, 
+  Link as LinkIcon, 
+  Phone, 
+  FileText, 
+  Globe, 
+  Palette, 
+  Mail, 
+  MapPin, 
+  Send, 
+  Server, 
+  CheckCircle2, 
+  AlertCircle,
+  Key
+} from '@lucide/vue';
 
 const props = defineProps({
   settings: {
     type: Object,
     required: true
+  },
+  mail_config: {
+    type: Object,
+    default: () => ({})
   }
 });
 
-const currentTab = ref('site'); // 'site', 'theme', 'links', 'logo'
+const currentTab = ref('site'); // 'site', 'theme', 'links', 'email', 'logo'
 
 const form = useForm({
   site_name: props.settings.site_name || '',
@@ -19,10 +38,21 @@ const form = useForm({
   site_description: props.settings.site_description || '',
   primary_color: props.settings.primary_color || '#4f46e5',
   whatsapp_number: props.settings.whatsapp_number || '',
-  contact_email: props.settings.contact_email || '',
+  contact_email: props.settings.contact_email || 'solusicodekita@gmail.com',
+  notification_email: props.settings.notification_email || 'solusicodekita@gmail.com',
   company_address: props.settings.company_address || '',
   site_logo: null
 });
+
+const testMailForm = useForm({
+  test_email: props.settings.notification_email || 'solusicodekita@gmail.com'
+});
+
+const sendTestEmail = () => {
+  testMailForm.post(route('admin.settings.testMail'), {
+    preserveScroll: true,
+  });
+};
 
 const logoPreview = ref(props.settings.site_logo_url || null);
 const isDragging = ref(false);
@@ -76,7 +106,7 @@ const submit = () => {
           Web Settings & Theming
         </h2>
         <p class="text-sm text-slate-400 mt-1">
-          Kelola profil identitas korporat, logo, warna tema utama (CSS Variables), dan saluran kontak WhatsApp.
+          Kelola profil identitas korporat, logo, warna tema utama, dan integrasi Email SMTP pemberitahuan.
         </p>
       </div>
 
@@ -127,6 +157,22 @@ const submit = () => {
           <span class="flex items-center gap-2">
             <Phone class="w-4 h-4" />
             Kontak & Alamat
+          </span>
+        </button>
+
+        <button 
+          type="button"
+          @click="currentTab = 'email'"
+          :class="[
+            currentTab === 'email' 
+              ? 'border-indigo-500 text-indigo-400 bg-slate-900/40' 
+              : 'border-transparent text-slate-400 hover:text-slate-200 hover:border-slate-700',
+            'px-6 py-3 border-b-2 font-semibold text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer whitespace-nowrap'
+          ]"
+        >
+          <span class="flex items-center gap-2">
+            <Mail class="w-4 h-4" />
+            Email & SMTP Notifikasi
           </span>
         </button>
 
@@ -265,7 +311,7 @@ const submit = () => {
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
               <div>
                 <label for="whatsapp_number" class="text-xs font-bold text-slate-400 uppercase tracking-wider">WhatsApp Konsultasi</label>
-                <p class="text-xxs text-slate-500 mt-1">Gunakan kode negara tanpa tanda plus (+), contoh: 6281234567890</p>
+                <p class="text-xxs text-slate-500 mt-1">Gunakan kode negara tanpa tanda plus (+), contoh: 628814959247</p>
               </div>
               <div class="md:col-span-2 relative">
                 <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
@@ -276,24 +322,7 @@ const submit = () => {
                   v-model="form.whatsapp_number"
                   type="text" 
                   class="w-full bg-slate-900 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-                  placeholder="6281234567890"
-                />
-              </div>
-            </div>
-
-            <!-- Email -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-              <label for="contact_email" class="text-xs font-bold text-slate-400 uppercase tracking-wider">Email Kontak Resmi</label>
-              <div class="md:col-span-2 relative">
-                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
-                  <Mail class="w-4 h-4" />
-                </span>
-                <input 
-                  id="contact_email"
-                  v-model="form.contact_email"
-                  type="email" 
-                  class="w-full bg-slate-900 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-                  placeholder="hello@solkit.tech"
+                  placeholder="628814959247"
                 />
               </div>
             </div>
@@ -310,13 +339,147 @@ const submit = () => {
                   v-model="form.company_address"
                   type="text" 
                   class="w-full bg-slate-900 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-                  placeholder="SCBD Jakarta Selatan, Indonesia"
+                  placeholder="Surabaya, Jawa Timur, Indonesia"
                 />
               </div>
             </div>
           </div>
 
-          <!-- Tab 4: Logo Website -->
+          <!-- Tab 4: Email & SMTP Notifikasi -->
+          <div v-if="currentTab === 'email'" class="space-y-8">
+            <!-- Notification Email -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+              <div>
+                <label for="notification_email" class="text-xs font-bold text-slate-400 uppercase tracking-wider">Email Notifikasi Lead</label>
+                <p class="text-xxs text-slate-500 mt-1">
+                  Alamat email penerima setiap ada klien/prospek baru yang mengirim form konsultasi di landing page.
+                </p>
+              </div>
+              <div class="md:col-span-2 relative">
+                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                  <Mail class="w-4 h-4 text-emerald-400" />
+                </span>
+                <input 
+                  id="notification_email"
+                  v-model="form.notification_email"
+                  type="email" 
+                  class="w-full bg-slate-900 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  placeholder="solusicodekita@gmail.com"
+                  required
+                />
+                <p class="text-xxs text-emerald-400 mt-1 font-mono">
+                  ✓ Target notifikasi real-time saat inquiry masuk
+                </p>
+              </div>
+            </div>
+
+            <!-- Public Contact Email -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+              <div>
+                <label for="contact_email" class="text-xs font-bold text-slate-400 uppercase tracking-wider">Email Kontak Resmi</label>
+                <p class="text-xxs text-slate-500 mt-1">
+                  Email resmi SOLKIT yang tercantum di footer website dan identitas korespondensi publik.
+                </p>
+              </div>
+              <div class="md:col-span-2 relative">
+                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                  <Mail class="w-4 h-4 text-indigo-400" />
+                </span>
+                <input 
+                  id="contact_email"
+                  v-model="form.contact_email"
+                  type="email" 
+                  class="w-full bg-slate-900 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  placeholder="solusicodekita@gmail.com"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- SMTP Server Information Card -->
+            <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <Server class="w-5 h-5 text-indigo-400" />
+                  <span class="text-xs font-bold text-white uppercase tracking-wider">Konfigurasi SMTP Google (Gmail)</span>
+                </div>
+                <span class="px-2.5 py-1 text-[10px] font-mono font-bold rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                  Driver: {{ mail_config?.mailer || 'smtp' }}
+                </span>
+              </div>
+
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2 border-t border-slate-800/80 text-xs">
+                <div>
+                  <span class="text-slate-500 block text-[11px]">SMTP Host</span>
+                  <span class="font-mono text-slate-200 font-semibold">{{ mail_config?.host || 'smtp.gmail.com' }}</span>
+                </div>
+                <div>
+                  <span class="text-slate-500 block text-[11px]">Port / Enkripsi</span>
+                  <span class="font-mono text-slate-200 font-semibold">{{ mail_config?.port || '587' }} (TLS)</span>
+                </div>
+                <div>
+                  <span class="text-slate-500 block text-[11px]">Akun Pengirim</span>
+                  <span class="font-mono text-slate-200 font-semibold truncate block" :title="mail_config?.username || 'solusicodekita@gmail.com'">
+                    {{ mail_config?.username || 'solusicodekita@gmail.com' }}
+                  </span>
+                </div>
+                <div>
+                  <span class="text-slate-500 block text-[11px]">App Password (.env)</span>
+                  <span :class="mail_config?.has_password ? 'text-emerald-400' : 'text-amber-400'" class="font-mono font-semibold flex items-center gap-1">
+                    <CheckCircle2 v-if="mail_config?.has_password" class="w-3.5 h-3.5 inline" />
+                    <AlertCircle v-else class="w-3.5 h-3.5 inline" />
+                    {{ mail_config?.has_password ? 'Terpasang' : 'Belum Terisi' }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Note on Google App Password -->
+              <div class="p-3 bg-slate-950 rounded-xl border border-slate-800/80 flex items-start gap-3 text-xxs text-slate-400">
+                <Key class="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                <div class="space-y-1">
+                  <p class="font-bold text-slate-300">Panduan Google App Password (Sandi Aplikasi):</p>
+                  <p>
+                    Gmail memerlukan <strong>Sandi Aplikasi (16 karakter)</strong> untuk SMTP pihak ketiga. Aktifkan 2-Step Verification pada akun <code class="text-indigo-400">solusicodekita@gmail.com</code>, lalu buat Sandi Aplikasi di <a href="https://myaccount.google.com/apppasswords" target="_blank" class="text-indigo-400 underline">myaccount.google.com/apppasswords</a> dan masukkan kodenya ke variabel <code class="text-indigo-400">MAIL_PASSWORD</code> di file <code class="text-indigo-400">.env</code>.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Standalone Test Mail Box -->
+            <div class="p-5 rounded-2xl bg-indigo-950/20 border border-indigo-500/20 space-y-3">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h4 class="text-xs font-bold text-indigo-300 uppercase tracking-wider flex items-center gap-2">
+                    <Send class="w-4 h-4 text-indigo-400" />
+                    Uji Coba Pengiriman Email (Test SMTP)
+                  </h4>
+                  <p class="text-xxs text-slate-400 mt-0.5">
+                    Kirim email uji coba instan untuk memverifikasi apakah akun Gmail SMTP berhasil terhubung.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex flex-col sm:flex-row gap-3 items-center pt-2">
+                <input 
+                  v-model="testMailForm.test_email"
+                  type="email" 
+                  class="flex-1 w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2 text-xs text-slate-100 placeholder-slate-600 focus:outline-none focus:border-indigo-500"
+                  placeholder="Email tujuan tes (misal: solusicodekita@gmail.com)"
+                />
+                <button 
+                  type="button"
+                  @click="sendTestEmail"
+                  :disabled="testMailForm.processing"
+                  class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-xl shadow-md transition-all duration-200 disabled:opacity-50 cursor-pointer whitespace-nowrap"
+                >
+                  <Send class="w-3.5 h-3.5" :class="{ 'animate-spin': testMailForm.processing }" />
+                  {{ testMailForm.processing ? 'Mengirim...' : 'Kirim Test Email' }}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 5: Logo Website -->
           <div v-if="currentTab === 'logo'" class="space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
               <div>
