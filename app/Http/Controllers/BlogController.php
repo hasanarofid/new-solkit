@@ -68,8 +68,13 @@ class BlogController extends Controller
     /**
      * Display a single technical article with full reading experience & SEO.
      */
-    public function show(string $slug): Response
+    public function show(string $slug): Response|\Illuminate\Http\RedirectResponse
     {
+        // 301 redirect legacy dummy post to main blog listing
+        if ($slug === 'selamat-datang-di-solkit') {
+            return redirect()->route('blog.index', [], 301);
+        }
+
         $settingsRaw = Setting::all();
         $settings = $settingsRaw->pluck('value', 'key')->toArray();
         $logoSetting = $settingsRaw->firstWhere('key', 'site_logo');

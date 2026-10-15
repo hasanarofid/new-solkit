@@ -8,17 +8,22 @@
         <?php
             $component = $page['component'] ?? '';
             $props = $page['props'] ?? [];
-            $currentUrl = url()->current();
+            
+            // Enforce authoritative canonical URL on https://solkit.tech
+            $baseDomain = 'https://solkit.tech';
+            $cleanPath = '/' . ltrim(parse_url(request()->getRequestUri(), PHP_URL_PATH) ?? '/', '/');
+            $canonicalUrl = $cleanPath === '/' ? $baseDomain : $baseDomain . rtrim($cleanPath, '/');
 
             // Default Branding & Meta
             $defaultTitle = 'SOLKIT - Solusi Kode Kita | Studio Rekayasa Perangkat Lunak & Sistem Digital Surabaya';
             $defaultDescription = 'SOLKIT (Solusi Kode Kita) adalah studio rekayasa perangkat lunak di Surabaya untuk pembuatan custom web application, sistem mobile iOS & Android, arsitektur cloud, dan otomatisasi AI berskala enterprise.';
-            $defaultImage = asset('images/og-share.jpg');
+            $defaultImage = "{$baseDomain}/images/og-share.jpg";
             $type = 'website';
 
             // Dynamic detection
             if ($component === 'Blog/Show' && isset($props['post'])) {
                 $post = $props['post'];
+                $canonicalUrl = "{$baseDomain}/blog/{$post['slug']}";
                 $metaTitle = ($post['title'] ?? 'Artikel') . ' - SOLKIT Insight';
                 $metaDescription = !empty($post['content']) 
                     ? \Illuminate\Support\Str::limit(trim(preg_replace('/\s+/', ' ', strip_tags($post['content']))), 160)
@@ -26,14 +31,17 @@
                 $metaImage = !empty($post['image_url']) ? url($post['image_url']) : $defaultImage;
                 $type = 'article';
             } elseif ($component === 'Blog/Index') {
+                $canonicalUrl = "{$baseDomain}/blog";
                 $metaTitle = 'Blog & Panduan Rekayasa Software - SOLKIT (Solusi Kode Kita)';
                 $metaDescription = 'Koleksi artikel teknis, arsitektur cloud, performa web, dan panduan rekayasa sistem enterprise oleh para engineer SOLKIT Surabaya.';
                 $metaImage = $defaultImage;
             } elseif ($component === 'Legal/PrivacyPolicy') {
+                $canonicalUrl = "{$baseDomain}/privacy-policy";
                 $metaTitle = 'Kebijakan Privasi (Privacy Policy) - SOLKIT';
                 $metaDescription = 'Kebijakan privasi resmi SOLKIT (Solusi Kode Kita) mengenai pemrosesan data, penggunaan cookie, dan kepatuhan standar industri digital.';
                 $metaImage = $defaultImage;
             } elseif ($component === 'Legal/TermsOfService') {
+                $canonicalUrl = "{$baseDomain}/terms-of-service";
                 $metaTitle = 'Syarat & Ketentuan Layanan (Terms of Service) - SOLKIT';
                 $metaDescription = 'Syarat dan ketentuan perjanjian layanan rekayasa perangkat lunak dan konsultasi teknologi digital SOLKIT.';
                 $metaImage = $defaultImage;
@@ -51,7 +59,7 @@
         <meta name="keywords" content="software house surabaya, jasa pembuatan aplikasi surabaya, jasa website custom surabaya, web development surabaya, mobile app ios android surabaya, arsitektur sistem digital, rekayasa perangkat lunak jawa timur, solusi kode kita, solkit tech, ai automation indonesia">
         <meta name="author" content="Hasan Arofid - SOLKIT (Solusi Kode Kita)">
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-        <link rel="canonical" href="{{ $currentUrl }}">
+        <link rel="canonical" href="{{ $canonicalUrl }}">
 
         <!-- Google Search Console Verification -->
         <meta name="google-site-verification" content="A1v60g8eChf7ZcmSIzFO9lLZVvjDjFOHAmZcnby5WC0">
@@ -65,7 +73,7 @@
         <!-- Open Graph / Facebook / WhatsApp Preview Meta Tags -->
         <meta property="og:site_name" content="SOLKIT (Solusi Kode Kita)">
         <meta property="og:type" content="{{ $type }}">
-        <meta property="og:url" content="{{ $currentUrl }}">
+        <meta property="og:url" content="{{ $canonicalUrl }}">
         <meta property="og:title" content="{{ $metaTitle }}">
         <meta property="og:description" content="{{ $metaDescription }}">
         <meta property="og:image" content="{{ $metaImage }}">
@@ -80,7 +88,7 @@
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="@solkittech">
         <meta name="twitter:creator" content="@hasanarofid">
-        <meta name="twitter:url" content="{{ $currentUrl }}">
+        <meta name="twitter:url" content="{{ $canonicalUrl }}">
         <meta name="twitter:title" content="{{ $metaTitle }}">
         <meta name="twitter:description" content="{{ $metaDescription }}">
         <meta name="twitter:image" content="{{ $metaImage }}">
