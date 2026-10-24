@@ -39,29 +39,59 @@ defineProps({
       </div>
 
       <div class="space-y-6">
-        <h2 class="text-xl font-bold text-white">1. Ketentuan Umum</h2>
+        <h2 class="text-xl font-bold text-white">1. Ketentuan Umum & Penerimaan Syarat</h2>
         <p>
-          Dengan mengakses situs web SOLKIT yang beralamat di https://solkit.tech, Anda setuju untuk terikat oleh Syarat dan Ketentuan Layanan ini, semua hukum dan peraturan yang berlaku, dan setuju bahwa Anda bertanggung jawab untuk mematuhi hukum setempat yang berlaku.
+          Dengan mengakses situs web SOLKIT yang beralamat di <a href="https://solkit.tech" class="text-sky-400 underline">https://solkit.tech</a>, Anda menyatakan bahwa Anda telah membaca, memahami, dan menyetujui untuk terikat oleh Syarat dan Ketentuan Layanan (Terms of Service) ini, seluruh peraturan perundang-undangan yang berlaku di Republik Indonesia, dan standar etika digital global. Apabila Anda tidak menyetujui salah satu bagian dari ketentuan ini, Anda dipersilakan untuk menghentikan penggunaan situs web kami.
         </p>
 
-        <h2 class="text-xl font-bold text-white">2. Lisensi Konten</h2>
+        <h2 class="text-xl font-bold text-white">2. Definisi Istilah</h2>
+        <ul class="list-disc pl-5 space-y-2 text-slate-300">
+          <li><strong>"SOLKIT"</strong> merujuk pada studio rekayasa perangkat lunak SOLKIT (Solusi Kode Kita) yang berdomisili di Surabaya, Jawa Timur, Indonesia.</li>
+          <li><strong>"Pengguna"</strong> atau <strong>"Anda"</strong> merujuk pada setiap individu, perwakilan badan usaha, atau institusi yang mengakses situs web atau menggunakan layanan konsultasi kami.</li>
+          <li><strong>"Layanan"</strong> merujuk pada seluruh produk, jasa pembuatan aplikasi web, aplikasi mobile, audit performa, implementasi AI, dan materi publikasi teknis yang disediakan oleh SOLKIT.</li>
+        </ul>
+
+        <h2 class="text-xl font-bold text-white">3. Hak Kekayaan Intelektual (Intellectual Property)</h2>
         <p>
-          Materi dan artikel teknis yang ditampilkan di situs SOLKIT dilindungi oleh undang-undang hak cipta dan merek dagang yang berlaku. Pengunjung diizinkan untuk membaca, membagikan kutipan dengan atribusi yang jelas, namun dilarang keras untuk menduplikasi seluruh artikel secara otomatis (scraping) tanpa izin tertulis dari manajemen SOLKIT.
+          Seluruh konten, materi teknis, artikel riset, logo, identitas visual, grafis, dan kode sumber dasar yang dipublikasikan di situs web SOLKIT adalah milik eksklusif SOLKIT dan dilindungi oleh Undang-Undang Hak Cipta No. 28 Tahun 2014 serta traktat kekayaan intelektual internasional.
+        </p>
+        <p>
+          Pengunjung diberikan lisensi terbatas non-eksklusif untuk membaca dan mengutip materi artikel teknis kami maksimal 200 kata dengan kewajiban menyertakan tautan balik (backlink) aktif dan atribusi jelas ke <a href="https://solkit.tech" class="text-sky-400 underline">https://solkit.tech</a>. Dilarang keras melakukan scraping otomatis, redistribusi massal, atau mempublikasikan ulang artikel tanpa persetujuan tertulis dari manajemen SOLKIT.
         </p>
 
-        <h2 class="text-xl font-bold text-white">3. Layanan Rekayasa Perangkat Lunak</h2>
+        <h2 class="text-xl font-bold text-white">4. Layanan Rekayasa Perangkat Lunak Komersial</h2>
         <p>
-          SOLKIT menyediakan layanan konsultasi, arsitektur cloud, pembuatan website kustom, aplikasi mobile, dan solusi AI. Setiap perikatan proyek komersial tunduk pada Perjanjian Kerja Sama (PKS) dan Dokumen Spesifikasi Kebutuhan Perangkat Lunak (PRD) tersendiri yang disepakati oleh kedua belah pihak.
+          Penyediaan jasa perancangan aplikasi kustom, sistem enterprise, integrasi cloud, dan otomatisasi bisnis tunduk pada Perjanjian Kerja Sama (PKS), Dokumen Spesifikasi Kebutuhan Perangkat Lunak (PRD), dan Berita Acara Serah Terima (BAST) tersendiri. Kepemilikan hak cipta atas source code produk akhir yang dipesan oleh klien komersial akan dialihkan secara penuh kepada klien sesuai kesepakatan kontrak kerja sama.
         </p>
 
-        <h2 class="text-xl font-bold text-white">4. Penafian (Disclaimer)</h2>
+        <h2 class="text-xl font-bold text-white">5. Kerahasiaan Informasi (Non-Disclosure Agreement)</h2>
         <p>
-          Materi pada situs web SOLKIT disediakan atas dasar "sebagaimana adanya". SOLKIT tidak memberikan jaminan, tersurat maupun tersirat, mengenai keakuratan atau keandalan penggunaan materi dalam artikel blog di luar konteks teknis yang dijelaskan.
+          SOLKIT menjamin kerahasiaan penuh atas segala data bisnis, logika bisnis proprietary, ide produk, dan kredensial akses yang dibagikan oleh calon klien saat sesi konsultasi maupun tahap implementasi proyek. Kami tidak akan pernah menjual, menyewakan, atau membagikan data Anda kepada pihak ketiga manapun tanpa persetujuan tertulis.
         </p>
 
-        <h2 class="text-xl font-bold text-white">5. Perubahan Ketentuan</h2>
+        <h2 class="text-xl font-bold text-white">6. Jaminan Kualitas & Masa Garansi Bebas Cacat (Bug Warranty)</h2>
         <p>
-          SOLKIT dapat merevisi Syarat Layanan ini untuk situs webnya setiap saat tanpa pemberitahuan sebelumnya. Dengan menggunakan situs web ini, Anda setuju untuk terikat oleh versi Syarat Layanan yang berlaku saat itu.
+          Setiap aplikasi perangkat lunak yang diserahterimakan oleh SOLKIT kepada klien komersial dilindungi oleh masa garansi pemeliharaan (warranty period) minimal 30 hingga 90 hari kalender. Selama masa garansi, tim engineer kami bertanggung jawab penuh untuk memperbaiki segala galat logika, memory leak, atau cacat fungsional yang tidak sesuai dengan spesifikasi PRD awal tanpa biaya tambahan.
+        </p>
+
+        <h2 class="text-xl font-bold text-white">7. Penafian Tanggung Jawab (Disclaimer of Warranty)</h2>
+        <p>
+          Materi pada artikel blog teknis situs web SOLKIT disediakan atas dasar <em>"as is"</em> (sebagaimana adanya) untuk tujuan edukasi dan referensi industri perangkat lunak. SOLKIT tidak memberikan jaminan tersirat atas kerugian teknis yang dialami pengguna akibat implementasi kode pihak ketiga di luar lingkungan pengawasan kami.
+        </p>
+
+        <h2 class="text-xl font-bold text-white">8. Pembatasan Tanggung Jawab (Limitation of Liability)</h2>
+        <p>
+          Dalam keadaan apa pun, SOLKIT, direktur, karyawan, atau mitra kerjanya tidak bertanggung jawab atas kerugian tidak langsung, insidental, khusus, atau konsekuensial (termasuk kehilangan keuntungan, kehilangan data bisnis, atau penghentian operasional) yang timbul dari penggunaan atau ketidakmampuan menggunakan materi di situs web ini.
+        </p>
+
+        <h2 class="text-xl font-bold text-white">9. Perubahan Syarat dan Ketentuan</h2>
+        <p>
+          SOLKIT berhak untuk memperbarui atau memodifikasi Syarat dan Ketentuan ini sewaktu-waktu demi mematuhi perkembangan hukum digital dan kebijakan perayapan mesin pencari (search engine). Tanggal pembaruan terakhir akan selalu dicantumkan di bagian atas halaman ini.
+        </p>
+
+        <h2 class="text-xl font-bold text-white">10. Hukum yang Berlaku & Yurisdiksi Penyelesaian Sengketa</h2>
+        <p>
+          Syarat dan Ketentuan ini diatur dan ditafsirkan sesuai dengan hukum Negara Kesatuan Republik Indonesia. Segala perselisihan yang timbul sehubungan dengan penafsiran atau pelaksanaan ketentuan ini akan diselesaikan secara musyawarah untuk mufakat, dan apabila tidak tercapai kesepakatan, para pihak sepakat untuk memilih domisili hukum di Pengadilan Negeri Surabaya, Jawa Timur, Indonesia.
         </p>
       </div>
     </main>

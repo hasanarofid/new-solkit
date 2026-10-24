@@ -59,11 +59,11 @@ class HomeController extends Controller
             ->orderBy('order')
             ->get();
 
-        // 6. Latest insights/posts
+        // 6. Latest insights/posts (strengthen internal linking for SEO crawlers)
         $posts = Post::where('status', 'published')
             ->with('category')
             ->latest()
-            ->take(3)
+            ->take(6)
             ->get()
             ->map(function ($post) {
                 return [

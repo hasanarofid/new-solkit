@@ -1521,9 +1521,9 @@ const structuredDataJson = computed(() => {
           </Link>
         </div>
 
-        <div v-if="posts && posts.length" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div v-if="posts && posts.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <article 
-            v-for="post in posts.slice(0, 3)" 
+            v-for="post in posts.slice(0, 6)" 
             :key="post.id"
             class="p-6 rounded-2xl bg-[#0C101C] border border-white/[0.08] hover:border-[#0052FF]/40 transition-all flex flex-col justify-between space-y-5 group"
           >

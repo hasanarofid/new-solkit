@@ -92,5 +92,8 @@ class DatabaseSeeder extends Seeder
                 'is_featured' => false
             ]
         );
+
+        // 8. Enrich SEO Articles & Ensure GSC Indexed Pages
+        $this->call(SeoArticleEnrichmentSeeder::class);
     }
 }

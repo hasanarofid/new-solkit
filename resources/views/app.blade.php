@@ -139,6 +139,136 @@
         ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
         </script>
 
+        @if ($component === 'Blog/Show' && isset($props['post']))
+        <!-- Article Structured Data (Schema.org) for Google Search Article Rich Snippets -->
+        <script type="application/ld+json">
+        {!! json_encode([
+          '@context' => 'https://schema.org',
+          '@type' => 'TechArticle',
+          'mainEntityOfPage' => [
+            '@type' => 'WebPage',
+            '@id' => $canonicalUrl,
+          ],
+          'headline' => $post['title'] ?? $metaTitle,
+          'description' => $metaDescription,
+          'image' => [$metaImage],
+          'datePublished' => isset($post['created_at']) ? \Carbon\Carbon::parse($post['created_at'])->toIso8601String() : now()->toIso8601String(),
+          'dateModified' => isset($post['updated_at']) ? \Carbon\Carbon::parse($post['updated_at'])->toIso8601String() : (isset($post['created_at']) ? \Carbon\Carbon::parse($post['created_at'])->toIso8601String() : now()->toIso8601String()),
+          'author' => [
+            '@type' => 'Person',
+            'name' => 'Hasan Arofid',
+            'url' => 'https://solkit.tech',
+            'jobTitle' => 'Principal Software Architect',
+          ],
+          'publisher' => [
+            '@type' => 'Organization',
+            'name' => 'SOLKIT (Solusi Kode Kita)',
+            'url' => 'https://solkit.tech',
+            'logo' => [
+              '@type' => 'ImageObject',
+              'url' => "{$baseDomain}/images/solkit-dark.svg",
+            ],
+          ],
+          'articleSection' => $post['category']['name'] ?? 'Technology',
+          'inLanguage' => 'id-ID',
+        ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+        </script>
+
+        <!-- BreadcrumbList Schema for Google Search Hierarchy -->
+        <script type="application/ld+json">
+        {!! json_encode([
+          '@context' => 'https://schema.org',
+          '@type' => 'BreadcrumbList',
+          'itemListElement' => [
+            [
+              '@type' => 'ListItem',
+              'position' => 1,
+              'name' => 'Beranda',
+              'item' => $baseDomain,
+            ],
+            [
+              '@type' => 'ListItem',
+              'position' => 2,
+              'name' => 'Blog & Riset',
+              'item' => "{$baseDomain}/blog",
+            ],
+            [
+              '@type' => 'ListItem',
+              'position' => 3,
+              'name' => $post['title'] ?? 'Artikel',
+              'item' => $canonicalUrl,
+            ],
+          ],
+        ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+        </script>
+        @elseif ($component === 'Blog/Index')
+        <!-- BreadcrumbList Schema for Blog Index -->
+        <script type="application/ld+json">
+        {!! json_encode([
+          '@context' => 'https://schema.org',
+          '@type' => 'BreadcrumbList',
+          'itemListElement' => [
+            [
+              '@type' => 'ListItem',
+              'position' => 1,
+              'name' => 'Beranda',
+              'item' => $baseDomain,
+            ],
+            [
+              '@type' => 'ListItem',
+              'position' => 2,
+              'name' => 'Blog & Riset',
+              'item' => "{$baseDomain}/blog",
+            ],
+          ],
+        ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+        </script>
+        @elseif ($component === 'Legal/TermsOfService')
+        <!-- BreadcrumbList Schema for Terms of Service -->
+        <script type="application/ld+json">
+        {!! json_encode([
+          '@context' => 'https://schema.org',
+          '@type' => 'BreadcrumbList',
+          'itemListElement' => [
+            [
+              '@type' => 'ListItem',
+              'position' => 1,
+              'name' => 'Beranda',
+              'item' => $baseDomain,
+            ],
+            [
+              '@type' => 'ListItem',
+              'position' => 2,
+              'name' => 'Syarat & Ketentuan Layanan',
+              'item' => "{$baseDomain}/terms-of-service",
+            ],
+          ],
+        ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+        </script>
+        @elseif ($component === 'Legal/PrivacyPolicy')
+        <!-- BreadcrumbList Schema for Privacy Policy -->
+        <script type="application/ld+json">
+        {!! json_encode([
+          '@context' => 'https://schema.org',
+          '@type' => 'BreadcrumbList',
+          'itemListElement' => [
+            [
+              '@type' => 'ListItem',
+              'position' => 1,
+              'name' => 'Beranda',
+              'item' => $baseDomain,
+            ],
+            [
+              '@type' => 'ListItem',
+              'position' => 2,
+              'name' => 'Kebijakan Privasi',
+              'item' => "{$baseDomain}/privacy-policy",
+            ],
+          ],
+        ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+        </script>
+        @endif
+
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -151,5 +281,21 @@
     </head>
     <body class="font-sans antialiased bg-[#07080E] text-slate-100 selection:bg-[#0052FF] selection:text-white">
         @inertia
+
+        <noscript>
+            @if ($component === 'Blog/Show' && isset($props['post']))
+                <article style="max-width: 800px; margin: 40px auto; padding: 20px; font-family: sans-serif; color: #cbd5e1;">
+                    <h1 style="color: #ffffff; font-size: 2rem;">{{ $props['post']['title'] ?? '' }}</h1>
+                    <p style="color: #94a3b8; font-size: 0.875rem;">Kategori: {{ $props['post']['category']['name'] ?? 'Teknologi' }} | Penulis: Hasan Arofid</p>
+                    <div style="line-height: 1.8; margin-top: 20px;">{!! $props['post']['content'] ?? '' !!}</div>
+                </article>
+            @elseif ($component === 'Legal/TermsOfService')
+                <article style="max-width: 800px; margin: 40px auto; padding: 20px; font-family: sans-serif; color: #cbd5e1;">
+                    <h1 style="color: #ffffff; font-size: 2rem;">Syarat dan Ketentuan Layanan (Terms of Service) - SOLKIT</h1>
+                    <p style="color: #94a3b8; font-size: 0.875rem;">Terakhir diperbarui: 24 Oktober 2026</p>
+                    <p>Syarat dan ketentuan perjanjian layanan rekayasa perangkat lunak dan konsultasi teknologi digital SOLKIT.</p>
+                </article>
+            @endif
+        </noscript>
     </body>
 </html>
