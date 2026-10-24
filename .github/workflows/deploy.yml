@@ -36,14 +36,16 @@ jobs:
 
             echo "📥 Fetching latest code from main branch..."
             git fetch origin main
-            git checkout -B main origin/main
+            git reset --hard HEAD
+            git checkout -B main origin/main --force
             git reset --hard origin/main
 
             echo "📦 Installing composer dependencies..."
             COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --optimize-autoloader --no-interaction
 
-            echo "🗄️ Running migrations..."
+            echo "🗄️ Running migrations and SEO data enrichment..."
             php artisan migrate --force
+            php artisan solkit:enrich-seo
 
             echo "⚡ Building frontend assets..."
             npm ci || npm install
