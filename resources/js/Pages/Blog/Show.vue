@@ -144,8 +144,7 @@ const shareArticle = () => {
     <meta name="twitter:title" :content="post.title" />
     <meta name="twitter:description" :content="cleanExcerpt" />
     <meta name="twitter:image" :content="post.image_url ? (post.image_url.startsWith('http') ? post.image_url : 'https://solkit.tech' + post.image_url) : 'https://solkit.tech/images/og-share.jpg'" />
-    <link rel="canonical" :href="'https://solkit.tech/blog/' + post.slug" />
-    <component :is="'script'" type="application/ld+json" v-html="schemaArticleJson" />
+    <link rel="canonical" :href="'https://solkit.tech/blog/' + post.slug" head-key="canonical" />
   </Head>
 
   <div class="min-h-screen bg-[#090A0E] text-slate-100 font-sans selection:bg-[#0052FF] selection:text-white relative">

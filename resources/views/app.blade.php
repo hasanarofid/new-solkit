@@ -50,6 +50,111 @@
                 $metaDescription = $defaultDescription;
                 $metaImage = $defaultImage;
             }
+            // Organization Schema.org
+            $orgSchema = [
+                '@context' => 'https://schema.org',
+                '@type' => 'ProfessionalService',
+                'name' => 'SOLKIT (Solusi Kode Kita)',
+                'alternateName' => 'Solkit Tech Software House',
+                'url' => 'https://solkit.tech',
+                'logo' => asset('images/solkit-dark.svg'),
+                'image' => asset('images/og-share.jpg'),
+                'description' => 'Studio rekayasa perangkat lunak enterprise untuk custom web application, sistem mobile, dan otomatisasi AI.',
+                'address' => [
+                    '@type' => 'PostalAddress',
+                    'addressLocality' => 'Surabaya',
+                    'addressRegion' => 'Jawa Timur',
+                    'addressCountry' => 'ID',
+                ],
+                'geo' => [
+                    '@type' => 'GeoCoordinates',
+                    'latitude' => -7.257472,
+                    'longitude' => 112.752088,
+                ],
+                'founder' => [
+                    '@type' => 'Person',
+                    'name' => 'Hasan Arofid',
+                    'jobTitle' => 'Principal Software Architect',
+                ],
+                'areaServed' => ['Surabaya', 'Jawa Timur', 'Indonesia', 'Global'],
+                'priceRange' => '$$',
+            ];
+
+            // Article Schema (Blog/Show)
+            $articleSchema = null;
+            if ($component === 'Blog/Show' && isset($props['post'])) {
+                $articleSchema = [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'TechArticle',
+                    'mainEntityOfPage' => [
+                        '@type' => 'WebPage',
+                        '@id' => $canonicalUrl,
+                    ],
+                    'headline' => $post['title'] ?? $metaTitle,
+                    'description' => $metaDescription,
+                    'image' => [$metaImage],
+                    'datePublished' => isset($post['created_at']) ? \Carbon\Carbon::parse($post['created_at'])->toIso8601String() : now()->toIso8601String(),
+                    'dateModified' => isset($post['updated_at']) ? \Carbon\Carbon::parse($post['updated_at'])->toIso8601String() : (isset($post['created_at']) ? \Carbon\Carbon::parse($post['created_at'])->toIso8601String() : now()->toIso8601String()),
+                    'author' => [
+                        '@type' => 'Person',
+                        'name' => 'Hasan Arofid',
+                        'url' => 'https://solkit.tech',
+                        'jobTitle' => 'Principal Software Architect',
+                    ],
+                    'publisher' => [
+                        '@type' => 'Organization',
+                        'name' => 'SOLKIT (Solusi Kode Kita)',
+                        'url' => 'https://solkit.tech',
+                        'logo' => [
+                            '@type' => 'ImageObject',
+                            'url' => "{$baseDomain}/images/solkit-dark.svg",
+                        ],
+                    ],
+                    'articleSection' => $post['category']['name'] ?? 'Technology',
+                    'inLanguage' => 'id-ID',
+                ];
+            }
+
+            // Breadcrumb Schema
+            $breadcrumbSchema = null;
+            if ($component === 'Blog/Show' && isset($props['post'])) {
+                $breadcrumbSchema = [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'BreadcrumbList',
+                    'itemListElement' => [
+                        ['@type' => 'ListItem', 'position' => 1, 'name' => 'Beranda', 'item' => $baseDomain],
+                        ['@type' => 'ListItem', 'position' => 2, 'name' => 'Blog & Riset', 'item' => "{$baseDomain}/blog"],
+                        ['@type' => 'ListItem', 'position' => 3, 'name' => $post['title'] ?? 'Artikel', 'item' => $canonicalUrl],
+                    ],
+                ];
+            } elseif ($component === 'Blog/Index') {
+                $breadcrumbSchema = [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'BreadcrumbList',
+                    'itemListElement' => [
+                        ['@type' => 'ListItem', 'position' => 1, 'name' => 'Beranda', 'item' => $baseDomain],
+                        ['@type' => 'ListItem', 'position' => 2, 'name' => 'Blog & Riset', 'item' => "{$baseDomain}/blog"],
+                    ],
+                ];
+            } elseif ($component === 'Legal/TermsOfService') {
+                $breadcrumbSchema = [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'BreadcrumbList',
+                    'itemListElement' => [
+                        ['@type' => 'ListItem', 'position' => 1, 'name' => 'Beranda', 'item' => $baseDomain],
+                        ['@type' => 'ListItem', 'position' => 2, 'name' => 'Syarat & Ketentuan Layanan', 'item' => "{$baseDomain}/terms-of-service"],
+                    ],
+                ];
+            } elseif ($component === 'Legal/PrivacyPolicy') {
+                $breadcrumbSchema = [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'BreadcrumbList',
+                    'itemListElement' => [
+                        ['@type' => 'ListItem', 'position' => 1, 'name' => 'Beranda', 'item' => $baseDomain],
+                        ['@type' => 'ListItem', 'position' => 2, 'name' => 'Kebijakan Privasi', 'item' => "{$baseDomain}/privacy-policy"],
+                    ],
+                ];
+            }
         ?>
 
         <!-- Primary SEO Meta Tags -->
@@ -59,7 +164,7 @@
         <meta name="keywords" content="software house surabaya, jasa pembuatan aplikasi surabaya, jasa website custom surabaya, web development surabaya, mobile app ios android surabaya, arsitektur sistem digital, rekayasa perangkat lunak jawa timur, solusi kode kita, solkit tech, ai automation indonesia">
         <meta name="author" content="Hasan Arofid - SOLKIT (Solusi Kode Kita)">
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-        <link rel="canonical" href="{{ $canonicalUrl }}">
+        <link rel="canonical" href="{{ $canonicalUrl }}" head-key="canonical">
 
         <!-- Google Search Console Verification -->
         <meta name="google-site-verification" content="A1v60g8eChf7ZcmSIzFO9lLZVvjDjFOHAmZcnby5WC0">
@@ -109,163 +214,20 @@
 
         <!-- Structured Data Organization Schema (JSON-LD) -->
         <script type="application/ld+json">
-        {!! json_encode([
-          '@context' => 'https://schema.org',
-          '@type' => 'ProfessionalService',
-          'name' => 'SOLKIT (Solusi Kode Kita)',
-          'alternateName' => 'Solkit Tech Software House',
-          'url' => 'https://solkit.tech',
-          'logo' => asset('images/solkit-dark.svg'),
-          'image' => asset('images/og-share.jpg'),
-          'description' => 'Studio rekayasa perangkat lunak enterprise untuk custom web application, sistem mobile, dan otomatisasi AI.',
-          'address' => [
-            '@type' => 'PostalAddress',
-            'addressLocality' => 'Surabaya',
-            'addressRegion' => 'Jawa Timur',
-            'addressCountry' => 'ID',
-          ],
-          'geo' => [
-            '@type' => 'GeoCoordinates',
-            'latitude' => -7.257472,
-            'longitude' => 112.752088,
-          ],
-          'founder' => [
-            '@type' => 'Person',
-            'name' => 'Hasan Arofid',
-            'jobTitle' => 'Principal Software Architect',
-          ],
-          'areaServed' => ['Surabaya', 'Jawa Timur', 'Indonesia', 'Global'],
-          'priceRange' => '$$',
-        ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+        {!! json_encode($orgSchema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
         </script>
 
-        @if ($component === 'Blog/Show' && isset($props['post']))
+        @if ($articleSchema)
         <!-- Article Structured Data (Schema.org) for Google Search Article Rich Snippets -->
         <script type="application/ld+json">
-        {!! json_encode([
-          '@context' => 'https://schema.org',
-          '@type' => 'TechArticle',
-          'mainEntityOfPage' => [
-            '@type' => 'WebPage',
-            '@id' => $canonicalUrl,
-          ],
-          'headline' => $post['title'] ?? $metaTitle,
-          'description' => $metaDescription,
-          'image' => [$metaImage],
-          'datePublished' => isset($post['created_at']) ? \Carbon\Carbon::parse($post['created_at'])->toIso8601String() : now()->toIso8601String(),
-          'dateModified' => isset($post['updated_at']) ? \Carbon\Carbon::parse($post['updated_at'])->toIso8601String() : (isset($post['created_at']) ? \Carbon\Carbon::parse($post['created_at'])->toIso8601String() : now()->toIso8601String()),
-          'author' => [
-            '@type' => 'Person',
-            'name' => 'Hasan Arofid',
-            'url' => 'https://solkit.tech',
-            'jobTitle' => 'Principal Software Architect',
-          ],
-          'publisher' => [
-            '@type' => 'Organization',
-            'name' => 'SOLKIT (Solusi Kode Kita)',
-            'url' => 'https://solkit.tech',
-            'logo' => [
-              '@type' => 'ImageObject',
-              'url' => "{$baseDomain}/images/solkit-dark.svg",
-            ],
-          ],
-          'articleSection' => $post['category']['name'] ?? 'Technology',
-          'inLanguage' => 'id-ID',
-        ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+        {!! json_encode($articleSchema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
         </script>
+        @endif
 
+        @if ($breadcrumbSchema)
         <!-- BreadcrumbList Schema for Google Search Hierarchy -->
         <script type="application/ld+json">
-        {!! json_encode([
-          '@context' => 'https://schema.org',
-          '@type' => 'BreadcrumbList',
-          'itemListElement' => [
-            [
-              '@type' => 'ListItem',
-              'position' => 1,
-              'name' => 'Beranda',
-              'item' => $baseDomain,
-            ],
-            [
-              '@type' => 'ListItem',
-              'position' => 2,
-              'name' => 'Blog & Riset',
-              'item' => "{$baseDomain}/blog",
-            ],
-            [
-              '@type' => 'ListItem',
-              'position' => 3,
-              'name' => $post['title'] ?? 'Artikel',
-              'item' => $canonicalUrl,
-            ],
-          ],
-        ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
-        </script>
-        @elseif ($component === 'Blog/Index')
-        <!-- BreadcrumbList Schema for Blog Index -->
-        <script type="application/ld+json">
-        {!! json_encode([
-          '@context' => 'https://schema.org',
-          '@type' => 'BreadcrumbList',
-          'itemListElement' => [
-            [
-              '@type' => 'ListItem',
-              'position' => 1,
-              'name' => 'Beranda',
-              'item' => $baseDomain,
-            ],
-            [
-              '@type' => 'ListItem',
-              'position' => 2,
-              'name' => 'Blog & Riset',
-              'item' => "{$baseDomain}/blog",
-            ],
-          ],
-        ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
-        </script>
-        @elseif ($component === 'Legal/TermsOfService')
-        <!-- BreadcrumbList Schema for Terms of Service -->
-        <script type="application/ld+json">
-        {!! json_encode([
-          '@context' => 'https://schema.org',
-          '@type' => 'BreadcrumbList',
-          'itemListElement' => [
-            [
-              '@type' => 'ListItem',
-              'position' => 1,
-              'name' => 'Beranda',
-              'item' => $baseDomain,
-            ],
-            [
-              '@type' => 'ListItem',
-              'position' => 2,
-              'name' => 'Syarat & Ketentuan Layanan',
-              'item' => "{$baseDomain}/terms-of-service",
-            ],
-          ],
-        ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
-        </script>
-        @elseif ($component === 'Legal/PrivacyPolicy')
-        <!-- BreadcrumbList Schema for Privacy Policy -->
-        <script type="application/ld+json">
-        {!! json_encode([
-          '@context' => 'https://schema.org',
-          '@type' => 'BreadcrumbList',
-          'itemListElement' => [
-            [
-              '@type' => 'ListItem',
-              'position' => 1,
-              'name' => 'Beranda',
-              'item' => $baseDomain,
-            ],
-            [
-              '@type' => 'ListItem',
-              'position' => 2,
-              'name' => 'Kebijakan Privasi',
-              'item' => "{$baseDomain}/privacy-policy",
-            ],
-          ],
-        ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+        {!! json_encode($breadcrumbSchema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
         </script>
         @endif
 
